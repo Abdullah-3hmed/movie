@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:movie/features/auth/presentation/screens/login_screen.dart';
 import 'package:movie/features/auth/presentation/screens/selection_screen.dart';
-import 'package:movie/features/splash/screens/splash_screen.dart';
+import 'package:movie/features/splash/presentation/screens/splash_screen.dart';
 
 part 'app_router.gr.dart';
 
@@ -19,7 +20,10 @@ class AppRouter extends RootStackRouter {
     _buildCustomRoute(
       initial: true,
       page: AuthRoute.page,
-      children: [_buildCustomRoute(initial: true, page: SelectionRoute.page)],
+      children: [
+        _buildCustomRoute(initial: true, page: SelectionRoute.page),
+        _buildCustomRoute(page: LoginRoute.page),
+      ],
     ),
   ];
 
