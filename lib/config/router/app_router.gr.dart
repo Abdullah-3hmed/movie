@@ -27,6 +27,22 @@ class AuthRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [BottomNavBarScreen]
+class BottomNavBarRoute extends PageRouteInfo<void> {
+  const BottomNavBarRoute({List<PageRouteInfo>? children})
+    : super(BottomNavBarRoute.name, initialChildren: children);
+
+  static const String name = 'BottomNavBarRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const BottomNavBarScreen();
+    },
+  );
+}
+
+/// generated route for
 /// [LoginScreen]
 class LoginRoute extends PageRouteInfo<void> {
   const LoginRoute({List<PageRouteInfo>? children})
@@ -38,6 +54,54 @@ class LoginRoute extends PageRouteInfo<void> {
     name,
     builder: (data) {
       return const LoginScreen();
+    },
+  );
+}
+
+/// generated route for
+/// [MoviesScreen]
+class MoviesRoute extends PageRouteInfo<void> {
+  const MoviesRoute({List<PageRouteInfo>? children})
+    : super(MoviesRoute.name, initialChildren: children);
+
+  static const String name = 'MoviesRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const MoviesScreen();
+    },
+  );
+}
+
+/// generated route for
+/// [ProfileScreen]
+class ProfileRoute extends PageRouteInfo<void> {
+  const ProfileRoute({List<PageRouteInfo>? children})
+    : super(ProfileRoute.name, initialChildren: children);
+
+  static const String name = 'ProfileRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const ProfileScreen();
+    },
+  );
+}
+
+/// generated route for
+/// [SearchScreen]
+class SearchRoute extends PageRouteInfo<void> {
+  const SearchRoute({List<PageRouteInfo>? children})
+    : super(SearchRoute.name, initialChildren: children);
+
+  static const String name = 'SearchRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const SearchScreen();
     },
   );
 }
@@ -86,6 +150,22 @@ class SplashRoute extends PageRouteInfo<void> {
     name,
     builder: (data) {
       return const SplashScreen();
+    },
+  );
+}
+
+/// generated route for
+/// [TvScreen]
+class TvRoute extends PageRouteInfo<void> {
+  const TvRoute({List<PageRouteInfo>? children})
+    : super(TvRoute.name, initialChildren: children);
+
+  static const String name = 'TvRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const TvScreen();
     },
   );
 }

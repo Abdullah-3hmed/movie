@@ -57,7 +57,7 @@ class ThemeManager {
         showUnselectedLabels: false,
         type: BottomNavigationBarType.fixed,
         backgroundColor: ColorsManager.bottomNavigationColor.withValues(
-          alpha: 0.8,
+          alpha: 0.5,
         ),
         selectedItemColor: ColorsManager.primaryColor,
         unselectedItemColor: ColorsManager.inActiveColor,

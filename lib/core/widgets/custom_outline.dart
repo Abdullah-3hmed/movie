@@ -40,7 +40,7 @@ class CustomOutline extends StatelessWidget {
             borderRadius: BorderRadius.circular(_radius),
             onTap: _callback,
             child: Container(
-              constraints: BoxConstraints(minWidth: 88, minHeight: 48),
+              constraints: const BoxConstraints(minWidth: 88, minHeight: 48),
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.center,
