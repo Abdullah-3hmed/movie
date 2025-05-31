@@ -24,7 +24,7 @@ class CustomSectionTitle extends StatelessWidget {
               borderRadius: BorderRadius.circular(5.0),
             ),
           ),
-          const SizedBox(width: 5.0),
+          const SizedBox(width: 10.0),
           Text(title, style: Theme.of(context).textTheme.bodyLarge),
           const Spacer(),
           TextButton(

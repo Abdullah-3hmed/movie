@@ -10,4 +10,8 @@ class AppStrings {
   static const String newMovies = 'New Movies';
   static const String topRated = 'Top Rated';
   static const String popularMovies = 'Popular Movies';
+  static const String year = 'Year';
+  static const String country = 'Country';
+  static const String length = 'Length';
+  static const String cast = 'Cast';
 }

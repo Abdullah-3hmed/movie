@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movie/core/util/app_strings.dart';
 import 'package:movie/core/widgets/custom_section_title.dart';
-import 'package:movie/features/movies/presentation/widgets/movie_list_view_item.dart';
+import 'package:movie/features/movies/presentation/screens/widgets/movie/movie_list_view_item.dart';
 
 class TopRatedMoviesSection extends StatelessWidget {
   const TopRatedMoviesSection({super.key});

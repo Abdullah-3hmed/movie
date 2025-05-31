@@ -59,6 +59,22 @@ class LoginRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [MovieDetailsScreen]
+class MovieDetailsRoute extends PageRouteInfo<void> {
+  const MovieDetailsRoute({List<PageRouteInfo>? children})
+    : super(MovieDetailsRoute.name, initialChildren: children);
+
+  static const String name = 'MovieDetailsRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const MovieDetailsScreen();
+    },
+  );
+}
+
+/// generated route for
 /// [MoviesScreen]
 class MoviesRoute extends PageRouteInfo<void> {
   const MoviesRoute({List<PageRouteInfo>? children})
