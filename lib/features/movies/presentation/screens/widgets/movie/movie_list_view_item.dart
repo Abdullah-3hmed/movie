@@ -15,7 +15,7 @@ class MovieListViewItem extends StatelessWidget {
         context.pushRoute(const MovieDetailsRoute());
       },
       child: Transform(
-        transform: Matrix4.skewX(-.15),
+        transform: Matrix4.skewX(-.08),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(16.0),
           child: Stack(

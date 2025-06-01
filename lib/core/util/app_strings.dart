@@ -14,4 +14,7 @@ class AppStrings {
   static const String country = 'Country';
   static const String length = 'Length';
   static const String cast = 'Cast';
+  static const String recommended = 'Recommended';
+  static const String similar = 'Similar';
+  static const String reviews = 'Reviews';
 }

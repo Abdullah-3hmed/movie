@@ -7,7 +7,7 @@ import 'package:movie/features/movies/presentation/screens/widgets/movie_details
 
 class MovieDetailsPoster extends StatelessWidget {
   const MovieDetailsPoster({super.key, required this.posterHeight});
-  final ValueNotifier<double> posterHeight;
+  final double posterHeight;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -17,8 +17,8 @@ class MovieDetailsPoster extends StatelessWidget {
           children: [
             AnimatedContainer(
               duration: const Duration(milliseconds: 300),
-              curve: Curves.easeOut,
-              height: posterHeight.value,
+              curve: Curves.easeInOutCubic,
+              height: posterHeight,
               width: double.infinity,
               child: ClipPath(
                 clipper: MovieDetailsClipper(),

@@ -8,23 +8,22 @@ class PopularMoviesSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 300.0,
-      child: Column(
-        children: [
-          const SizedBox(height: 14.0),
-          CustomSectionTitle(title: AppStrings.popularMovies, onPressed: () {}),
-          Expanded(
-            child: ListView.separated(
-              scrollDirection: Axis.horizontal,
-              physics: const BouncingScrollPhysics(),
-              itemBuilder: (context, index) => const MovieListViewItem(),
-              separatorBuilder: (context, index) => const SizedBox(width: 10.0),
-              itemCount: 5,
-            ),
+    return Column(
+      children: [
+        const SizedBox(height: 14.0),
+        CustomSectionTitle(title: AppStrings.popularMovies, onPressed: () {}),
+        SizedBox(
+          height: 270.0,
+          child: ListView.separated(
+            scrollDirection: Axis.horizontal,
+            padding: const EdgeInsetsDirectional.symmetric(horizontal: 24.0),
+            physics: const BouncingScrollPhysics(),
+            itemBuilder: (context, index) => const MovieListViewItem(),
+            separatorBuilder: (context, index) => const SizedBox(width: 10.0),
+            itemCount: 5,
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

@@ -7,9 +7,13 @@ class CustomSectionTitle extends StatelessWidget {
     super.key,
     required this.title,
     required this.onPressed,
+    this.seeAll = true,
   });
+
+  final bool seeAll;
   final String title;
   final void Function() onPressed;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -27,16 +31,17 @@ class CustomSectionTitle extends StatelessWidget {
           const SizedBox(width: 10.0),
           Text(title, style: Theme.of(context).textTheme.bodyLarge),
           const Spacer(),
-          TextButton(
-            onPressed: onPressed,
-            child: Text(
-              AppStrings.seeAll,
-              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                color: Colors.blue,
-                fontWeight: FontWeight.w600,
+          if (seeAll)
+            TextButton(
+              onPressed: onPressed,
+              child: Text(
+                AppStrings.seeAll,
+                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                  color: Colors.blue,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
             ),
-          ),
         ],
       ),
     );
