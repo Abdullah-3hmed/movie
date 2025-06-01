@@ -8,7 +8,7 @@ import 'package:movie/features/movies/presentation/screens/see_all_movies_screen
 import 'package:movie/features/profile/presentation/profile_screen.dart';
 import 'package:movie/features/search/presentation/search_screen.dart';
 import 'package:movie/features/splash/presentation/screens/splash_screen.dart';
-import 'package:movie/features/tv/presentation/tv_screen.dart';
+import 'package:movie/features/tv/presentation/screens/tv_screen.dart';
 
 part 'app_router.gr.dart';
 
