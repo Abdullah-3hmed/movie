@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:movie/core/widgets/custom_back_button.dart';
 import 'package:movie/core/widgets/custom_scaffold.dart';
+import 'package:movie/features/movies/presentation/screens/widgets/see_all/see_all_list_view_item.dart';
 
 @RoutePage()
 class SeeAllMoviesScreen extends StatelessWidget {
@@ -29,18 +30,10 @@ class SeeAllMoviesScreen extends StatelessWidget {
             Expanded(
               child: ListView.separated(
                 physics: const BouncingScrollPhysics(),
-                itemBuilder:
-                    (context, index) => Container(
-                      height: 160.0,
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20.0),
-                        color: Colors.black26,
-                      ),
-                    ),
+                itemBuilder: (context, index) => const SeeAllListViewItem(),
                 separatorBuilder:
                     (context, index) => const SizedBox(height: 16.0),
-                itemCount: 10,
+                itemCount: 5,
               ),
             ),
           ],
