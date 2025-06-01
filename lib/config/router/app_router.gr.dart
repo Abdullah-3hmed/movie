@@ -187,6 +187,38 @@ class SplashRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [TvDetailsScreen]
+class TvDetailsRoute extends PageRouteInfo<void> {
+  const TvDetailsRoute({List<PageRouteInfo>? children})
+    : super(TvDetailsRoute.name, initialChildren: children);
+
+  static const String name = 'TvDetailsRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const TvDetailsScreen();
+    },
+  );
+}
+
+/// generated route for
+/// [TvOverviewScreen]
+class TvOverviewRoute extends PageRouteInfo<void> {
+  const TvOverviewRoute({List<PageRouteInfo>? children})
+    : super(TvOverviewRoute.name, initialChildren: children);
+
+  static const String name = 'TvOverviewRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const TvOverviewScreen();
+    },
+  );
+}
+
+/// generated route for
 /// [TvScreen]
 class TvRoute extends PageRouteInfo<void> {
   const TvRoute({List<PageRouteInfo>? children})
@@ -198,6 +230,22 @@ class TvRoute extends PageRouteInfo<void> {
     name,
     builder: (data) {
       return const TvScreen();
+    },
+  );
+}
+
+/// generated route for
+/// [TvSeasonsScreen]
+class TvSeasonsRoute extends PageRouteInfo<void> {
+  const TvSeasonsRoute({List<PageRouteInfo>? children})
+    : super(TvSeasonsRoute.name, initialChildren: children);
+
+  static const String name = 'TvSeasonsRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const TvSeasonsScreen();
     },
   );
 }

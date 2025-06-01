@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:movie/core/util/app_strings.dart';
 import 'package:movie/core/widgets/custom_section_title.dart';
-import 'package:movie/features/tv/presentation/screens/tv_show/tv_list_view_item.dart';
+import 'package:movie/features/tv/presentation/screens/widgets/tv_show/tv_list_view_item.dart';
 
-class PoplarTvShowSection extends StatelessWidget {
-  const PoplarTvShowSection({super.key});
+class TopRatedTvShowSection extends StatelessWidget {
+  const TopRatedTvShowSection({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         const SizedBox(height: 15.0),
-        CustomSectionTitle(title: AppStrings.popularShows, onPressed: () {}),
+        CustomSectionTitle(title: AppStrings.topRated, onPressed: () {}),
         const SizedBox(height: 15.0),
         SizedBox(
           height: 245.0,

@@ -7,8 +7,12 @@ import 'package:movie/features/movies/presentation/screens/movies_screen.dart';
 import 'package:movie/features/movies/presentation/screens/see_all_movies_screen.dart';
 import 'package:movie/features/profile/presentation/profile_screen.dart';
 import 'package:movie/features/search/presentation/search_screen.dart';
-import 'package:movie/features/splash/presentation/screens/splash_screen.dart';
+import 'package:movie/features/tv/presentation/screens/tv_details_screen.dart';
+import 'package:movie/features/tv/presentation/screens/tv_overview_screen.dart';
 import 'package:movie/features/tv/presentation/screens/tv_screen.dart';
+import 'package:movie/features/tv/presentation/screens/tv_seasons_screen.dart';
+
+import '../../features/splash/presentation/screens/splash_screen.dart';
 
 part 'app_router.gr.dart';
 
@@ -44,6 +48,13 @@ class AppRouter extends RootStackRouter {
     ),
     _buildCustomRoute(page: MovieDetailsRoute.page),
     _buildCustomRoute(page: SeeAllMoviesRoute.page),
+    _buildCustomRoute(
+      page: TvDetailsRoute.page,
+      children: [
+        _buildCustomRoute(initial: true, page: TvOverviewRoute.page),
+        _buildCustomRoute(page: TvSeasonsRoute.page),
+      ],
+    ),
   ];
 
   CustomRoute _buildCustomRoute({
