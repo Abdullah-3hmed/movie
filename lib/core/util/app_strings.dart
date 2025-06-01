@@ -17,4 +17,6 @@ class AppStrings {
   static const String recommended = 'Recommended';
   static const String similar = 'Similar';
   static const String reviews = 'Reviews';
+  static const String airingToDay = 'Airing To Day';
+  static const String popularShows = 'Popular Shows';
 }
