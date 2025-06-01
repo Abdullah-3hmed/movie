@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:movie/core/icons/solar_system_icons.dart';
 import 'package:movie/core/util/assets_manager.dart';
+import 'package:movie/core/widgets/custom_back_button.dart';
 import 'package:movie/features/movies/presentation/screens/widgets/movie_details/movie_details_clipper.dart';
 
 class MovieDetailsPoster extends StatelessWidget {
@@ -29,24 +30,10 @@ class MovieDetailsPoster extends StatelessWidget {
                 ),
               ),
             ),
-            PositionedDirectional(
+            const PositionedDirectional(
               top: 40.0,
               start: 16.0,
-              child: InkWell(
-                onTap: () => Navigator.pop(context),
-                child: Container(
-                  width: 35.0,
-                  height: 35.0,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadiusDirectional.circular(10.0),
-                    color: Colors.black38,
-                  ),
-                  child: const Icon(
-                    Icons.arrow_back_ios_new_outlined,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
+              child: CustomBackButton(),
             ),
             PositionedDirectional(
               start: 0.0,

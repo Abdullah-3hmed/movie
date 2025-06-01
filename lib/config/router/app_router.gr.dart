@@ -123,6 +123,22 @@ class SearchRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [SeeAllMoviesScreen]
+class SeeAllMoviesRoute extends PageRouteInfo<void> {
+  const SeeAllMoviesRoute({List<PageRouteInfo>? children})
+    : super(SeeAllMoviesRoute.name, initialChildren: children);
+
+  static const String name = 'SeeAllMoviesRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const SeeAllMoviesScreen();
+    },
+  );
+}
+
+/// generated route for
 /// [SelectionScreen]
 class SelectionRoute extends PageRouteInfo<void> {
   const SelectionRoute({List<PageRouteInfo>? children})
