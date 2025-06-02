@@ -15,7 +15,7 @@ class MovieReviewItem extends StatelessWidget {
         horizontal: 10.0,
       ),
       decoration: const BoxDecoration(
-        color: Colors.black,
+        color: ColorsManager.reviewCardColor,
         borderRadius: BorderRadius.all(Radius.circular(24.0)),
       ),
       child: Column(

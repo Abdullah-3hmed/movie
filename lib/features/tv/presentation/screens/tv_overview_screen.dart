@@ -12,19 +12,8 @@ class TvOverviewScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      physics: const NeverScrollableScrollPhysics(),
-      child: Column(
-        children: const [
-          TvDetailsSection(),
-          TvDetailsCastSection(),
-          TvRecommendedSection(),
-          TvSimilarSection(),
-          TvReviewsSection(),
-        ],
-      ),
-    );
-    const CustomScrollView(
+    return const CustomScrollView(
+      shrinkWrap: true,
       physics: NeverScrollableScrollPhysics(),
       slivers: [
         SliverToBoxAdapter(child: TvDetailsSection()),
@@ -32,6 +21,7 @@ class TvOverviewScreen extends StatelessWidget {
         SliverToBoxAdapter(child: TvRecommendedSection()),
         SliverToBoxAdapter(child: TvSimilarSection()),
         SliverToBoxAdapter(child: TvReviewsSection()),
+        SliverToBoxAdapter(child: SizedBox(height: 30.0)),
       ],
     );
   }
