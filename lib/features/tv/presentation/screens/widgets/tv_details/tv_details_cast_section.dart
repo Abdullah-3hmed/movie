@@ -10,7 +10,11 @@ class TvDetailsCastSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        CustomSectionTitle(title: AppStrings.cast, onPressed: () {}),
+        CustomSectionTitle(
+          title: AppStrings.cast,
+          onPressed: () {},
+          seeAll: false,
+        ),
         const SizedBox(height: 16.0),
         SizedBox(
           height: 200.0,

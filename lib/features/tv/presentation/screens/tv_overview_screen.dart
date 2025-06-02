@@ -13,8 +13,7 @@ class TvOverviewScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const CustomScrollView(
-      shrinkWrap: true,
-      physics: NeverScrollableScrollPhysics(),
+      physics: BouncingScrollPhysics(),
       slivers: [
         SliverToBoxAdapter(child: TvDetailsSection()),
         SliverToBoxAdapter(child: TvDetailsCastSection()),
