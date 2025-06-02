@@ -44,34 +44,6 @@ class TvDetailsPoster extends StatelessWidget {
             ),
           ],
         ),
-
-        ///TODO: I will come back for this
-        // const SizedBox(height: 16.0),
-        // Padding(
-        //   padding: const EdgeInsetsDirectional.symmetric(horizontal: 16.0),
-        //   child: Row(
-        //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        //     children: [
-        //       const Column(
-        //         children: [
-        //           Icon(Icons.star, color: Colors.yellow),
-        //           SizedBox(height: 5.0),
-        //           Text("7.6 / 10"),
-        //           SizedBox(height: 5.0),
-        //           Text("100.755"),
-        //         ],
-        //       ),
-        //       IconButton(
-        //         onPressed: () {},
-        //         icon: const Icon(
-        //           SolarSystemIcons.unsaved,
-        //           size: 30.0,
-        //           color: Color(0xFF007373),
-        //         ),
-        //       ),
-        //     ],
-        //   ),
-        // ),
       ],
     );
   }

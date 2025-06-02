@@ -1,5 +1,10 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:movie/features/tv/presentation/screens/widgets/tv_details/tv_details_cast_section.dart';
+import 'package:movie/features/tv/presentation/screens/widgets/tv_details/tv_details_section.dart';
+import 'package:movie/features/tv/presentation/screens/widgets/tv_details/tv_recommended_section.dart';
+import 'package:movie/features/tv/presentation/screens/widgets/tv_details/tv_reviews_section.dart';
+import 'package:movie/features/tv/presentation/screens/widgets/tv_details/tv_similar_section.dart';
 
 @RoutePage()
 class TvOverviewScreen extends StatelessWidget {
@@ -7,11 +12,26 @@ class TvOverviewScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Center(
-          child: Container(height: 100.0, width: 100.0, color: Colors.red),
-        ),
+    return SingleChildScrollView(
+      physics: const NeverScrollableScrollPhysics(),
+      child: Column(
+        children: const [
+          TvDetailsSection(),
+          TvDetailsCastSection(),
+          TvRecommendedSection(),
+          TvSimilarSection(),
+          TvReviewsSection(),
+        ],
+      ),
+    );
+    const CustomScrollView(
+      physics: NeverScrollableScrollPhysics(),
+      slivers: [
+        SliverToBoxAdapter(child: TvDetailsSection()),
+        SliverToBoxAdapter(child: TvDetailsCastSection()),
+        SliverToBoxAdapter(child: TvRecommendedSection()),
+        SliverToBoxAdapter(child: TvSimilarSection()),
+        SliverToBoxAdapter(child: TvReviewsSection()),
       ],
     );
   }

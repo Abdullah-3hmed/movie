@@ -12,6 +12,7 @@ class TvDetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return const CustomScaffold(
       child: CustomScrollView(
+        physics: BouncingScrollPhysics(),
         slivers: [
           SliverToBoxAdapter(child: TvDetailsPoster(posterHeight: 330.0)),
           SliverFillRemaining(child: TvDetailsTabBarSection()),
