@@ -8,6 +8,7 @@ import 'package:movie/features/movies/presentation/screens/see_all_movies_screen
 import 'package:movie/features/profile/presentation/profile_screen.dart';
 import 'package:movie/features/search/presentation/search_screen.dart';
 import 'package:movie/features/splash/presentation/screens/splash_screen.dart';
+import 'package:movie/features/tv/presentation/screens/tv_actor_details_screen.dart';
 import 'package:movie/features/tv/presentation/screens/tv_details_screen.dart';
 import 'package:movie/features/tv/presentation/screens/tv_overview_screen.dart';
 import 'package:movie/features/tv/presentation/screens/tv_screen.dart';
@@ -54,6 +55,7 @@ class AppRouter extends RootStackRouter {
         _buildCustomRoute(page: TvSeasonsRoute.page),
       ],
     ),
+    _buildCustomRoute(page: TvActorDetailsRoute.page),
   ];
 
   CustomRoute _buildCustomRoute({

@@ -6,13 +6,13 @@ class CustomSectionTitle extends StatelessWidget {
   const CustomSectionTitle({
     super.key,
     required this.title,
-    required this.onPressed,
+    this.onPressed,
     this.seeAll = true,
   });
 
   final bool seeAll;
   final String title;
-  final void Function() onPressed;
+  final void Function()? onPressed;
 
   @override
   Widget build(BuildContext context) {

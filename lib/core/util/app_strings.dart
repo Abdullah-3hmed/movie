@@ -20,4 +20,5 @@ class AppStrings {
   static const String airingToDay = 'Airing To Day';
   static const String popularShows = 'Popular Shows';
   static const String from = 'From';
+  static const String biography = 'Biography';
 }

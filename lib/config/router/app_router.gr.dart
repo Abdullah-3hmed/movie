@@ -187,6 +187,22 @@ class SplashRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [TvActorDetailsScreen]
+class TvActorDetailsRoute extends PageRouteInfo<void> {
+  const TvActorDetailsRoute({List<PageRouteInfo>? children})
+    : super(TvActorDetailsRoute.name, initialChildren: children);
+
+  static const String name = 'TvActorDetailsRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const TvActorDetailsScreen();
+    },
+  );
+}
+
+/// generated route for
 /// [TvDetailsScreen]
 class TvDetailsRoute extends PageRouteInfo<void> {
   const TvDetailsRoute({List<PageRouteInfo>? children})
