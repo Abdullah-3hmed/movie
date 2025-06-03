@@ -21,4 +21,5 @@ class AppStrings {
   static const String popularShows = 'Popular Shows';
   static const String from = 'From';
   static const String biography = 'Biography';
+  static const String tvShows = 'Tv Shows';
 }
