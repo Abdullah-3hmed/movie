@@ -1,10 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:movie/core/icons/solar_system_icons.dart';
-import 'package:movie/core/util/color_manager.dart';
+import 'package:movie/core/util/app_strings.dart';
 
-class SeeAllAndSearchListViewItem extends StatelessWidget {
-  const SeeAllAndSearchListViewItem({super.key});
+class SearchActorsListItem extends StatelessWidget {
+  const SearchActorsListItem({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -42,6 +42,7 @@ class SeeAllAndSearchListViewItem extends StatelessWidget {
                   const Spacer(),
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
+                    spacing: 8.0,
                     children: [
                       Text(
                         "The Godfather",
@@ -50,27 +51,8 @@ class SeeAllAndSearchListViewItem extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        "1998 ‧ Drama ‧2h 36m",
-                        style: Theme.of(context).textTheme.bodySmall,
-                      ),
-                      const SizedBox(height: 7.0),
-                      Row(
-                        children: [
-                          const Icon(
-                            SolarSystemIcons.star,
-                            size: 16.0,
-                            color: ColorsManager.ratingIconColor,
-                          ),
-                          Text(
-                            "  9.1",
-                            style: Theme.of(context).textTheme.bodySmall,
-                          ),
-                          const SizedBox(width: 22.0),
-                          Text(
-                            "From 45641 users",
-                            style: Theme.of(context).textTheme.bodySmall,
-                          ),
-                        ],
+                        "${AppStrings.knownFor} : Acting",
+                        style: Theme.of(context).textTheme.bodyMedium,
                       ),
                     ],
                   ),

@@ -11,7 +11,6 @@ class SearchTvScreen extends StatelessWidget {
     return ListView.separated(
       physics: const BouncingScrollPhysics(),
       cacheExtent: 200.0,
-      padding: const EdgeInsetsDirectional.symmetric(vertical: 16.0),
       itemBuilder:
           (context, index) =>
               const SizedBox(height: 180.0, child: TvSearchListViewItem()),

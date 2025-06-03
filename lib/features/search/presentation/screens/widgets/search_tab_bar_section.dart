@@ -62,6 +62,7 @@ class SearchTabBarSection extends StatelessWidget {
                   ],
                 ),
               ),
+              const SizedBox(height: 16.0),
               Expanded(child: child),
             ],
           );

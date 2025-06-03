@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:movie/features/search/presentation/screens/widgets/search_actors_list_item.dart';
 
 @RoutePage()
 class SearchActorsScreen extends StatelessWidget {
@@ -7,6 +8,12 @@ class SearchActorsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Center(child: Text('SearchActorsScreen'));
+    return ListView.separated(
+      itemBuilder:
+          (context, index) =>
+              const SizedBox(height: 180.0, child: SearchActorsListItem()),
+      separatorBuilder: (context, index) => const SizedBox(height: 16.0),
+      itemCount: 10,
+    );
   }
 }
