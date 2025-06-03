@@ -31,7 +31,7 @@ class MovieDetailsPoster extends StatelessWidget {
               ),
             ),
             const PositionedDirectional(
-              top: 40.0,
+              top: 60.0,
               start: 16.0,
               child: CustomBackButton(),
             ),

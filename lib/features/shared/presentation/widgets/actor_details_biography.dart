@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:movie/core/util/color_manager.dart';
 
-class TvActorDetailsBiography extends StatefulWidget {
-  const TvActorDetailsBiography({super.key});
+class ActorDetailsBiography extends StatefulWidget {
+  const ActorDetailsBiography({super.key});
 
   @override
-  State<TvActorDetailsBiography> createState() =>
-      _TvActorDetailsBiographyState();
+  State<ActorDetailsBiography> createState() => _ActorDetailsBiographyState();
 }
 
-class _TvActorDetailsBiographyState extends State<TvActorDetailsBiography> {
+class _ActorDetailsBiographyState extends State<ActorDetailsBiography> {
   bool _isExpanded = false;
 
   final String biography =

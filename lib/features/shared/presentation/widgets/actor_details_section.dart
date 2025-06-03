@@ -6,10 +6,10 @@ import 'package:movie/core/util/color_manager.dart';
 import 'package:movie/core/widgets/custom_back_button.dart';
 import 'package:movie/core/widgets/custom_divider.dart';
 import 'package:movie/core/widgets/custom_section_title.dart';
-import 'package:movie/features/tv/presentation/screens/widgets/tv_details/tv_actor_details_biography.dart';
+import 'package:movie/features/shared/presentation/widgets/actor_details_biography.dart';
 
-class TvActorDetailsSection extends StatelessWidget {
-  const TvActorDetailsSection({super.key});
+class ActorDetailsSection extends StatelessWidget {
+  const ActorDetailsSection({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -85,7 +85,7 @@ class TvActorDetailsSection extends StatelessWidget {
         ),
         const CustomSectionTitle(title: AppStrings.biography, seeAll: false),
         const SizedBox(height: 8.0),
-        const TvActorDetailsBiography(),
+        const ActorDetailsBiography(),
         const CustomDivider(),
         CustomSectionTitle(title: AppStrings.tvShows, onPressed: () {}),
       ],
