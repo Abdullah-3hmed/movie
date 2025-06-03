@@ -107,6 +107,38 @@ class ProfileRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [SearchActorsScreen]
+class SearchActorsRoute extends PageRouteInfo<void> {
+  const SearchActorsRoute({List<PageRouteInfo>? children})
+    : super(SearchActorsRoute.name, initialChildren: children);
+
+  static const String name = 'SearchActorsRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const SearchActorsScreen();
+    },
+  );
+}
+
+/// generated route for
+/// [SearchMoviesScreen]
+class SearchMoviesRoute extends PageRouteInfo<void> {
+  const SearchMoviesRoute({List<PageRouteInfo>? children})
+    : super(SearchMoviesRoute.name, initialChildren: children);
+
+  static const String name = 'SearchMoviesRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const SearchMoviesScreen();
+    },
+  );
+}
+
+/// generated route for
 /// [SearchScreen]
 class SearchRoute extends PageRouteInfo<void> {
   const SearchRoute({List<PageRouteInfo>? children})
@@ -118,6 +150,22 @@ class SearchRoute extends PageRouteInfo<void> {
     name,
     builder: (data) {
       return const SearchScreen();
+    },
+  );
+}
+
+/// generated route for
+/// [SearchTvScreen]
+class SearchTvRoute extends PageRouteInfo<void> {
+  const SearchTvRoute({List<PageRouteInfo>? children})
+    : super(SearchTvRoute.name, initialChildren: children);
+
+  static const String name = 'SearchTvRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const SearchTvScreen();
     },
   );
 }

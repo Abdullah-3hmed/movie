@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:movie/core/icons/solar_system_icons.dart';
 import 'package:movie/core/util/color_manager.dart';
 
-class SeeAllListViewItem extends StatelessWidget {
-  const SeeAllListViewItem({super.key});
+class SeeAllAndSearchListViewItem extends StatelessWidget {
+  const SeeAllAndSearchListViewItem({super.key});
 
   @override
   Widget build(BuildContext context) {

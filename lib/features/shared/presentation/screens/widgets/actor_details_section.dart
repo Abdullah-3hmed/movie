@@ -6,7 +6,7 @@ import 'package:movie/core/util/color_manager.dart';
 import 'package:movie/core/widgets/custom_back_button.dart';
 import 'package:movie/core/widgets/custom_divider.dart';
 import 'package:movie/core/widgets/custom_section_title.dart';
-import 'package:movie/features/shared/presentation/widgets/actor_details_biography.dart';
+import 'package:movie/features/shared/presentation/screens/widgets/actor_details_biography.dart';
 
 class ActorDetailsSection extends StatelessWidget {
   const ActorDetailsSection({super.key});
@@ -19,7 +19,7 @@ class ActorDetailsSection extends StatelessWidget {
           children: [
             ClipRRect(
               borderRadius: const BorderRadiusDirectional.only(
-                bottomEnd: Radius.circular(20.0),
+                bottomEnd: Radius.circular(60.0),
               ),
               child: CachedNetworkImage(
                 imageUrl:

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:movie/core/util/app_strings.dart';
 import 'package:movie/core/widgets/custom_divider.dart';
 import 'package:movie/core/widgets/custom_section_title.dart';
-import 'package:movie/core/widgets/movie_details_list_item.dart';
+import 'package:movie/features/shared/presentation/screens/widgets/movie_details_list_item.dart';
 
 class RecommendedSection extends StatelessWidget {
   const RecommendedSection({super.key});

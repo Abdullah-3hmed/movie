@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:movie/core/util/app_strings.dart';
 import 'package:movie/core/widgets/custom_divider.dart';
 import 'package:movie/core/widgets/custom_section_title.dart';
-import 'package:movie/core/widgets/movie_review_item.dart';
+import 'package:movie/features/shared/presentation/screens/widgets/movie_review_item.dart';
 
 class TvReviewsSection extends StatelessWidget {
   const TvReviewsSection({super.key});

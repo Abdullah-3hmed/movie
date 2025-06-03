@@ -1,8 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:movie/core/widgets/custom_scaffold.dart';
-import 'package:movie/features/shared/presentation/widgets/actor_details_section.dart';
-import 'package:movie/features/shared/presentation/widgets/tv_show_section.dart';
+import 'package:movie/features/shared/presentation/screens/widgets/actor_details_section.dart';
+import 'package:movie/features/shared/presentation/screens/widgets/tv_show_section.dart';
 
 @RoutePage()
 class TvActorDetailsScreen extends StatelessWidget {

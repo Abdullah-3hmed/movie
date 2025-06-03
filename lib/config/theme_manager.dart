@@ -68,6 +68,16 @@ class ThemeManager {
         dividerColor: Colors.transparent,
         indicatorColor: ColorsManager.darkPrimary,
         indicatorSize: TabBarIndicatorSize.label,
+        labelStyle: TextStyle(
+          fontSize: 14,
+          fontWeight: FontWeight.w700,
+          color: Colors.white,
+        ),
+        unselectedLabelStyle: TextStyle(
+          fontSize: 14,
+          fontWeight: FontWeight.w700,
+          color: Colors.white,
+        ),
       ),
     );
   }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movie/core/util/app_strings.dart';
-import 'package:movie/core/widgets/cast_list_view_item.dart';
 import 'package:movie/core/widgets/custom_section_title.dart';
+import 'package:movie/features/shared/presentation/screens/widgets/cast_list_view_item.dart';
 
 class CastSection extends StatelessWidget {
   const CastSection({super.key});
