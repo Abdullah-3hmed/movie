@@ -4,7 +4,7 @@ import 'package:movie/features/auth/presentation/screens/selection_screen.dart';
 import 'package:movie/features/bottom_nab_bar/bottom_nav_bar.dart';
 import 'package:movie/features/movies/presentation/screens/movie_details_screen.dart';
 import 'package:movie/features/movies/presentation/screens/movies_screen.dart';
-import 'package:movie/features/profile/presentation/profile_screen.dart';
+import 'package:movie/features/profile/presentation/screens/profile_screen.dart';
 import 'package:movie/features/search/presentation/screens/search_actors_screen.dart';
 import 'package:movie/features/search/presentation/screens/search_movies_screen.dart';
 import 'package:movie/features/search/presentation/screens/search_screen.dart';

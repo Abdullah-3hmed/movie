@@ -15,7 +15,7 @@ class MovieListViewItem extends StatelessWidget {
         context.pushRoute(const MovieDetailsRoute());
       },
       child: Transform(
-        transform: Matrix4.skewX(-.08),
+        transform: Matrix4.skewX(-.05),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(16.0),
           child: Stack(
@@ -24,7 +24,7 @@ class MovieListViewItem extends StatelessWidget {
                 imageUrl:
                     "https://i.pinimg.com/736x/bd/8c/99/bd8c998d2e1a2766775fb97151a3c9fd.jpg",
                 width: 200.0,
-                height: 300.0,
+                height: 250.0,
                 fit: BoxFit.cover,
               ),
               PositionedDirectional(

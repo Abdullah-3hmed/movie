@@ -25,4 +25,6 @@ class AppStrings {
   static const String movies = 'Movies';
   static const String actors = 'Actors';
   static const String knownFor = 'Known For';
+  static const String moviesWatchList = 'Movies Watch List';
+  static const String tvShowsWatchList = 'TvShows Watch List';
 }
