@@ -4,7 +4,9 @@ import 'package:movie/core/icons/solar_system_icons.dart';
 import 'package:movie/core/util/color_manager.dart';
 
 class SeeAllAndSearchListViewItem extends StatelessWidget {
-  const SeeAllAndSearchListViewItem({super.key});
+  const SeeAllAndSearchListViewItem({super.key, this.isWatchList = false});
+
+  final bool isWatchList;
 
   @override
   Widget build(BuildContext context) {
@@ -80,17 +82,18 @@ class SeeAllAndSearchListViewItem extends StatelessWidget {
             ),
           ),
         ),
-        PositionedDirectional(
-          top: 10.0,
-          end: 15.0,
-          child: IconButton(
-            onPressed: () {},
-            icon: const Icon(
-              SolarSystemIcons.unsaved,
-              color: Color(0xFF007373),
+        if (!isWatchList)
+          PositionedDirectional(
+            top: 10.0,
+            end: 15.0,
+            child: IconButton(
+              onPressed: () {},
+              icon: const Icon(
+                SolarSystemIcons.unsaved,
+                color: Color(0xFF007373),
+              ),
             ),
           ),
-        ),
       ],
     );
   }

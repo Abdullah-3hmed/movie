@@ -313,3 +313,19 @@ class TvSeasonsRoute extends PageRouteInfo<void> {
     },
   );
 }
+
+/// generated route for
+/// [WatchListScreen]
+class WatchListRoute extends PageRouteInfo<void> {
+  const WatchListRoute({List<PageRouteInfo>? children})
+    : super(WatchListRoute.name, initialChildren: children);
+
+  static const String name = 'WatchListRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const WatchListScreen();
+    },
+  );
+}

@@ -1,4 +1,6 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:movie/config/router/app_router.dart';
 import 'package:movie/core/util/app_strings.dart';
 import 'package:movie/core/widgets/custom_section_title.dart';
 import 'package:movie/features/movies/presentation/screens/widgets/movie/movie_list_view_item.dart';
@@ -10,7 +12,12 @@ class ProfileMoviesWatchListSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        CustomSectionTitle(title: AppStrings.moviesWatchList, onPressed: () {}),
+        CustomSectionTitle(
+          title: AppStrings.moviesWatchList,
+          onPressed: () {
+            context.pushRoute(const WatchListRoute());
+          },
+        ),
         SizedBox(
           height: 250.0,
           child: ListView.separated(
