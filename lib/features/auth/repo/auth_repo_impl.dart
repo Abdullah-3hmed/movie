@@ -3,9 +3,13 @@ import 'package:dio/dio.dart';
 import 'package:movie/core/error/error_model.dart';
 import 'package:movie/core/error/failures.dart';
 import 'package:movie/core/error/server_exception.dart';
+import 'package:movie/core/local/cache_helper.dart';
 import 'package:movie/core/network/api_constants.dart';
 import 'package:movie/core/network/dio_helper.dart';
+import 'package:movie/core/services/service_locator.dart';
+import 'package:movie/core/util/app_constants.dart';
 import 'package:movie/features/auth/repo/auth_repo.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class AuthRepoImpl implements AuthRepo {
   AuthRepoImpl({required this.dioHelper});
@@ -79,15 +83,28 @@ class AuthRepoImpl implements AuthRepo {
   }
 
   @override
-  Future<Either<Failure, void>> signUp() async {
-    try {
-      return Right(null);
-    } on DioException catch (e) {
-      return Left(ServerFailure.fromDioError(e));
-    } on ServerException catch (e) {
-      return Left(ServerFailure(e.errorModel.statusMessages));
-    } catch (e) {
-      return Left(ServerFailure(e.toString()));
+  Future<void> signUp() async {
+    const String url = "https://www.themoviedb.org/signup";
+    if (await canLaunchUrl(Uri.parse(url))) {
+      await launchUrl(Uri.parse(url), mode: LaunchMode.externalApplication);
+    } else {
+      throw "Could not launch $url";
     }
+  }
+
+  @override
+  Future<void> resetPassword() async {
+    const String url = "https://www.themoviedb.org/reset-password";
+    if (await canLaunchUrl(Uri.parse(url))) {
+      await launchUrl(Uri.parse(url), mode: LaunchMode.externalApplication);
+    } else {
+      throw "Could not launch $url";
+    }
+  }
+
+  @override
+  Future<void> logout() async {
+    AppConstants.sessionId = "";
+    await getIt<CacheHelper>().delete(key: AppConstants.sessionIdKey);
   }
 }

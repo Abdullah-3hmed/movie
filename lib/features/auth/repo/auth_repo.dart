@@ -6,5 +6,7 @@ abstract class AuthRepo {
     required String userName,
     required String password,
   });
-  Future<Either<Failure, void>> signUp();
+  Future<void> signUp();
+  Future<void> resetPassword();
+  Future<void> logout();
 }

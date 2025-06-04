@@ -45,7 +45,6 @@ class _LoginFormState extends State<LoginForm> {
               textInputAction: TextInputAction.next,
               autofillHints: const [AutofillHints.username],
               onSaved: (value) {
-                print(value);
                 userName = value!;
               },
               validator: (value) {
@@ -79,7 +78,6 @@ class _LoginFormState extends State<LoginForm> {
             const SizedBox(height: 16.0),
             PasswordField(
               onSaved: (value) {
-                print(value);
                 password = value!;
               },
               onFieldSubmitted: (_) async {
@@ -89,10 +87,15 @@ class _LoginFormState extends State<LoginForm> {
             const SizedBox(height: 16.0),
             Align(
               alignment: AlignmentDirectional.centerEnd,
-              child: Text(
-                AppStrings.forgetPassword,
-                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                  color: const Color(0xFF00CCCC),
+              child: TextButton(
+                onPressed: () async {
+                  await context.read<AuthCubit>().resetPassword();
+                },
+                child: Text(
+                  AppStrings.forgetPassword,
+                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                    color: const Color(0xFF00CCCC),
+                  ),
                 ),
               ),
             ),

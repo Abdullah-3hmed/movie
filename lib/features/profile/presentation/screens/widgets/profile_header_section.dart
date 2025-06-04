@@ -1,13 +1,12 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie/config/router/app_router.dart';
 import 'package:movie/core/icons/solar_system_icons.dart';
-import 'package:movie/core/local/cache_helper.dart';
-import 'package:movie/core/services/service_locator.dart';
-import 'package:movie/core/util/app_constants.dart';
 import 'package:movie/core/util/color_manager.dart';
 import 'package:movie/core/widgets/custom_outline.dart';
+import 'package:movie/features/auth/cubit/auth_cubit.dart';
 
 class ProfileHeaderSection extends StatelessWidget {
   const ProfileHeaderSection({super.key});
@@ -60,8 +59,7 @@ class ProfileHeaderSection extends StatelessWidget {
           IconButton(
             onPressed: () async {
               context.replaceRoute(const AuthRoute());
-              AppConstants.sessionId = "";
-              await getIt<CacheHelper>().delete(key: AppConstants.sessionIdKey);
+              await context.read<AuthCubit>().logout();
             },
             icon: const Icon(SolarSystemIcons.sign_out, color: Colors.white),
           ),

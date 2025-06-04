@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:movie/core/network/api_constants.dart';
 import 'package:movie/core/network/custom_interceptors.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
@@ -8,7 +9,7 @@ class DioHelper {
 
   static void init() {
     BaseOptions options = BaseOptions(
-      baseUrl: dotenv.env["API_URL"]!,
+      baseUrl: ApiConstants.baseUrl,
       queryParameters: {
         "api_key": dotenv.env["API_KEY"]!,
         "contentType": 'Application/json',

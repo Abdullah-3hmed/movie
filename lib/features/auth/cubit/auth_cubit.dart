@@ -39,4 +39,16 @@ class AuthCubit extends Cubit<AuthState> {
       },
     );
   }
+
+  Future<void> signUp() async {
+    await authRepoImpl.signUp();
+  }
+
+  Future<void> resetPassword() async {
+    await authRepoImpl.resetPassword();
+  }
+
+  Future<void> logout() async {
+    await authRepoImpl.logout();
+  }
 }
