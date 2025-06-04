@@ -4,8 +4,15 @@ import 'package:movie/core/util/color_manager.dart';
 import 'package:movie/core/widgets/custom_outline.dart';
 
 class CustomLoginButton extends StatelessWidget {
-  const CustomLoginButton({super.key, required this.onPressed});
+  const CustomLoginButton({
+    super.key,
+    required this.onPressed,
+    this.isLoading = false,
+  });
+
   final void Function() onPressed;
+  final bool isLoading;
+
   @override
   Widget build(BuildContext context) {
     return CustomOutline(
@@ -17,10 +24,13 @@ class CustomLoginButton extends StatelessWidget {
       gradient: const LinearGradient(
         colors: [ColorsManager.primaryColor, ColorsManager.secondaryColor],
       ),
-      child: Text(
-        AppStrings.login,
-        style: Theme.of(context).textTheme.titleLarge,
-      ),
+      child:
+          isLoading
+              ? const CircularProgressIndicator(color: Colors.white)
+              : Text(
+                AppStrings.login,
+                style: Theme.of(context).textTheme.titleLarge,
+              ),
     );
   }
 }

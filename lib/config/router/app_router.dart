@@ -1,4 +1,8 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movie/core/services/service_locator.dart';
+import 'package:movie/features/auth/cubit/auth_cubit.dart';
 import 'package:movie/features/auth/presentation/screens/login_screen.dart';
 import 'package:movie/features/auth/presentation/screens/selection_screen.dart';
 import 'package:movie/features/bottom_nab_bar/bottom_nav_bar.dart';
@@ -28,12 +32,11 @@ class AppRouter extends RootStackRouter {
   @override
   List<AutoRoute> get routes => [
     AutoRoute(
-      //initial: true,
+      initial: true,
       page: SplashTabRoute.page,
       children: [AutoRoute(initial: true, page: SplashRoute.page)],
     ),
     _buildCustomRoute(
-      //  initial: true,
       page: AuthRoute.page,
       children: [
         _buildCustomRoute(initial: true, page: SelectionRoute.page),
@@ -41,7 +44,7 @@ class AppRouter extends RootStackRouter {
       ],
     ),
     _buildCustomRoute(
-      initial: true,
+      // initial: true,
       page: BottomNavBarRoute.page,
       children: [
         _buildCustomRoute(initial: true, page: MoviesRoute.page),
@@ -91,6 +94,10 @@ class Splash extends AutoRouter {
 }
 
 @RoutePage(name: 'AuthRoute')
-class Auth extends AutoRouter {
+class Auth extends AutoRouter implements AutoRouteWrapper {
   const Auth({super.key});
+
+  @override
+  Widget wrappedRoute(BuildContext context) =>
+      BlocProvider(create: (context) => getIt<AuthCubit>(), child: this);
 }

@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:movie/core/util/color_manager.dart';
 
 class PasswordField extends StatefulWidget {
-  const PasswordField({super.key, this.onSaved});
+  const PasswordField({super.key, this.onSaved, this.onFieldSubmitted});
   final void Function(String?)? onSaved;
+  final void Function(String)? onFieldSubmitted;
   @override
   State<PasswordField> createState() => _PasswordFieldState();
 }
@@ -16,7 +17,14 @@ class _PasswordFieldState extends State<PasswordField> {
       onTapOutside: (event) => FocusScope.of(context).unfocus(),
       obscureText: isObscure,
       onSaved: widget.onSaved,
+      onFieldSubmitted: widget.onFieldSubmitted,
       textInputAction: TextInputAction.done,
+      validator: (value) {
+        if (value!.isEmpty) {
+          return 'Password must not be empty';
+        }
+        return null;
+      },
       decoration: InputDecoration(
         labelText: 'Password',
         hintText: 'Password',

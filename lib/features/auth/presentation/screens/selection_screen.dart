@@ -5,7 +5,7 @@ import 'package:movie/core/util/app_strings.dart';
 import 'package:movie/core/util/assets_manager.dart';
 import 'package:movie/core/util/color_manager.dart';
 import 'package:movie/core/widgets/custom_scaffold.dart';
-import 'package:movie/features/auth/presentation/widgets/custom_login_button.dart';
+import 'package:movie/features/auth/presentation/screens/widgets/custom_login_button.dart';
 
 @RoutePage()
 class SelectionScreen extends StatelessWidget {
