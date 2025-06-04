@@ -7,6 +7,8 @@ class ApiConstants {
   static const signupEndpoint = '/signup';
   static const nowPlayingMoviesEndpoint = '/movie/now_playing';
   static const upComingMoviesEndpoint = '/movie/upcoming';
+  static const topRatedMoviesEndpoint = '/movie/top_rated';
+  static const popularMoviesEndpoint = '/movie/popular';
 
   static const String baseImageUrl = 'https://image.tmdb.org/t/p/w500';
 

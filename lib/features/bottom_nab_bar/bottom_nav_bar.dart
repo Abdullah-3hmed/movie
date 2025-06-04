@@ -15,11 +15,7 @@ class BottomNavBarScreen extends StatelessWidget implements AutoRouteWrapper {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create:
-              (context) =>
-                  getIt<MovieCubit>()
-                    ..getNowPlayingMovies()
-                    ..getUpComingMovies(),
+          create: (context) => getIt<MovieCubit>()..getAllHomeMovies(),
           child: this,
         ),
       ],

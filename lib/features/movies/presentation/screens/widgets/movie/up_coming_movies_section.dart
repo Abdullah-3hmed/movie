@@ -4,7 +4,7 @@ import 'package:movie/core/enums/request_status.dart';
 import 'package:movie/core/util/color_manager.dart';
 import 'package:movie/features/movies/cubit/movie_cubit.dart';
 import 'package:movie/features/movies/cubit/movie_state.dart';
-import 'package:movie/features/movies/presentation/screens/widgets/movie/movie_now_playing_item.dart';
+import 'package:movie/features/movies/presentation/screens/widgets/movie/movie_page_view_item.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class UpComingMoviesSection extends StatefulWidget {
@@ -36,15 +36,17 @@ class _UpComingMoviesSectionState extends State<UpComingMoviesSection> {
           (previous, current) =>
               previous.upComingMoviesState != current.upComingMoviesState,
       builder: (context, state) {
-        return state.upComingMoviesState == RequestStatus.loading
-            ? const Center(child: CircularProgressIndicator())
-            : Column(
+        switch (state.upComingMoviesState) {
+          case RequestStatus.loading:
+            return const SizedBox.shrink();
+          case RequestStatus.success:
+            return Column(
               children: [
                 SizedBox(
                   height: 360.0,
                   child: PageView.builder(
                     controller: controller,
-                    itemCount: state.upComingMovies.length,
+                    itemCount: 5,
                     itemBuilder: (context, index) {
                       return MoviePageViewItem(
                         upComingMoviesModel: state.upComingMovies[index],
@@ -55,7 +57,7 @@ class _UpComingMoviesSectionState extends State<UpComingMoviesSection> {
                 const SizedBox(height: 12.0),
                 SmoothPageIndicator(
                   controller: controller,
-                  count: state.upComingMovies.length,
+                  count: 5,
                   effect: const ExpandingDotsEffect(
                     activeDotColor: ColorsManager.primaryColor,
                     dotColor: Colors.white,
@@ -66,6 +68,12 @@ class _UpComingMoviesSectionState extends State<UpComingMoviesSection> {
                 ),
               ],
             );
+          case RequestStatus.error:
+            return Center(child: Text(state.upComingErrorMessage));
+
+          default:
+            return const SizedBox.shrink();
+        }
       },
     );
   }

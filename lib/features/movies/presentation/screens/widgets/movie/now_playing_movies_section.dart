@@ -29,9 +29,11 @@ class NowPlayingMoviesSection extends StatelessWidget {
                   current.nowPlayingMoviesState !=
                   previous.nowPlayingMoviesState,
           builder: (context, state) {
-            return state.nowPlayingMoviesState == RequestStatus.loading
-                ? const Center(child: CircularProgressIndicator())
-                : SizedBox(
+            switch (state.nowPlayingMoviesState) {
+              case RequestStatus.loading:
+                return const Center(child: CircularProgressIndicator());
+              case RequestStatus.success:
+                return SizedBox(
                   height: 270.0,
                   child: ListView.separated(
                     scrollDirection: Axis.horizontal,
@@ -48,6 +50,11 @@ class NowPlayingMoviesSection extends StatelessWidget {
                     itemCount: state.nowPlayingMovies.length,
                   ),
                 );
+              case RequestStatus.error:
+                return Center(child: Text(state.nowPlayingErrorMessage));
+              default:
+                return const SizedBox.shrink();
+            }
           },
         ),
       ],

@@ -3,14 +3,14 @@ import 'package:equatable/equatable.dart';
 class MoviesModel extends Equatable {
   final int id;
   final String title;
-  final String posterPath;
+  final String backdropPath;
   final double voteAverage;
   final List<int> genreIds;
 
   const MoviesModel({
     required this.id,
     required this.title,
-    required this.posterPath,
+    required this.backdropPath,
     required this.voteAverage,
     required this.genreIds,
   });
@@ -19,12 +19,12 @@ class MoviesModel extends Equatable {
     return MoviesModel(
       id: json['id'],
       title: json['original_title'],
-      posterPath: json['poster_path'],
+      backdropPath: json['backdrop_path'],
       voteAverage: json['vote_average'].toDouble(),
       genreIds: List<int>.from(json['genre_ids']),
     );
   }
 
   @override
-  List<Object> get props => [id, title, posterPath, voteAverage, genreIds];
+  List<Object> get props => [id, title, backdropPath, voteAverage, genreIds];
 }

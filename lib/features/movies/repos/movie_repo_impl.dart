@@ -15,6 +15,30 @@ class MovieRepoImpl implements MovieRepo {
   final DioHelper dioHelper;
 
   @override
+  Future<Either<Failure, List<UpComingMoviesModel>>> getUpComingMovies() async {
+    try {
+      final response = await dioHelper.get(
+        url: ApiConstants.upComingMoviesEndpoint,
+      );
+      if (response.statusCode == 200) {
+        return Right(
+          response.data['results']
+              .map<UpComingMoviesModel>((e) => UpComingMoviesModel.fromJson(e))
+              .toList(),
+        );
+      } else {
+        throw ServerException(errorModel: ErrorModel.fromJson(response.data));
+      }
+    } on DioException catch (e) {
+      return Left(ServerFailure.fromDioError(e));
+    } on ServerException catch (e) {
+      return Left(ServerFailure(e.errorModel.statusMessages));
+    } catch (e) {
+      return Left(ServerFailure(e.toString()));
+    }
+  }
+
+  @override
   Future<Either<Failure, List<MoviesModel>>> getNowPlayingMovies() async {
     try {
       final response = await dioHelper.get(
@@ -39,15 +63,39 @@ class MovieRepoImpl implements MovieRepo {
   }
 
   @override
-  Future<Either<Failure, List<UpComingMoviesModel>>> getUpComingMovies() async {
+  Future<Either<Failure, List<MoviesModel>>> getTopRatedMovies() async {
     try {
       final response = await dioHelper.get(
-        url: ApiConstants.upComingMoviesEndpoint,
+        url: ApiConstants.topRatedMoviesEndpoint,
       );
       if (response.statusCode == 200) {
         return Right(
           response.data['results']
-              .map<UpComingMoviesModel>((e) => UpComingMoviesModel.fromJson(e))
+              .map<MoviesModel>((e) => MoviesModel.fromJson(e))
+              .toList(),
+        );
+      } else {
+        throw ServerException(errorModel: ErrorModel.fromJson(response.data));
+      }
+    } on DioException catch (e) {
+      return Left(ServerFailure.fromDioError(e));
+    } on ServerException catch (e) {
+      return Left(ServerFailure(e.errorModel.statusMessages));
+    } catch (e) {
+      return Left(ServerFailure(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<MoviesModel>>> getPopularMovies() async {
+    try {
+      final response = await dioHelper.get(
+        url: ApiConstants.popularMoviesEndpoint,
+      );
+      if (response.statusCode == 200) {
+        return Right(
+          response.data['results']
+              .map<MoviesModel>((e) => MoviesModel.fromJson(e))
               .toList(),
         );
       } else {

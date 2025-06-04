@@ -24,7 +24,7 @@ class MovieListViewItem extends StatelessWidget {
             ClipRRect(
               borderRadius: BorderRadius.circular(16.0),
               child: CachedNetworkImage(
-                imageUrl: ApiConstants.imageUrl(moviesModel.posterPath),
+                imageUrl: ApiConstants.imageUrl(moviesModel.backdropPath),
                 errorWidget: (context, url, error) => const Icon(Icons.error),
                 width: 200.0,
                 height: 250.0,

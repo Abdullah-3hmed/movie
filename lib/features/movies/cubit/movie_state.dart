@@ -10,7 +10,13 @@ class MovieState extends Equatable {
   final RequestStatus upComingMoviesState;
   final List<UpComingMoviesModel> upComingMovies;
   final String upComingErrorMessage;
-
+  final RequestStatus topRatedMoviesState;
+  final List<MoviesModel> topRatedMovies;
+  final String topRatedErrorMessage;
+  final RequestStatus popularMoviesState;
+  final List<MoviesModel> popularMovies;
+  final String popularErrorMessage;
+  final RequestStatus allMoviesState;
   final bool isConnected;
 
   const MovieState({
@@ -20,6 +26,13 @@ class MovieState extends Equatable {
     this.upComingMoviesState = RequestStatus.loading,
     this.upComingMovies = const [],
     this.upComingErrorMessage = '',
+    this.topRatedMoviesState = RequestStatus.loading,
+    this.topRatedMovies = const [],
+    this.topRatedErrorMessage = '',
+    this.popularMoviesState = RequestStatus.loading,
+    this.popularMovies = const [],
+    this.popularErrorMessage = '',
+    this.allMoviesState = RequestStatus.loading,
     this.isConnected = true,
   });
 
@@ -30,6 +43,13 @@ class MovieState extends Equatable {
     RequestStatus? upComingMoviesState,
     List<UpComingMoviesModel>? upComingMovies,
     String? upComingErrorMessage,
+    RequestStatus? topRatedMoviesState,
+    List<MoviesModel>? topRatedMovies,
+    String? topRatedErrorMessage,
+    RequestStatus? popularMoviesState,
+    List<MoviesModel>? popularMovies,
+    String? popularErrorMessage,
+    RequestStatus? allMoviesState,
     bool? isConnected,
   }) {
     return MovieState(
@@ -42,6 +62,13 @@ class MovieState extends Equatable {
       upComingMovies: upComingMovies ?? this.upComingMovies,
       upComingErrorMessage: upComingErrorMessage ?? this.upComingErrorMessage,
       isConnected: isConnected ?? this.isConnected,
+      topRatedMoviesState: topRatedMoviesState ?? this.topRatedMoviesState,
+      topRatedMovies: topRatedMovies ?? this.topRatedMovies,
+      topRatedErrorMessage: topRatedErrorMessage ?? this.topRatedErrorMessage,
+      popularMoviesState: popularMoviesState ?? this.popularMoviesState,
+      popularMovies: popularMovies ?? this.popularMovies,
+      popularErrorMessage: popularErrorMessage ?? this.popularErrorMessage,
+      allMoviesState: allMoviesState ?? this.allMoviesState,
     );
   }
 
@@ -53,6 +80,13 @@ class MovieState extends Equatable {
     upComingMoviesState,
     upComingMovies,
     upComingErrorMessage,
+    topRatedMoviesState,
+    topRatedMovies,
+    topRatedErrorMessage,
+    popularMoviesState,
+    popularMovies,
+    popularErrorMessage,
+    allMoviesState,
     isConnected,
   ];
 }

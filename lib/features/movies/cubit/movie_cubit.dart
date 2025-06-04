@@ -42,4 +42,50 @@ class MovieCubit extends Cubit<MovieState> {
       ),
     );
   }
+
+  Future<void> getTopRatedMovies() async {
+    final result = await movieRepo.getTopRatedMovies();
+    result.fold(
+      (failure) => emit(
+        state.copyWith(
+          topRatedMoviesState: RequestStatus.error,
+          topRatedErrorMessage: failure.errorMessage,
+        ),
+      ),
+      (movies) => emit(
+        state.copyWith(
+          topRatedMoviesState: RequestStatus.success,
+          topRatedMovies: movies,
+        ),
+      ),
+    );
+  }
+
+  Future<void> getPopularMovies() async {
+    final result = await movieRepo.getPopularMovies();
+    result.fold(
+      (failure) => emit(
+        state.copyWith(
+          popularMoviesState: RequestStatus.error,
+          popularErrorMessage: failure.errorMessage,
+        ),
+      ),
+      (movies) => emit(
+        state.copyWith(
+          popularMoviesState: RequestStatus.success,
+          popularMovies: movies,
+        ),
+      ),
+    );
+  }
+
+  Future<void> getAllHomeMovies() async {
+    await Future.wait([
+      getNowPlayingMovies(),
+      getUpComingMovies(),
+      getTopRatedMovies(),
+      getPopularMovies(),
+    ]);
+    emit(state.copyWith(allMoviesState: RequestStatus.success));
+  }
 }
