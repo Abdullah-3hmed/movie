@@ -5,6 +5,10 @@ import 'package:movie/core/network/dio_helper.dart';
 import 'package:movie/features/auth/cubit/auth_cubit.dart';
 import 'package:movie/features/auth/repo/auth_repo.dart';
 import 'package:movie/features/auth/repo/auth_repo_impl.dart';
+import 'package:movie/features/movies/cubit/movie_cubit.dart';
+import 'package:movie/features/movies/repos/movie_repo.dart';
+
+import '../../features/movies/repos/movie_repo_impl.dart';
 
 final GetIt getIt = GetIt.instance;
 
@@ -21,6 +25,12 @@ class ServiceLocator {
         authRepoImpl: getIt<AuthRepo>(),
         cacheHelper: getIt<CacheHelper>(),
       ),
+    );
+    getIt.registerLazySingleton<MovieRepo>(
+      () => MovieRepoImpl(dioHelper: getIt<DioHelper>()),
+    );
+    getIt.registerFactory<MovieCubit>(
+      () => MovieCubit(movieRepo: getIt<MovieRepo>()),
     );
   }
 }
