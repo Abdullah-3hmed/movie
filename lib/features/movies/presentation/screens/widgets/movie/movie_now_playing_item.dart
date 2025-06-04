@@ -3,19 +3,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:movie/core/network/api_constants.dart';
 import 'package:movie/core/util/color_manager.dart';
-import 'package:movie/features/movies/data/movie/now_playing_model.dart';
+import 'package:movie/features/movies/data/movie/up_coming_movies_model.dart';
 
-class MovieNowPlayingItem extends StatelessWidget {
-  const MovieNowPlayingItem({super.key, required this.movieNowPlayingModel});
+class MoviePageViewItem extends StatelessWidget {
+  const MoviePageViewItem({super.key, required this.upComingMoviesModel});
 
-  final MovieNowPlayingModel movieNowPlayingModel;
+  final UpComingMoviesModel upComingMoviesModel;
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
         CachedNetworkImage(
-          imageUrl: ApiConstants.imageUrl(movieNowPlayingModel.posterPath),
+          imageUrl: ApiConstants.imageUrl(upComingMoviesModel.posterPath),
           errorWidget: (context, url, error) => const Icon(Icons.error),
           height: 360.0,
           width: double.infinity,
@@ -28,14 +28,14 @@ class MovieNowPlayingItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                movieNowPlayingModel.title,
+                upComingMoviesModel.title,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: Theme.of(context).textTheme.titleLarge,
               ),
               const SizedBox(height: 4.0),
               Text(
-                "Release date: ${movieNowPlayingModel.releaseDate}",
+                "Release date: ${upComingMoviesModel.releaseDate}",
                 style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                   color: const Color(0xFFD8D8D8),
                   fontWeight: FontWeight.w400,
@@ -43,11 +43,11 @@ class MovieNowPlayingItem extends StatelessWidget {
               ),
               const SizedBox(height: 7.0),
               RatingBar.builder(
-                initialRating: movieNowPlayingModel.voteAverage,
+                initialRating: upComingMoviesModel.voteAverage,
                 minRating: 1,
                 allowHalfRating: true,
                 itemSize: 20.0,
-                itemCount: movieNowPlayingModel.voteAverage.toInt(),
+                itemCount: upComingMoviesModel.voteAverage.toInt(),
                 itemPadding: const EdgeInsets.symmetric(horizontal: 1.0),
                 itemBuilder:
                     (context, _) => const Icon(
@@ -58,7 +58,7 @@ class MovieNowPlayingItem extends StatelessWidget {
               ),
               const SizedBox(height: 4.0),
               Text(
-                "From ${movieNowPlayingModel.voteCount} users",
+                "From ${upComingMoviesModel.voteCount} users",
                 style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                   color: const Color(0xFFD8D8D8),
                   fontWeight: FontWeight.w400,

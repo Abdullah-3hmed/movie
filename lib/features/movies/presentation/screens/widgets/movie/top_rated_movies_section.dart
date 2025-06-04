@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movie/core/util/app_strings.dart';
 import 'package:movie/core/widgets/custom_section_title.dart';
-import 'package:movie/features/movies/presentation/screens/widgets/movie/movie_list_view_item.dart';
 
 class TopRatedMoviesSection extends StatelessWidget {
   const TopRatedMoviesSection({super.key});
@@ -18,7 +17,8 @@ class TopRatedMoviesSection extends StatelessWidget {
             scrollDirection: Axis.horizontal,
             padding: const EdgeInsetsDirectional.symmetric(horizontal: 24.0),
             physics: const BouncingScrollPhysics(),
-            itemBuilder: (context, index) => const MovieListViewItem(),
+            itemBuilder:
+                (context, index) => const SizedBox(), //MovieListViewItem(),,
             separatorBuilder: (context, index) => const SizedBox(width: 10.0),
             itemCount: 5,
           ),

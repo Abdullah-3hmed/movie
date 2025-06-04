@@ -24,4 +24,22 @@ class MovieCubit extends Cubit<MovieState> {
       ),
     );
   }
+
+  Future<void> getUpComingMovies() async {
+    final result = await movieRepo.getUpComingMovies();
+    result.fold(
+      (failure) => emit(
+        state.copyWith(
+          upComingMoviesState: RequestStatus.error,
+          upComingErrorMessage: failure.errorMessage,
+        ),
+      ),
+      (movies) => emit(
+        state.copyWith(
+          upComingMoviesState: RequestStatus.success,
+          upComingMovies: movies,
+        ),
+      ),
+    );
+  }
 }

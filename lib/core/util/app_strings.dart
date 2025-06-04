@@ -7,7 +7,7 @@ class AppStrings {
   static const String forgetPassword = 'Forget password?';
   static const String dontHaveAccount = 'Don’t have an account?';
   static const String seeAll = 'See All';
-  static const String newMovies = 'New Movies';
+  static const String nowPlayingMovies = 'Now Playing Movies';
   static const String topRated = 'Top Rated';
   static const String popularMovies = 'Popular Movies';
   static const String year = 'Year';
