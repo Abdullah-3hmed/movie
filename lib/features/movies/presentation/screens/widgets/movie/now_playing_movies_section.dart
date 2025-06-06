@@ -21,7 +21,12 @@ class NowPlayingMoviesSection extends StatelessWidget {
         CustomSectionTitle(
           title: AppStrings.nowPlayingMovies,
           onPressed: () {
-            context.pushRoute(const SeeAllMoviesRoute());
+            context.pushRoute(
+              SeeAllMoviesRoute(
+                title: AppStrings.nowPlayingMovies,
+                movies: context.read<MovieCubit>().state.nowPlayingMovies,
+              ),
+            );
           },
         ),
         BlocBuilder<MovieCubit, MovieState>(

@@ -5,6 +5,7 @@ class MoviesModel extends Equatable {
   final String title;
   final String backdropPath;
   final double voteAverage;
+  final int voteCount;
   final List<int> genreIds;
 
   const MoviesModel({
@@ -13,6 +14,7 @@ class MoviesModel extends Equatable {
     required this.backdropPath,
     required this.voteAverage,
     required this.genreIds,
+    required this.voteCount,
   });
 
   factory MoviesModel.fromJson(Map<String, dynamic> json) {
@@ -20,11 +22,19 @@ class MoviesModel extends Equatable {
       id: json['id'],
       title: json['original_title'],
       backdropPath: json['backdrop_path'],
+      voteCount: json['vote_count'].toInt(),
       voteAverage: json['vote_average'].toDouble(),
       genreIds: List<int>.from(json['genre_ids']),
     );
   }
 
   @override
-  List<Object> get props => [id, title, backdropPath, voteAverage, genreIds];
+  List<Object> get props => [
+    id,
+    title,
+    backdropPath,
+    voteAverage,
+    genreIds,
+    voteCount,
+  ];
 }

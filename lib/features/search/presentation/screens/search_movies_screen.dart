@@ -1,6 +1,5 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:movie/features/shared/presentation/screens/widgets/see_all_and_search_list_view_item.dart';
 
 @RoutePage()
 class SearchMoviesScreen extends StatelessWidget {
@@ -14,7 +13,7 @@ class SearchMoviesScreen extends StatelessWidget {
       itemBuilder:
           (context, index) => const SizedBox(
             height: 180.0,
-            child: SeeAllAndSearchListViewItem(),
+            child: SizedBox.shrink(), // SeeAllAndSearchListViewItem(),
           ),
       separatorBuilder: (context, index) => const SizedBox(height: 16.0),
       itemCount: 10,

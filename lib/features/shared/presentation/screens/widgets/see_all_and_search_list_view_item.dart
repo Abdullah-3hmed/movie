@@ -1,15 +1,24 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:movie/core/icons/solar_system_icons.dart';
+import 'package:movie/core/network/api_constants.dart';
 import 'package:movie/core/util/color_manager.dart';
+import 'package:movie/core/util/geners.dart';
+import 'package:movie/features/movies/data/movie/movies_model.dart';
 
 class SeeAllAndSearchListViewItem extends StatelessWidget {
-  const SeeAllAndSearchListViewItem({super.key, this.isWatchList = false});
+  const SeeAllAndSearchListViewItem({
+    super.key,
+    this.isWatchList = false,
+    required this.movieModel,
+  });
 
   final bool isWatchList;
+  final MoviesModel movieModel;
 
   @override
   Widget build(BuildContext context) {
+    final genres = getGenreNames(movieModel.genreIds).join(', ');
     return Stack(
       children: [
         ClipRRect(
@@ -34,25 +43,36 @@ class SeeAllAndSearchListViewItem extends StatelessWidget {
                   ClipRRect(
                     borderRadius: BorderRadius.circular(20.0),
                     child: CachedNetworkImage(
-                      imageUrl:
-                          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQr8FcgAq31cIByH4nveSOqH7a0soJ7fLq1Q&s",
+                      imageUrl: ApiConstants.imageUrl(movieModel.backdropPath),
+                      errorWidget:
+                          (context, url, error) => const Icon(Icons.error),
                       width: 140.0,
                       height: 180.0,
                       fit: BoxFit.cover,
                     ),
                   ),
-                  const Spacer(),
+                  const SizedBox(width: 10.0),
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        "The Godfather",
+                        movieModel.title.length > 16
+                            ? '${movieModel.title.substring(0, 16)}...'
+                            : movieModel.title,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
                         style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                           fontWeight: FontWeight.w500,
                         ),
                       ),
+
+                      const SizedBox(height: 7.0),
                       Text(
-                        "1998 ‧ Drama ‧2h 36m",
+                        genres.length > 25
+                            ? '${genres.substring(0, 25)}...'
+                            : genres,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
                         style: Theme.of(context).textTheme.bodySmall,
                       ),
                       const SizedBox(height: 7.0),
@@ -64,19 +84,19 @@ class SeeAllAndSearchListViewItem extends StatelessWidget {
                             color: ColorsManager.ratingIconColor,
                           ),
                           Text(
-                            "  9.1",
+                            "  ${movieModel.voteAverage}",
                             style: Theme.of(context).textTheme.bodySmall,
                           ),
                           const SizedBox(width: 22.0),
                           Text(
-                            "From 45641 users",
+                            "From ${movieModel.voteCount} users",
                             style: Theme.of(context).textTheme.bodySmall,
                           ),
                         ],
                       ),
                     ],
                   ),
-                  const Spacer(),
+                  const SizedBox(width: 5.0),
                 ],
               ),
             ),

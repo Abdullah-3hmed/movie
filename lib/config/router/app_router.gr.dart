@@ -21,7 +21,7 @@ class AuthRoute extends PageRouteInfo<void> {
   static PageInfo page = PageInfo(
     name,
     builder: (data) {
-      return const Auth();
+      return WrappedRoute(child: const Auth());
     },
   );
 }
@@ -37,7 +37,7 @@ class BottomNavBarRoute extends PageRouteInfo<void> {
   static PageInfo page = PageInfo(
     name,
     builder: (data) {
-      return const BottomNavBarScreen();
+      return WrappedRoute(child: const BottomNavBarScreen());
     },
   );
 }
@@ -172,18 +172,63 @@ class SearchTvRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [SeeAllMoviesScreen]
-class SeeAllMoviesRoute extends PageRouteInfo<void> {
-  const SeeAllMoviesRoute({List<PageRouteInfo>? children})
-    : super(SeeAllMoviesRoute.name, initialChildren: children);
+class SeeAllMoviesRoute extends PageRouteInfo<SeeAllMoviesRouteArgs> {
+  SeeAllMoviesRoute({
+    Key? key,
+    required String title,
+    required List<MoviesModel> movies,
+    List<PageRouteInfo>? children,
+  }) : super(
+         SeeAllMoviesRoute.name,
+         args: SeeAllMoviesRouteArgs(key: key, title: title, movies: movies),
+         initialChildren: children,
+       );
 
   static const String name = 'SeeAllMoviesRoute';
 
   static PageInfo page = PageInfo(
     name,
     builder: (data) {
-      return const SeeAllMoviesScreen();
+      final args = data.argsAs<SeeAllMoviesRouteArgs>();
+      return SeeAllMoviesScreen(
+        key: args.key,
+        title: args.title,
+        movies: args.movies,
+      );
     },
   );
+}
+
+class SeeAllMoviesRouteArgs {
+  const SeeAllMoviesRouteArgs({
+    this.key,
+    required this.title,
+    required this.movies,
+  });
+
+  final Key? key;
+
+  final String title;
+
+  final List<MoviesModel> movies;
+
+  @override
+  String toString() {
+    return 'SeeAllMoviesRouteArgs{key: $key, title: $title, movies: $movies}';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! SeeAllMoviesRouteArgs) return false;
+    return key == other.key &&
+        title == other.title &&
+        const ListEquality().equals(movies, other.movies);
+  }
+
+  @override
+  int get hashCode =>
+      key.hashCode ^ title.hashCode ^ const ListEquality().hash(movies);
 }
 
 /// generated route for

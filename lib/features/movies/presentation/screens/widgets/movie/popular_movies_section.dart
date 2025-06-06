@@ -1,5 +1,7 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movie/config/router/app_router.dart';
 import 'package:movie/core/enums/request_status.dart';
 import 'package:movie/core/util/app_constants.dart';
 import 'package:movie/core/util/app_strings.dart';
@@ -16,7 +18,17 @@ class PopularMoviesSection extends StatelessWidget {
     return Column(
       children: [
         const SizedBox(height: 14.0),
-        CustomSectionTitle(title: AppStrings.popularMovies, onPressed: () {}),
+        CustomSectionTitle(
+          title: AppStrings.popularMovies,
+          onPressed: () {
+            context.pushRoute(
+              SeeAllMoviesRoute(
+                title: AppStrings.popularMovies,
+                movies: context.read<MovieCubit>().state.popularMovies,
+              ),
+            );
+          },
+        ),
         BlocBuilder<MovieCubit, MovieState>(
           buildWhen:
               (previous, current) =>

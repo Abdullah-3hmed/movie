@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
 import 'package:movie/core/enums/request_status.dart';
+import 'package:movie/core/util/assets_manager.dart';
 import 'package:movie/core/widgets/custom_scaffold.dart';
 import 'package:movie/core/widgets/no_internet_widget.dart';
 import 'package:movie/features/movies/cubit/movie_cubit.dart';
@@ -26,9 +27,7 @@ class MoviesScreen extends StatelessWidget {
         builder: (context, state) {
           switch (state.allMoviesState) {
             case RequestStatus.loading:
-              return Center(
-                child: Lottie.asset("assets/lottie/neon_loading.json"),
-              );
+              return Center(child: Lottie.asset(AssetsManager.loadingLottie));
             case RequestStatus.success:
               return const CustomScrollView(
                 physics: BouncingScrollPhysics(),
