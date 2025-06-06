@@ -33,8 +33,8 @@ class MovieListViewItem extends StatelessWidget {
             ),
             PositionedDirectional(
               bottom: 30.0,
-              start: 0.0,
-              end: 0.0,
+              start: 5.0,
+              end: 5.0,
               child: Column(
                 children: [
                   Text(

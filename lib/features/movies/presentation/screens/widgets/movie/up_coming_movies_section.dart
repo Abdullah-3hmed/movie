@@ -46,7 +46,7 @@ class _UpComingMoviesSectionState extends State<UpComingMoviesSection> {
                   height: 360.0,
                   child: PageView.builder(
                     controller: controller,
-                    itemCount: 5,
+                    itemCount: 7,
                     itemBuilder: (context, index) {
                       return MoviePageViewItem(
                         upComingMoviesModel: state.upComingMovies[index],
@@ -57,7 +57,7 @@ class _UpComingMoviesSectionState extends State<UpComingMoviesSection> {
                 const SizedBox(height: 12.0),
                 SmoothPageIndicator(
                   controller: controller,
-                  count: 5,
+                  count: 7,
                   effect: const ExpandingDotsEffect(
                     activeDotColor: ColorsManager.primaryColor,
                     dotColor: Colors.white,
@@ -69,7 +69,15 @@ class _UpComingMoviesSectionState extends State<UpComingMoviesSection> {
               ],
             );
           case RequestStatus.error:
-            return Center(child: Text(state.upComingErrorMessage));
+            return SizedBox(
+              height: 360.0,
+              child: Center(
+                child: Text(
+                  state.popularErrorMessage,
+                  style: Theme.of(context).textTheme.titleMedium,
+                ),
+              ),
+            );
 
           default:
             return const SizedBox.shrink();

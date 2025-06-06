@@ -15,7 +15,7 @@ class MoviePageViewItem extends StatelessWidget {
     return Stack(
       children: [
         CachedNetworkImage(
-          imageUrl: ApiConstants.imageUrl(upComingMoviesModel.posterPath),
+          imageUrl: ApiConstants.imageUrl(upComingMoviesModel.backdropPath),
           errorWidget: (context, url, error) => const Icon(Icons.error),
           height: 360.0,
           width: double.infinity,

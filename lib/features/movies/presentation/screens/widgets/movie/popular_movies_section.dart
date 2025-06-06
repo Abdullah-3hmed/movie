@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie/core/enums/request_status.dart';
+import 'package:movie/core/util/app_constants.dart';
 import 'package:movie/core/util/app_strings.dart';
 import 'package:movie/core/widgets/custom_section_title.dart';
 import 'package:movie/features/movies/cubit/movie_cubit.dart';
@@ -29,8 +30,8 @@ class PopularMoviesSection extends StatelessWidget {
                   height: 270.0,
                   child: ListView.separated(
                     scrollDirection: Axis.horizontal,
-                    padding: const EdgeInsetsDirectional.symmetric(
-                      horizontal: 24.0,
+                    padding: EdgeInsetsDirectional.symmetric(
+                      horizontal: AppConstants.horizontalPadding,
                     ),
                     physics: const BouncingScrollPhysics(),
                     itemBuilder:
@@ -43,7 +44,15 @@ class PopularMoviesSection extends StatelessWidget {
                   ),
                 );
               case RequestStatus.error:
-                return Center(child: Text(state.popularErrorMessage));
+                return SizedBox(
+                  height: 270.0,
+                  child: Center(
+                    child: Text(
+                      state.popularErrorMessage,
+                      style: Theme.of(context).textTheme.titleMedium,
+                    ),
+                  ),
+                );
               default:
                 return const SizedBox.shrink();
             }

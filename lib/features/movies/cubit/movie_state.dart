@@ -17,6 +17,7 @@ class MovieState extends Equatable {
   final List<MoviesModel> popularMovies;
   final String popularErrorMessage;
   final RequestStatus allMoviesState;
+  final String allMoviesErrorMessage;
   final bool isConnected;
 
   const MovieState({
@@ -33,6 +34,7 @@ class MovieState extends Equatable {
     this.popularMovies = const [],
     this.popularErrorMessage = '',
     this.allMoviesState = RequestStatus.loading,
+    this.allMoviesErrorMessage = '',
     this.isConnected = true,
   });
 
@@ -50,6 +52,7 @@ class MovieState extends Equatable {
     List<MoviesModel>? popularMovies,
     String? popularErrorMessage,
     RequestStatus? allMoviesState,
+    String? allMoviesErrorMessage,
     bool? isConnected,
   }) {
     return MovieState(
@@ -68,6 +71,8 @@ class MovieState extends Equatable {
       popularMoviesState: popularMoviesState ?? this.popularMoviesState,
       popularMovies: popularMovies ?? this.popularMovies,
       popularErrorMessage: popularErrorMessage ?? this.popularErrorMessage,
+      allMoviesErrorMessage:
+          allMoviesErrorMessage ?? this.allMoviesErrorMessage,
       allMoviesState: allMoviesState ?? this.allMoviesState,
     );
   }
@@ -87,6 +92,7 @@ class MovieState extends Equatable {
     popularMovies,
     popularErrorMessage,
     allMoviesState,
+    allMoviesErrorMessage,
     isConnected,
   ];
 }

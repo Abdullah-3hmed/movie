@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
 import 'package:movie/core/enums/request_status.dart';
 import 'package:movie/core/widgets/custom_scaffold.dart';
+import 'package:movie/core/widgets/no_internet_widget.dart';
 import 'package:movie/features/movies/cubit/movie_cubit.dart';
 import 'package:movie/features/movies/cubit/movie_state.dart';
 import 'package:movie/features/movies/presentation/screens/widgets/movie/now_playing_movies_section.dart';
@@ -23,9 +24,13 @@ class MoviesScreen extends StatelessWidget {
             (previous, current) =>
                 previous.allMoviesState != current.allMoviesState,
         builder: (context, state) {
-          return state.allMoviesState == RequestStatus.loading
-              ? Center(child: Lottie.asset("assets/lottie/neon_loading.json"))
-              : const CustomScrollView(
+          switch (state.allMoviesState) {
+            case RequestStatus.loading:
+              return Center(
+                child: Lottie.asset("assets/lottie/neon_loading.json"),
+              );
+            case RequestStatus.success:
+              return const CustomScrollView(
                 physics: BouncingScrollPhysics(),
                 slivers: [
                   SliverToBoxAdapter(child: UpComingMoviesSection()),
@@ -34,6 +39,20 @@ class MoviesScreen extends StatelessWidget {
                   SliverToBoxAdapter(child: PopularMoviesSection()),
                 ],
               );
+            case RequestStatus.error:
+              if (!state.isConnected) {
+                return NoInternetWidget(
+                  errorMessage: state.allMoviesErrorMessage,
+                  onPressed:
+                      () async =>
+                          await context.read<MovieCubit>().getAllHomeMovies(),
+                );
+              } else {
+                return Center(child: Text(state.allMoviesErrorMessage));
+              }
+            default:
+              return const SizedBox.shrink();
+          }
         },
       ),
     );

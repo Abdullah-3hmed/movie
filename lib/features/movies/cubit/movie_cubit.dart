@@ -7,6 +7,36 @@ class MovieCubit extends Cubit<MovieState> {
   MovieCubit({required this.movieRepo}) : super(const MovieState());
   final MovieRepo movieRepo;
 
+  Future<void> getUpComingMovies() async {
+    final result = await movieRepo.getUpComingMovies();
+    result.fold(
+      (failure) {
+        if (!failure.isConnected) {
+          emit(
+            state.copyWith(
+              upComingMoviesState: RequestStatus.error,
+              upComingErrorMessage: failure.errorMessage,
+              isConnected: false,
+            ),
+          );
+        } else {
+          emit(
+            state.copyWith(
+              upComingMoviesState: RequestStatus.error,
+              upComingErrorMessage: failure.errorMessage,
+            ),
+          );
+        }
+      },
+      (movies) => emit(
+        state.copyWith(
+          upComingMoviesState: RequestStatus.success,
+          upComingMovies: movies,
+        ),
+      ),
+    );
+  }
+
   Future<void> getNowPlayingMovies() async {
     final result = await movieRepo.getNowPlayingMovies();
     result.fold(
@@ -20,24 +50,6 @@ class MovieCubit extends Cubit<MovieState> {
         state.copyWith(
           nowPlayingMoviesState: RequestStatus.success,
           nowPlayingMovies: movies,
-        ),
-      ),
-    );
-  }
-
-  Future<void> getUpComingMovies() async {
-    final result = await movieRepo.getUpComingMovies();
-    result.fold(
-      (failure) => emit(
-        state.copyWith(
-          upComingMoviesState: RequestStatus.error,
-          upComingErrorMessage: failure.errorMessage,
-        ),
-      ),
-      (movies) => emit(
-        state.copyWith(
-          upComingMoviesState: RequestStatus.success,
-          upComingMovies: movies,
         ),
       ),
     );
@@ -80,12 +92,24 @@ class MovieCubit extends Cubit<MovieState> {
   }
 
   Future<void> getAllHomeMovies() async {
+    emit(
+      state.copyWith(allMoviesState: RequestStatus.loading, isConnected: true),
+    );
     await Future.wait([
-      getNowPlayingMovies(),
       getUpComingMovies(),
+      getNowPlayingMovies(),
       getTopRatedMovies(),
       getPopularMovies(),
     ]);
-    emit(state.copyWith(allMoviesState: RequestStatus.success));
+    if (!state.isConnected) {
+      emit(
+        state.copyWith(
+          allMoviesState: RequestStatus.error,
+          allMoviesErrorMessage: state.upComingErrorMessage,
+        ),
+      );
+    } else {
+      emit(state.copyWith(allMoviesState: RequestStatus.success));
+    }
   }
 }
