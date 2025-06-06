@@ -15,7 +15,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsState> {
         if (!failure.isConnected) {
           emit(
             state.copyWith(
-              movieDetailsStatus: RequestStatus.error,
+              movieDetailsState: RequestStatus.error,
               movieDetailsErrorMessage: failure.errorMessage,
               isConnected: false,
             ),
@@ -23,7 +23,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsState> {
         } else {
           emit(
             state.copyWith(
-              movieDetailsStatus: RequestStatus.error,
+              movieDetailsState: RequestStatus.error,
               movieDetailsErrorMessage: failure.errorMessage,
               isConnected: true,
             ),
@@ -32,9 +32,77 @@ class MovieDetailsCubit extends Cubit<MovieDetailsState> {
       },
       (movieDetails) => emit(
         state.copyWith(
-          movieDetailsStatus: RequestStatus.success,
+          movieDetailsState: RequestStatus.success,
           movieDetails: movieDetails,
         ),
+      ),
+    );
+  }
+
+  Future<void> getMovieCast({required int movieId}) async {
+    final result = await movieDetailsRepo.getMovieCast(movieId: movieId);
+    result.fold(
+      (failure) => emit(
+        state.copyWith(
+          castState: RequestStatus.error,
+          castErrorMessage: failure.errorMessage,
+        ),
+      ),
+      (movieCast) => emit(
+        state.copyWith(castState: RequestStatus.success, cast: movieCast),
+      ),
+    );
+  }
+
+  Future<void> getRecommendedMovies({required int movieId}) async {
+    final result = await movieDetailsRepo.getRecommendedMovies(
+      movieId: movieId,
+    );
+    result.fold(
+      (failure) => emit(
+        state.copyWith(
+          recommendedState: RequestStatus.error,
+          recommendedErrorMessage: failure.errorMessage,
+        ),
+      ),
+      (movies) => emit(
+        state.copyWith(
+          recommendedState: RequestStatus.success,
+          recommendedMovies: movies,
+        ),
+      ),
+    );
+  }
+
+  Future<void> getSimilarMovies({required int movieId}) async {
+    final result = await movieDetailsRepo.getSimilarMovies(movieId: movieId);
+    result.fold(
+      (failure) => emit(
+        state.copyWith(
+          similarState: RequestStatus.error,
+          similarErrorMessage: failure.errorMessage,
+        ),
+      ),
+      (movies) => emit(
+        state.copyWith(
+          similarState: RequestStatus.success,
+          similarMovies: movies,
+        ),
+      ),
+    );
+  }
+
+  Future<void> getReviews({required int movieId}) async {
+    final result = await movieDetailsRepo.getMovieReviews(movieId: movieId);
+    result.fold(
+      (failure) => emit(
+        state.copyWith(
+          reviewsState: RequestStatus.error,
+          reviewsErrorMessage: failure.errorMessage,
+        ),
+      ),
+      (reviews) => emit(
+        state.copyWith(reviewsState: RequestStatus.success, reviews: reviews),
       ),
     );
   }

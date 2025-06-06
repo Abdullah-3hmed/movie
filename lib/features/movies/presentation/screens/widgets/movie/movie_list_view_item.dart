@@ -17,7 +17,7 @@ class MovieListViewItem extends StatelessWidget {
       transform: Matrix4.skewX(-.05),
       child: InkWell(
         onTap: () {
-          context.pushRoute(const MovieDetailsRoute());
+          context.pushRoute(MovieDetailsRoute(movieId: moviesModel.id));
         },
         child: Stack(
           children: [

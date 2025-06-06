@@ -60,18 +60,51 @@ class LoginRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [MovieDetailsScreen]
-class MovieDetailsRoute extends PageRouteInfo<void> {
-  const MovieDetailsRoute({List<PageRouteInfo>? children})
-    : super(MovieDetailsRoute.name, initialChildren: children);
+class MovieDetailsRoute extends PageRouteInfo<MovieDetailsRouteArgs> {
+  MovieDetailsRoute({
+    Key? key,
+    required int movieId,
+    List<PageRouteInfo>? children,
+  }) : super(
+         MovieDetailsRoute.name,
+         args: MovieDetailsRouteArgs(key: key, movieId: movieId),
+         initialChildren: children,
+       );
 
   static const String name = 'MovieDetailsRoute';
 
   static PageInfo page = PageInfo(
     name,
     builder: (data) {
-      return const MovieDetailsScreen();
+      final args = data.argsAs<MovieDetailsRouteArgs>();
+      return WrappedRoute(
+        child: MovieDetailsScreen(key: args.key, movieId: args.movieId),
+      );
     },
   );
+}
+
+class MovieDetailsRouteArgs {
+  const MovieDetailsRouteArgs({this.key, required this.movieId});
+
+  final Key? key;
+
+  final int movieId;
+
+  @override
+  String toString() {
+    return 'MovieDetailsRouteArgs{key: $key, movieId: $movieId}';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! MovieDetailsRouteArgs) return false;
+    return key == other.key && movieId == other.movieId;
+  }
+
+  @override
+  int get hashCode => key.hashCode ^ movieId.hashCode;
 }
 
 /// generated route for

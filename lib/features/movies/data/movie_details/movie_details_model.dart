@@ -33,7 +33,7 @@ class MovieDetailsModel extends Equatable {
         geners: List<String>.from(json['genres'].map((e) => e['name'])),
         country: json['origin_country'][0],
         length: json['runtime'],
-        year: json['release_date'].split('-')[0],
+        year: int.parse(json['release_date'].split('-')[0]),
       );
   static const empty = MovieDetailsModel(
     title: '',
