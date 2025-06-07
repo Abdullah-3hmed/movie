@@ -19,4 +19,5 @@ abstract class MovieDetailsRepo {
   Future<Either<Failure, List<ReviewModel>>> getMovieReviews({
     required int movieId,
   });
+  Future<Either<Failure, String>> getMovieTrailer({required int movieId});
 }

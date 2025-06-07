@@ -409,6 +409,53 @@ class SplashRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [TrailerScreen]
+class TrailerRoute extends PageRouteInfo<TrailerRouteArgs> {
+  TrailerRoute({
+    Key? key,
+    required String videoId,
+    List<PageRouteInfo>? children,
+  }) : super(
+         TrailerRoute.name,
+         args: TrailerRouteArgs(key: key, videoId: videoId),
+         initialChildren: children,
+       );
+
+  static const String name = 'TrailerRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<TrailerRouteArgs>();
+      return TrailerScreen(key: args.key, videoId: args.videoId);
+    },
+  );
+}
+
+class TrailerRouteArgs {
+  const TrailerRouteArgs({this.key, required this.videoId});
+
+  final Key? key;
+
+  final String videoId;
+
+  @override
+  String toString() {
+    return 'TrailerRouteArgs{key: $key, videoId: $videoId}';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! TrailerRouteArgs) return false;
+    return key == other.key && videoId == other.videoId;
+  }
+
+  @override
+  int get hashCode => key.hashCode ^ videoId.hashCode;
+}
+
+/// generated route for
 /// [TvDetailsScreen]
 class TvDetailsRoute extends PageRouteInfo<void> {
   const TvDetailsRoute({List<PageRouteInfo>? children})

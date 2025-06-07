@@ -107,6 +107,29 @@ class MovieDetailsCubit extends Cubit<MovieDetailsState> {
     );
   }
 
+  Future<String> getMovieTrailer({required int movieId}) async {
+    emit(
+      state.copyWith(trailerState: RequestStatus.loading, isConnected: true),
+    );
+    String trailerKey = '';
+    final result = await movieDetailsRepo.getMovieTrailer(movieId: movieId);
+    result.fold(
+      (failure) => emit(
+        state.copyWith(
+          trailerState: RequestStatus.error,
+          trailerErrorMessage: failure.errorMessage,
+        ),
+      ),
+      (trailer) {
+        trailerKey = trailer;
+        emit(
+          state.copyWith(trailerState: RequestStatus.success, videoId: trailer),
+        );
+      },
+    );
+    return trailerKey;
+  }
+
   Future<void> getAllMoviesDetails({required int movieId}) async {
     emit(
       state.copyWith(

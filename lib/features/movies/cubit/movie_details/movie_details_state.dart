@@ -23,6 +23,9 @@ class MovieDetailsState extends Equatable {
   final String reviewsErrorMessage;
   final RequestStatus allMovieDetailsState;
   final String allMovieDetailsErrorMessage;
+  final RequestStatus trailerState;
+  final String videoId;
+  final String trailerErrorMessage;
   final bool isConnected;
 
   const MovieDetailsState({
@@ -43,6 +46,9 @@ class MovieDetailsState extends Equatable {
     this.reviewsErrorMessage = '',
     this.allMovieDetailsState = RequestStatus.initial,
     this.allMovieDetailsErrorMessage = '',
+    this.trailerState = RequestStatus.initial,
+    this.videoId = '',
+    this.trailerErrorMessage = '',
     this.isConnected = true,
   });
 
@@ -64,7 +70,9 @@ class MovieDetailsState extends Equatable {
     String? reviewsErrorMessage,
     RequestStatus? allMovieDetailsState,
     String? allMovieDetailsErrorMessage,
-
+    RequestStatus? trailerState,
+    String? videoId,
+    String? trailerErrorMessage,
     bool? isConnected,
   }) {
     return MovieDetailsState(
@@ -88,6 +96,9 @@ class MovieDetailsState extends Equatable {
       allMovieDetailsState: allMovieDetailsState ?? this.allMovieDetailsState,
       allMovieDetailsErrorMessage:
           allMovieDetailsErrorMessage ?? this.allMovieDetailsErrorMessage,
+      trailerState: trailerState ?? this.trailerState,
+      videoId: videoId ?? this.videoId,
+      trailerErrorMessage: trailerErrorMessage ?? this.trailerErrorMessage,
       isConnected: isConnected ?? this.isConnected,
     );
   }
@@ -111,6 +122,9 @@ class MovieDetailsState extends Equatable {
     reviewsErrorMessage,
     allMovieDetailsState,
     allMovieDetailsErrorMessage,
+    trailerState,
+    videoId,
+    trailerErrorMessage,
     isConnected,
   ];
 }

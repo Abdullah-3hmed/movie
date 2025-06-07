@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 
 class MovieDetailsModel extends Equatable {
+  final int id;
   final String title;
   final String posterPath;
   final double voteAverage;
@@ -12,6 +13,7 @@ class MovieDetailsModel extends Equatable {
   final int year;
 
   const MovieDetailsModel({
+    required this.id,
     required this.title,
     required this.posterPath,
     required this.voteAverage,
@@ -25,6 +27,7 @@ class MovieDetailsModel extends Equatable {
 
   factory MovieDetailsModel.fromJson(Map<String, dynamic> json) =>
       MovieDetailsModel(
+        id: json['id'],
         title: json['original_title'],
         posterPath: json['poster_path'],
         voteAverage: json['vote_average'].toDouble(),
@@ -36,6 +39,7 @@ class MovieDetailsModel extends Equatable {
         year: int.parse(json['release_date'].split('-')[0]),
       );
   static const empty = MovieDetailsModel(
+    id: 0,
     title: '',
     posterPath: '',
     voteAverage: 0.0,
@@ -48,6 +52,7 @@ class MovieDetailsModel extends Equatable {
   );
   @override
   List<Object?> get props => [
+    id,
     title,
     posterPath,
     voteAverage,

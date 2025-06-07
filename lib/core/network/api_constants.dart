@@ -25,5 +25,7 @@ class ApiConstants {
   static String actorMoviesEndpoint(int actorId) =>
       '/person/$actorId/movie_credits';
 
+  static String movieVideosEndpoint(int movieId) => '/movie/$movieId/videos';
+
   static String imageUrl(String path) => '$baseImageUrl$path';
 }

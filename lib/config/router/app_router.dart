@@ -20,6 +20,7 @@ import 'package:movie/features/shared/data/cast_model.dart';
 import 'package:movie/features/shared/presentation/screens/actor_details_screen.dart';
 import 'package:movie/features/shared/presentation/screens/see_all_cast_screen.dart';
 import 'package:movie/features/shared/presentation/screens/see_all_movies_screen.dart';
+import 'package:movie/features/shared/presentation/screens/trailer_screen.dart';
 import 'package:movie/features/splash/presentation/screens/splash_screen.dart';
 import 'package:movie/features/tv/presentation/screens/tv_details_screen.dart';
 import 'package:movie/features/tv/presentation/screens/tv_overview_screen.dart';
@@ -76,6 +77,7 @@ class AppRouter extends RootStackRouter {
     _buildCustomRoute(page: ActorDetailsRoute.page),
     _buildCustomRoute(page: WatchListRoute.page),
     _buildCustomRoute(page: SeeAllCastRoute.page),
+    _buildCustomRoute(page: TrailerRoute.page),
   ];
 
   CustomRoute _buildCustomRoute({

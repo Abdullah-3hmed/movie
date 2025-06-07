@@ -1,11 +1,14 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:movie/config/router/app_router.dart';
 import 'package:movie/core/enums/request_status.dart';
 import 'package:movie/core/icons/solar_system_icons.dart';
 import 'package:movie/core/network/api_constants.dart';
 import 'package:movie/core/util/assets_manager.dart';
+import 'package:movie/core/util/show_toast.dart';
 import 'package:movie/core/widgets/custom_back_button.dart';
 import 'package:movie/features/movies/cubit/movie_details/movie_details_cubit.dart';
 import 'package:movie/features/movies/cubit/movie_details/movie_details_state.dart';
@@ -57,11 +60,36 @@ class MovieDetailsPoster extends StatelessWidget {
                       start: 16.0,
                       child: CustomBackButton(),
                     ),
-                    PositionedDirectional(
-                      start: 0.0,
-                      end: 0.0,
-                      bottom: -25.0,
-                      child: SvgPicture.asset(AssetsManager.neonPlayButton),
+                    BlocListener<MovieDetailsCubit, MovieDetailsState>(
+                      listenWhen:
+                          (previous, current) =>
+                              previous.trailerState != current.trailerState,
+                      listener: (context, state) {
+                        if (state.trailerState == RequestStatus.error) {
+                          showToast(
+                            message: state.trailerErrorMessage,
+                            state: ToastStates.error,
+                          );
+                        }
+                      },
+                      child: PositionedDirectional(
+                        start: 0.0,
+                        end: 0.0,
+                        bottom: -25.0,
+                        child: InkWell(
+                          onTap: () async {
+                            String videoId = await context
+                                .read<MovieDetailsCubit>()
+                                .getMovieTrailer(
+                                  movieId: state.movieDetails.id,
+                                );
+                            if (videoId.isNotEmpty) {
+                              context.pushRoute(TrailerRoute(videoId: videoId));
+                            }
+                          },
+                          child: SvgPicture.asset(AssetsManager.neonPlayButton),
+                        ),
+                      ),
                     ),
                   ],
                 ),
