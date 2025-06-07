@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:movie/core/icons/solar_system_icons.dart';
 import 'package:movie/core/util/color_manager.dart';
+import 'package:movie/features/shared/data/review_model.dart';
 
 class MovieReviewItem extends StatelessWidget {
-  const MovieReviewItem({super.key});
-
+  const MovieReviewItem({super.key, required this.review});
+  final ReviewModel review;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -30,19 +31,22 @@ class MovieReviewItem extends StatelessWidget {
                 size: 15.0,
               ),
               const SizedBox(width: 5.0),
-              Text("7", style: Theme.of(context).textTheme.bodyMedium),
+              Text(
+                "${review.rating}",
+                style: Theme.of(context).textTheme.bodyMedium,
+              ),
             ],
           ),
           const SizedBox(height: 5.0),
           Text(
-            "Abdullah Ahmed",
+            review.author,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style: Theme.of(context).textTheme.bodyLarge,
           ),
           const SizedBox(height: 5.0),
           Text(
-            "I have to say, starting out, that Sam Raimi's original EVIL DEAD trilogy has been a favourite of mine ever since I saw it as a teenager. While EVIL DEAD 2 was the best of the three films, for me, a pitch-perfect comedy/horror, and ARMY OF DARKNESS was a funny, cheesy comedy, the first film was a gruelling terror flick made a grea ......",
+            review.content,
             maxLines: 7,
             overflow: TextOverflow.ellipsis,
             style: Theme.of(context).textTheme.bodySmall,

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movie/core/util/app_strings.dart';
 import 'package:movie/core/widgets/custom_section_title.dart';
-import 'package:movie/features/shared/presentation/screens/widgets/cast_list_view_item.dart';
 
 class TvDetailsCastSection extends StatelessWidget {
   const TvDetailsCastSection({super.key});
@@ -25,7 +24,8 @@ class TvDetailsCastSection extends StatelessWidget {
             padding: const EdgeInsetsDirectional.symmetric(horizontal: 24.0),
             itemBuilder:
                 (context, index) =>
-                    const SizedBox(height: 200.0, child: CastListViewItem()),
+                    const SizedBox(height: 200.0, child: SizedBox.shrink()),
+            //CastListViewItem()),
             separatorBuilder: (context, index) => const SizedBox(width: 8.0),
             itemCount: 5,
           ),

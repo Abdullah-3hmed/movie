@@ -106,4 +106,32 @@ class MovieDetailsCubit extends Cubit<MovieDetailsState> {
       ),
     );
   }
+
+  Future<void> getAllMoviesDetails({required int movieId}) async {
+    emit(
+      state.copyWith(
+        allMovieDetailsState: RequestStatus.loading,
+        isConnected: true,
+      ),
+    );
+
+    await Future.wait([
+      getMovieDetails(movieId: movieId),
+      getMovieCast(movieId: movieId),
+      getRecommendedMovies(movieId: movieId),
+      getSimilarMovies(movieId: movieId),
+      getReviews(movieId: movieId),
+    ]);
+
+    if (!state.isConnected) {
+      emit(
+        state.copyWith(
+          allMovieDetailsState: RequestStatus.error,
+          allMovieDetailsErrorMessage: state.movieDetailsErrorMessage,
+        ),
+      );
+    } else {
+      emit(state.copyWith(allMovieDetailsState: RequestStatus.success));
+    }
+  }
 }

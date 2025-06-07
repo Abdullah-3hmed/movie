@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:movie/core/util/app_strings.dart';
 import 'package:movie/core/widgets/custom_divider.dart';
 import 'package:movie/core/widgets/custom_section_title.dart';
-import 'package:movie/features/shared/presentation/screens/widgets/movie_details_list_item.dart';
 
 class TvRecommendedSection extends StatelessWidget {
   const TvRecommendedSection({super.key});
@@ -23,7 +22,7 @@ class TvRecommendedSection extends StatelessWidget {
             itemBuilder:
                 (context, index) => const SizedBox(
                   height: 200.0,
-                  child: MovieDetailsListItem(),
+                  child: SizedBox.shrink(), //MovieDetailsListItem(),
                 ),
             separatorBuilder: (context, index) => const SizedBox(width: 10.0),
             itemCount: 5,

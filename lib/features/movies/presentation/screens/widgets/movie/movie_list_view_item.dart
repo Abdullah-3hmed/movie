@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:movie/config/router/app_router.dart';
 import 'package:movie/core/network/api_constants.dart';
+import 'package:movie/core/util/assets_manager.dart';
 import 'package:movie/core/util/color_manager.dart';
 import 'package:movie/core/util/geners.dart';
 import 'package:movie/features/movies/data/movie/movies_model.dart';
@@ -25,7 +26,11 @@ class MovieListViewItem extends StatelessWidget {
               borderRadius: BorderRadius.circular(16.0),
               child: CachedNetworkImage(
                 imageUrl: ApiConstants.imageUrl(moviesModel.backdropPath),
-                errorWidget: (context, url, error) => const Icon(Icons.error),
+                errorWidget:
+                    (context, url, error) => Image.network(
+                      AssetsManager.errorPoster,
+                      fit: BoxFit.cover,
+                    ),
                 width: 200.0,
                 height: 250.0,
                 fit: BoxFit.cover,

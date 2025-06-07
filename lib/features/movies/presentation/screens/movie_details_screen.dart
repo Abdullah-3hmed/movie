@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie/core/enums/request_status.dart';
 import 'package:movie/core/services/service_locator.dart';
 import 'package:movie/core/widgets/custom_scaffold.dart';
+import 'package:movie/core/widgets/no_internet_widget.dart';
 import 'package:movie/features/movies/cubit/movie_details_cubit.dart';
 import 'package:movie/features/movies/cubit/movie_details_state.dart';
 import 'package:movie/features/movies/presentation/screens/widgets/movie_details/cast_section.dart';
@@ -43,7 +44,7 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
     super.initState();
     scrollController = ScrollController();
     scrollController.addListener(_onScroll);
-    _getMovieDetails();
+    _getAllMovieDetails();
   }
 
   void _onScroll() {
@@ -81,11 +82,12 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
           return BlocBuilder<MovieDetailsCubit, MovieDetailsState>(
             buildWhen:
                 (previous, current) =>
-                    previous.movieDetailsState != current.movieDetailsState,
+                    previous.allMovieDetailsState !=
+                    current.allMovieDetailsState,
             builder: (context, state) {
               switch (state.movieDetailsState) {
                 case RequestStatus.loading:
-                  return const SizedBox(height: 400.0, child: CustomLoading());
+                  return const CustomLoading();
                 case RequestStatus.success:
                   return CustomScrollView(
                     controller: scrollController,
@@ -101,15 +103,34 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
                           movieDetailsModel: state.movieDetails,
                         ),
                       ),
-                      const SliverToBoxAdapter(child: CastSection()),
-                      const SliverToBoxAdapter(child: RecommendedSection()),
-                      const SliverToBoxAdapter(child: SimilarSection()),
-                      const SliverToBoxAdapter(child: MovieReviewsSection()),
+                      SliverToBoxAdapter(child: CastSection(cast: state.cast)),
+                      SliverToBoxAdapter(
+                        child: RecommendedSection(
+                          recommendedMovies: state.recommendedMovies,
+                        ),
+                      ),
+                      SliverToBoxAdapter(
+                        child: SimilarSection(
+                          similarMovies: state.similarMovies,
+                        ),
+                      ),
+                      SliverToBoxAdapter(
+                        child: MovieReviewsSection(reviews: state.reviews),
+                      ),
                       const SliverToBoxAdapter(child: SizedBox(height: 40.0)),
                     ],
                   );
                 case RequestStatus.error:
-                  return Center(child: Text(state.movieDetailsErrorMessage));
+                  if (!state.isConnected) {
+                    return NoInternetWidget(
+                      errorMessage: state.movieDetailsErrorMessage,
+                      onPressed: () async {
+                        await _getAllMovieDetails();
+                      },
+                    );
+                  } else {
+                    return Center(child: Text(state.movieDetailsErrorMessage));
+                  }
                 default:
                   return const SizedBox.shrink();
               }
@@ -120,8 +141,8 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
     );
   }
 
-  Future<void> _getMovieDetails() async {
-    await context.read<MovieDetailsCubit>().getMovieDetails(
+  Future<void> _getAllMovieDetails() async {
+    await context.read<MovieDetailsCubit>().getAllMoviesDetails(
       movieId: widget.movieId,
     );
   }

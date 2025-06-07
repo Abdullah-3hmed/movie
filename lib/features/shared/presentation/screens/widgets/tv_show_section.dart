@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:movie/features/shared/presentation/screens/widgets/cast_list_view_item.dart';
 
 class TvShowSection extends StatelessWidget {
   const TvShowSection({super.key});
@@ -15,7 +14,8 @@ class TvShowSection extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         itemBuilder:
             (context, index) =>
-                const SizedBox(height: 200.0, child: CastListViewItem()),
+                const SizedBox(height: 200.0, child: SizedBox.shrink()),
+        //CastListViewItem()),
         separatorBuilder: (context, index) => const SizedBox(height: 8.0),
         itemCount: 5,
       ),

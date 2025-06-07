@@ -18,10 +18,11 @@ class MovieDetailsState extends Equatable {
   final String similarErrorMessage;
   final RequestStatus recommendedState;
   final RequestStatus similarState;
-
   final RequestStatus reviewsState;
   final List<ReviewModel> reviews;
   final String reviewsErrorMessage;
+  final RequestStatus allMovieDetailsState;
+  final String allMovieDetailsErrorMessage;
   final bool isConnected;
 
   const MovieDetailsState({
@@ -40,7 +41,8 @@ class MovieDetailsState extends Equatable {
     this.reviewsState = RequestStatus.loading,
     this.reviews = const [],
     this.reviewsErrorMessage = '',
-
+    this.allMovieDetailsState = RequestStatus.initial,
+    this.allMovieDetailsErrorMessage = '',
     this.isConnected = true,
   });
 
@@ -60,6 +62,9 @@ class MovieDetailsState extends Equatable {
     RequestStatus? reviewsState,
     List<ReviewModel>? reviews,
     String? reviewsErrorMessage,
+    RequestStatus? allMovieDetailsState,
+    String? allMovieDetailsErrorMessage,
+
     bool? isConnected,
   }) {
     return MovieDetailsState(
@@ -80,6 +85,9 @@ class MovieDetailsState extends Equatable {
       reviewsState: reviewsState ?? this.reviewsState,
       reviews: reviews ?? this.reviews,
       reviewsErrorMessage: reviewsErrorMessage ?? this.reviewsErrorMessage,
+      allMovieDetailsState: allMovieDetailsState ?? this.allMovieDetailsState,
+      allMovieDetailsErrorMessage:
+          allMovieDetailsErrorMessage ?? this.allMovieDetailsErrorMessage,
       isConnected: isConnected ?? this.isConnected,
     );
   }
@@ -89,7 +97,6 @@ class MovieDetailsState extends Equatable {
     movieDetailsState,
     movieDetailsErrorMessage,
     movieDetails,
-    isConnected,
     castState,
     castErrorMessage,
     cast,
@@ -102,5 +109,8 @@ class MovieDetailsState extends Equatable {
     reviewsState,
     reviews,
     reviewsErrorMessage,
+    allMovieDetailsState,
+    allMovieDetailsErrorMessage,
+    isConnected,
   ];
 }

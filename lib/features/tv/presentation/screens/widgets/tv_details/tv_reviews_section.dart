@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:movie/core/util/app_strings.dart';
 import 'package:movie/core/widgets/custom_divider.dart';
 import 'package:movie/core/widgets/custom_section_title.dart';
-import 'package:movie/features/shared/presentation/screens/widgets/movie_review_item.dart';
 
 class TvReviewsSection extends StatelessWidget {
   const TvReviewsSection({super.key});
@@ -26,7 +25,8 @@ class TvReviewsSection extends StatelessWidget {
             physics: const BouncingScrollPhysics(),
             itemBuilder:
                 (context, index) =>
-                    const SizedBox(height: 200.0, child: MovieReviewItem()),
+                    const SizedBox(height: 200.0, child: SizedBox.shrink()),
+            // MovieReviewItem()),
             separatorBuilder: (context, index) => const SizedBox(width: 10.0),
             itemCount: 5,
           ),

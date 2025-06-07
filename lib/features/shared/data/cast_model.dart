@@ -13,9 +13,9 @@ class CastModel extends Equatable {
   });
   factory CastModel.fromJson(Map<String, dynamic> json) => CastModel(
     id: json['id'],
-    image: json['profile_path'],
-    name: json['original_name'],
-    character: json['character'],
+    image: json['profile_path'] ?? "",
+    name: json['original_name'] ?? "",
+    character: json['character'] ?? "",
   );
 
   @override

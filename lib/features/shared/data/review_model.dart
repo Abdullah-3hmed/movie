@@ -13,7 +13,7 @@ class ReviewModel extends Equatable {
   factory ReviewModel.fromJson(Map<String, dynamic> json) {
     return ReviewModel(
       author: json['author'],
-      rating: json["author_details"]['rating'],
+      rating: json["author_details"]['rating'] ?? 0.0,
       content: json['content'],
     );
   }
