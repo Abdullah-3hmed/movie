@@ -13,7 +13,7 @@ class CastListViewItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        context.pushRoute(const TvActorDetailsRoute());
+        context.pushRoute(ActorDetailsRoute(actorId: castModel.id));
       },
       child: Transform(
         transform: Matrix4.skewX(-.05),

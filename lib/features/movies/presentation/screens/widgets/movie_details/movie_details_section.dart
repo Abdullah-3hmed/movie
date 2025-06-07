@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie/core/enums/request_status.dart';
 import 'package:movie/core/util/app_strings.dart';
 import 'package:movie/core/widgets/custom_divider.dart';
-import 'package:movie/features/movies/cubit/movie_details_cubit.dart';
-import 'package:movie/features/movies/cubit/movie_details_state.dart';
+import 'package:movie/features/movies/cubit/movie_details/movie_details_cubit.dart';
+import 'package:movie/features/movies/cubit/movie_details/movie_details_state.dart';
 import 'package:movie/features/movies/data/movie_details/movie_details_model.dart';
 
 class MovieDetailsSection extends StatelessWidget {

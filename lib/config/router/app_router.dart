@@ -16,9 +16,9 @@ import 'package:movie/features/search/presentation/screens/search_actors_screen.
 import 'package:movie/features/search/presentation/screens/search_movies_screen.dart';
 import 'package:movie/features/search/presentation/screens/search_screen.dart';
 import 'package:movie/features/search/presentation/screens/search_tv_screen.dart';
+import 'package:movie/features/shared/presentation/screens/actor_details_screen.dart';
 import 'package:movie/features/shared/presentation/screens/see_all_movies_screen.dart';
 import 'package:movie/features/splash/presentation/screens/splash_screen.dart';
-import 'package:movie/features/tv/presentation/screens/tv_actor_details_screen.dart';
 import 'package:movie/features/tv/presentation/screens/tv_details_screen.dart';
 import 'package:movie/features/tv/presentation/screens/tv_overview_screen.dart';
 import 'package:movie/features/tv/presentation/screens/tv_screen.dart';
@@ -71,7 +71,7 @@ class AppRouter extends RootStackRouter {
         _buildCustomRoute(page: TvSeasonsRoute.page),
       ],
     ),
-    _buildCustomRoute(page: TvActorDetailsRoute.page),
+    _buildCustomRoute(page: ActorDetailsRoute.page),
     _buildCustomRoute(page: WatchListRoute.page),
   ];
 

@@ -11,6 +11,55 @@
 part of 'app_router.dart';
 
 /// generated route for
+/// [ActorDetailsScreen]
+class ActorDetailsRoute extends PageRouteInfo<ActorDetailsRouteArgs> {
+  ActorDetailsRoute({
+    Key? key,
+    required int actorId,
+    List<PageRouteInfo>? children,
+  }) : super(
+         ActorDetailsRoute.name,
+         args: ActorDetailsRouteArgs(key: key, actorId: actorId),
+         initialChildren: children,
+       );
+
+  static const String name = 'ActorDetailsRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<ActorDetailsRouteArgs>();
+      return WrappedRoute(
+        child: ActorDetailsScreen(key: args.key, actorId: args.actorId),
+      );
+    },
+  );
+}
+
+class ActorDetailsRouteArgs {
+  const ActorDetailsRouteArgs({this.key, required this.actorId});
+
+  final Key? key;
+
+  final int actorId;
+
+  @override
+  String toString() {
+    return 'ActorDetailsRouteArgs{key: $key, actorId: $actorId}';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! ActorDetailsRouteArgs) return false;
+    return key == other.key && actorId == other.actorId;
+  }
+
+  @override
+  int get hashCode => key.hashCode ^ actorId.hashCode;
+}
+
+/// generated route for
 /// [Auth]
 class AuthRoute extends PageRouteInfo<void> {
   const AuthRoute({List<PageRouteInfo>? children})
@@ -308,22 +357,6 @@ class SplashRoute extends PageRouteInfo<void> {
     name,
     builder: (data) {
       return const SplashScreen();
-    },
-  );
-}
-
-/// generated route for
-/// [TvActorDetailsScreen]
-class TvActorDetailsRoute extends PageRouteInfo<void> {
-  const TvActorDetailsRoute({List<PageRouteInfo>? children})
-    : super(TvActorDetailsRoute.name, initialChildren: children);
-
-  static const String name = 'TvActorDetailsRoute';
-
-  static PageInfo page = PageInfo(
-    name,
-    builder: (data) {
-      return const TvActorDetailsScreen();
     },
   );
 }

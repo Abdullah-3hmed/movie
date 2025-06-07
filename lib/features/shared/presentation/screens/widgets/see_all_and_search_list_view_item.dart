@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:movie/core/icons/solar_system_icons.dart';
 import 'package:movie/core/network/api_constants.dart';
+import 'package:movie/core/util/assets_manager.dart';
 import 'package:movie/core/util/color_manager.dart';
 import 'package:movie/core/util/geners.dart';
 import 'package:movie/features/movies/data/movie/movies_model.dart';
@@ -19,13 +20,13 @@ class SeeAllAndSearchListViewItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final genres = getGenreNames(movieModel.genreIds).join(', ');
-    return Stack(
-      children: [
-        ClipRRect(
-          borderRadius: BorderRadius.circular(20.0),
-          clipBehavior: Clip.antiAliasWithSaveLayer,
-          child: Transform(
-            transform: Matrix4.skewX(-0.08),
+    return Transform(
+      transform: Matrix4.skewX(-0.05),
+      child: Stack(
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.circular(20.0),
+            clipBehavior: Clip.antiAliasWithSaveLayer,
             child: Container(
               width: double.infinity,
               padding: const EdgeInsetsDirectional.symmetric(
@@ -45,7 +46,10 @@ class SeeAllAndSearchListViewItem extends StatelessWidget {
                     child: CachedNetworkImage(
                       imageUrl: ApiConstants.imageUrl(movieModel.backdropPath),
                       errorWidget:
-                          (context, url, error) => const Icon(Icons.error),
+                          (context, url, error) => Image.network(
+                            AssetsManager.errorPoster,
+                            fit: BoxFit.cover,
+                          ),
                       width: 140.0,
                       height: 180.0,
                       fit: BoxFit.cover,
@@ -101,20 +105,20 @@ class SeeAllAndSearchListViewItem extends StatelessWidget {
               ),
             ),
           ),
-        ),
-        if (!isWatchList)
-          PositionedDirectional(
-            top: 10.0,
-            end: 15.0,
-            child: IconButton(
-              onPressed: () {},
-              icon: const Icon(
-                SolarSystemIcons.unsaved,
-                color: Color(0xFF007373),
+          if (!isWatchList)
+            PositionedDirectional(
+              top: 10.0,
+              end: 15.0,
+              child: IconButton(
+                onPressed: () {},
+                icon: const Icon(
+                  SolarSystemIcons.unsaved,
+                  color: Color(0xFF007373),
+                ),
               ),
             ),
-          ),
-      ],
+        ],
+      ),
     );
   }
 }

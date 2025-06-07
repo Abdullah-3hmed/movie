@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie/core/enums/request_status.dart';
-import 'package:movie/features/movies/cubit/movie_details_state.dart';
-import 'package:movie/features/movies/repos/movie_details_repo.dart';
+import 'package:movie/features/movies/cubit/movie_details/movie_details_state.dart';
+import 'package:movie/features/movies/repos/movie_details/movie_details_repo.dart';
 
 class MovieDetailsCubit extends Cubit<MovieDetailsState> {
   MovieDetailsCubit({required this.movieDetailsRepo})

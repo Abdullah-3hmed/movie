@@ -5,13 +5,16 @@ import 'package:movie/core/network/dio_helper.dart';
 import 'package:movie/features/auth/cubit/auth_cubit.dart';
 import 'package:movie/features/auth/repo/auth_repo.dart';
 import 'package:movie/features/auth/repo/auth_repo_impl.dart';
-import 'package:movie/features/movies/cubit/movie_cubit.dart';
-import 'package:movie/features/movies/cubit/movie_details_cubit.dart';
-import 'package:movie/features/movies/repos/movie_details_repo.dart';
-import 'package:movie/features/movies/repos/movie_details_repo_impl.dart';
-import 'package:movie/features/movies/repos/movie_repo.dart';
+import 'package:movie/features/movies/cubit/actor/actor_cubit.dart';
+import 'package:movie/features/movies/cubit/movie/movie_cubit.dart';
+import 'package:movie/features/movies/cubit/movie_details/movie_details_cubit.dart';
+import 'package:movie/features/movies/repos/actor/actor_repo.dart';
+import 'package:movie/features/movies/repos/actor/actor_repo_impl.dart';
+import 'package:movie/features/movies/repos/movie/movie_repo.dart';
+import 'package:movie/features/movies/repos/movie_details/movie_details_repo.dart';
+import 'package:movie/features/movies/repos/movie_details/movie_details_repo_impl.dart';
 
-import '../../features/movies/repos/movie_repo_impl.dart';
+import '../../features/movies/repos/movie/movie_repo_impl.dart';
 
 final GetIt getIt = GetIt.instance;
 
@@ -40,6 +43,12 @@ class ServiceLocator {
     );
     getIt.registerFactory<MovieDetailsCubit>(
       () => MovieDetailsCubit(movieDetailsRepo: getIt<MovieDetailsRepo>()),
+    );
+    getIt.registerLazySingleton<ActorRepo>(
+      () => ActorRepoImpl(dioHelper: getIt<DioHelper>()),
+    );
+    getIt.registerFactory<ActorCubit>(
+      () => ActorCubit(actorRepo: getIt<ActorRepo>()),
     );
   }
 }

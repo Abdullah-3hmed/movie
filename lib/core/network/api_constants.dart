@@ -20,5 +20,10 @@ class ApiConstants {
       '/movie/$movieId/recommendations';
   static String movieReviewsEndpoint(int movieId) => '/movie/$movieId/reviews';
 
+  //////actor details
+  static String actorDetailsEndpoint(int actorId) => '/person/$actorId';
+  static String actorMoviesEndpoint(int actorId) =>
+      '/person/$actorId/movie_credits';
+
   static String imageUrl(String path) => '$baseImageUrl$path';
 }

@@ -7,8 +7,8 @@ import 'package:movie/core/icons/solar_system_icons.dart';
 import 'package:movie/core/network/api_constants.dart';
 import 'package:movie/core/util/assets_manager.dart';
 import 'package:movie/core/widgets/custom_back_button.dart';
-import 'package:movie/features/movies/cubit/movie_details_cubit.dart';
-import 'package:movie/features/movies/cubit/movie_details_state.dart';
+import 'package:movie/features/movies/cubit/movie_details/movie_details_cubit.dart';
+import 'package:movie/features/movies/cubit/movie_details/movie_details_state.dart';
 import 'package:movie/features/movies/data/movie_details/movie_details_model.dart';
 import 'package:movie/features/movies/presentation/screens/widgets/movie_details/movie_details_clipper.dart';
 

@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie/config/router/app_router.dart';
 import 'package:movie/core/icons/solar_system_icons.dart';
 import 'package:movie/core/services/service_locator.dart';
-import 'package:movie/features/movies/cubit/movie_cubit.dart';
+import 'package:movie/features/movies/cubit/movie/movie_cubit.dart';
 
 @RoutePage()
 class BottomNavBarScreen extends StatelessWidget implements AutoRouteWrapper {

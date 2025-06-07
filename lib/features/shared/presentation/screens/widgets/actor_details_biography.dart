@@ -2,20 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:movie/core/util/color_manager.dart';
 
 class ActorDetailsBiography extends StatefulWidget {
-  const ActorDetailsBiography({super.key});
-
+  const ActorDetailsBiography({super.key, required this.biography});
+  final String biography;
   @override
   State<ActorDetailsBiography> createState() => _ActorDetailsBiographyState();
 }
 
 class _ActorDetailsBiographyState extends State<ActorDetailsBiography> {
   bool _isExpanded = false;
-
-  final String biography =
-      "Leonardo Wilhelm DiCaprio is an American actor and film producer. "
-      "Known for his work in biographical and period films, he is the recipient of numerous accolades, "
-      "including an Academy Award, a British Academy Film Award and three Golden Globe Awards.";
-
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme.bodyLarge!.copyWith(
@@ -30,12 +24,12 @@ class _ActorDetailsBiographyState extends State<ActorDetailsBiography> {
         children: [
           AnimatedCrossFade(
             firstChild: Text(
-              biography,
+              widget.biography,
               style: textTheme,
               maxLines: 3,
               overflow: TextOverflow.ellipsis,
             ),
-            secondChild: Text(biography, style: textTheme),
+            secondChild: Text(widget.biography, style: textTheme),
             crossFadeState:
                 _isExpanded
                     ? CrossFadeState.showSecond

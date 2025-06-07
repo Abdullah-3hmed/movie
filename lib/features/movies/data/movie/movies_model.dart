@@ -24,7 +24,7 @@ class MoviesModel extends Equatable {
       backdropPath: json['backdrop_path'] ?? "",
       voteCount: json['vote_count'].toInt(),
       voteAverage: json['vote_average'].toDouble() ?? 0.0,
-      genreIds: List<int>.from(json['genre_ids']),
+      genreIds: List<int>.from(json['genre_ids'] ?? []),
     );
   }
 

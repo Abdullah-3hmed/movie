@@ -7,8 +7,8 @@ import 'package:movie/core/util/app_constants.dart';
 import 'package:movie/core/util/app_strings.dart';
 import 'package:movie/core/widgets/custom_divider.dart';
 import 'package:movie/core/widgets/custom_section_title.dart';
-import 'package:movie/features/movies/cubit/movie_details_cubit.dart';
-import 'package:movie/features/movies/cubit/movie_details_state.dart';
+import 'package:movie/features/movies/cubit/movie_details/movie_details_cubit.dart';
+import 'package:movie/features/movies/cubit/movie_details/movie_details_state.dart';
 import 'package:movie/features/movies/data/movie/movies_model.dart';
 import 'package:movie/features/shared/presentation/screens/widgets/movie_details_list_item.dart';
 
@@ -71,8 +71,6 @@ class RecommendedSection extends StatelessWidget {
                 );
               default:
                 return const SizedBox.shrink();
-
-              ///
             }
           },
         ),

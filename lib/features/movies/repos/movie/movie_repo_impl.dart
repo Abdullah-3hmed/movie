@@ -6,50 +6,24 @@ import 'package:movie/core/error/server_exception.dart';
 import 'package:movie/core/network/api_constants.dart';
 import 'package:movie/core/network/dio_helper.dart';
 import 'package:movie/features/movies/data/movie/movies_model.dart';
-import 'package:movie/features/movies/data/movie_details/movie_details_model.dart';
-import 'package:movie/features/movies/repos/movie_details_repo.dart';
-import 'package:movie/features/shared/data/cast_model.dart';
-import 'package:movie/features/shared/data/review_model.dart';
+import 'package:movie/features/movies/data/movie/up_coming_movies_model.dart';
+import 'package:movie/features/movies/repos/movie/movie_repo.dart';
 
-class MovieDetailsRepoImpl implements MovieDetailsRepo {
-  MovieDetailsRepoImpl({required this.dioHelper});
+class MovieRepoImpl implements MovieRepo {
+  MovieRepoImpl({required this.dioHelper});
 
   final DioHelper dioHelper;
 
   @override
-  Future<Either<Failure, MovieDetailsModel>> getMovieDetails({
-    required int movieId,
-  }) async {
+  Future<Either<Failure, List<UpComingMoviesModel>>> getUpComingMovies() async {
     try {
       final response = await dioHelper.get(
-        url: ApiConstants.movieDetailsEndpoint(movieId),
-      );
-      if (response.statusCode == 200) {
-        return Right(MovieDetailsModel.fromJson(response.data));
-      } else {
-        throw ServerException(errorModel: ErrorModel.fromJson(response.data));
-      }
-    } on DioException catch (e) {
-      return Left(ServerFailure.fromDioError(e));
-    } on ServerException catch (e) {
-      return Left(ServerFailure(e.errorModel.statusMessages));
-    } catch (e) {
-      return Left(ServerFailure(e.toString()));
-    }
-  }
-
-  @override
-  Future<Either<Failure, List<CastModel>>> getMovieCast({
-    required int movieId,
-  }) async {
-    try {
-      final response = await dioHelper.get(
-        url: ApiConstants.movieCastEndpoint(movieId),
+        url: ApiConstants.upComingMoviesEndpoint,
       );
       if (response.statusCode == 200) {
         return Right(
-          response.data['cast']
-              .map<CastModel>((e) => CastModel.fromJson(e))
+          response.data['results']
+              .map<UpComingMoviesModel>((e) => UpComingMoviesModel.fromJson(e))
               .toList(),
         );
       } else {
@@ -65,12 +39,10 @@ class MovieDetailsRepoImpl implements MovieDetailsRepo {
   }
 
   @override
-  Future<Either<Failure, List<MoviesModel>>> getRecommendedMovies({
-    required int movieId,
-  }) async {
+  Future<Either<Failure, List<MoviesModel>>> getNowPlayingMovies() async {
     try {
       final response = await dioHelper.get(
-        url: ApiConstants.movieRecommendedEndpoint(movieId),
+        url: ApiConstants.nowPlayingMoviesEndpoint,
       );
       if (response.statusCode == 200) {
         return Right(
@@ -91,12 +63,10 @@ class MovieDetailsRepoImpl implements MovieDetailsRepo {
   }
 
   @override
-  Future<Either<Failure, List<MoviesModel>>> getSimilarMovies({
-    required int movieId,
-  }) async {
+  Future<Either<Failure, List<MoviesModel>>> getTopRatedMovies() async {
     try {
       final response = await dioHelper.get(
-        url: ApiConstants.movieSimilarEndpoint(movieId),
+        url: ApiConstants.topRatedMoviesEndpoint,
       );
       if (response.statusCode == 200) {
         return Right(
@@ -117,17 +87,15 @@ class MovieDetailsRepoImpl implements MovieDetailsRepo {
   }
 
   @override
-  Future<Either<Failure, List<ReviewModel>>> getMovieReviews({
-    required int movieId,
-  }) async {
+  Future<Either<Failure, List<MoviesModel>>> getPopularMovies() async {
     try {
       final response = await dioHelper.get(
-        url: ApiConstants.movieReviewsEndpoint(movieId),
+        url: ApiConstants.popularMoviesEndpoint,
       );
       if (response.statusCode == 200) {
         return Right(
           response.data['results']
-              .map<ReviewModel>((e) => ReviewModel.fromJson(e))
+              .map<MoviesModel>((e) => MoviesModel.fromJson(e))
               .toList(),
         );
       } else {
