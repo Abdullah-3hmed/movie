@@ -71,6 +71,8 @@ class RecommendedSection extends StatelessWidget {
                 );
               default:
                 return const SizedBox.shrink();
+
+              ///
             }
           },
         ),
