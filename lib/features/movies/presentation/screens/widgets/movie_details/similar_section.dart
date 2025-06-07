@@ -13,9 +13,7 @@ import 'package:movie/features/movies/data/movie/movies_model.dart';
 import 'package:movie/features/shared/presentation/screens/widgets/movie_details_list_item.dart';
 
 class SimilarSection extends StatelessWidget {
-  const SimilarSection({super.key, required this.similarMovies});
-
-  final List<MoviesModel> similarMovies;
+  const SimilarSection({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +23,8 @@ class SimilarSection extends StatelessWidget {
         CustomSectionTitle(
           title: AppStrings.similar,
           onPressed: () {
+            final List<MoviesModel> similarMovies =
+                context.read<MovieDetailsCubit>().state.similarMovies;
             context.pushRoute(
               SeeAllMoviesRoute(
                 title: AppStrings.similar,
@@ -54,12 +54,12 @@ class SimilarSection extends StatelessWidget {
                         (context, index) => SizedBox(
                           height: 200.0,
                           child: MovieDetailsListItem(
-                            movieModel: similarMovies[index],
+                            movieModel: state.similarMovies[index],
                           ),
                         ),
                     separatorBuilder:
                         (context, index) => const SizedBox(width: 10.0),
-                    itemCount: similarMovies.length,
+                    itemCount: state.similarMovies.length,
                   ),
                 );
               case RequestStatus.error:

@@ -6,13 +6,10 @@ import 'package:movie/core/widgets/custom_divider.dart';
 import 'package:movie/core/widgets/custom_section_title.dart';
 import 'package:movie/features/movies/cubit/movie_details/movie_details_cubit.dart';
 import 'package:movie/features/movies/cubit/movie_details/movie_details_state.dart';
-import 'package:movie/features/shared/data/review_model.dart';
 import 'package:movie/features/shared/presentation/screens/widgets/movie_review_item.dart';
 
 class MovieReviewsSection extends StatelessWidget {
-  const MovieReviewsSection({super.key, required this.reviews});
-
-  final List<ReviewModel> reviews;
+  const MovieReviewsSection({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -45,11 +42,11 @@ class MovieReviewsSection extends StatelessWidget {
                     itemBuilder:
                         (context, index) => SizedBox(
                           height: 200.0,
-                          child: MovieReviewItem(review: reviews[index]),
+                          child: MovieReviewItem(review: state.reviews[index]),
                         ),
                     separatorBuilder:
                         (context, index) => const SizedBox(width: 10.0),
-                    itemCount: reviews.length,
+                    itemCount: state.reviews.length,
                   ),
                 );
               case RequestStatus.error:

@@ -1,5 +1,7 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movie/config/router/app_router.dart';
 import 'package:movie/core/enums/request_status.dart';
 import 'package:movie/core/util/app_constants.dart';
 import 'package:movie/core/util/app_strings.dart';
@@ -10,9 +12,7 @@ import 'package:movie/features/shared/data/cast_model.dart';
 import 'package:movie/features/shared/presentation/screens/widgets/cast_list_view_item.dart';
 
 class CastSection extends StatelessWidget {
-  const CastSection({super.key, required this.cast});
-
-  final List<CastModel> cast;
+  const CastSection({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,9 @@ class CastSection extends StatelessWidget {
         CustomSectionTitle(
           title: AppStrings.cast,
           onPressed: () {
-            //  context.pushRoute(CastRoute(cast: cast));
+            final List<CastModel> cast =
+                context.read<MovieDetailsCubit>().state.cast;
+            context.pushRoute(SeeAllCastRoute(cast: cast));
           },
         ),
         BlocBuilder<MovieDetailsCubit, MovieDetailsState>(
@@ -42,10 +44,10 @@ class CastSection extends StatelessWidget {
                     ),
                     itemBuilder:
                         (context, index) =>
-                            CastListViewItem(castModel: cast[index]),
+                            CastListViewItem(castModel: state.cast[index]),
                     separatorBuilder:
                         (context, index) => const SizedBox(width: 8.0),
-                    itemCount: cast.length,
+                    itemCount: state.cast.length,
                   ),
                 );
               case RequestStatus.error:

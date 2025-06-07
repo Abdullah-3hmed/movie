@@ -9,18 +9,12 @@ import 'package:movie/core/util/assets_manager.dart';
 import 'package:movie/core/widgets/custom_back_button.dart';
 import 'package:movie/features/movies/cubit/movie_details/movie_details_cubit.dart';
 import 'package:movie/features/movies/cubit/movie_details/movie_details_state.dart';
-import 'package:movie/features/movies/data/movie_details/movie_details_model.dart';
 import 'package:movie/features/movies/presentation/screens/widgets/movie_details/movie_details_clipper.dart';
 
 class MovieDetailsPoster extends StatelessWidget {
-  const MovieDetailsPoster({
-    super.key,
-    required this.posterHeight,
-    required this.movieDetailsModel,
-  });
+  const MovieDetailsPoster({super.key, required this.posterHeight});
 
   final double posterHeight;
-  final MovieDetailsModel movieDetailsModel;
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +41,7 @@ class MovieDetailsPoster extends StatelessWidget {
                         clipper: MovieDetailsClipper(),
                         child: CachedNetworkImage(
                           imageUrl: ApiConstants.imageUrl(
-                            movieDetailsModel.posterPath,
+                            state.movieDetails.posterPath,
                           ),
                           errorWidget:
                               (context, url, error) => Image.network(
@@ -84,12 +78,12 @@ class MovieDetailsPoster extends StatelessWidget {
                           const Icon(Icons.star, color: Colors.yellow),
                           const SizedBox(height: 5.0),
                           Text(
-                            "${movieDetailsModel.voteAverage} / 10",
+                            "${state.movieDetails.voteAverage} / 10",
                             style: Theme.of(context).textTheme.bodyMedium,
                           ),
                           const SizedBox(height: 5.0),
                           Text(
-                            "${movieDetailsModel.voteCount}",
+                            "${state.movieDetails.voteCount}",
                             style: Theme.of(context).textTheme.bodyMedium,
                           ),
                         ],

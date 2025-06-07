@@ -37,12 +37,10 @@ class ActorDetailsScreen extends StatelessWidget implements AutoRouteWrapper {
             case RequestStatus.loading:
               return const CustomLoading();
             case RequestStatus.success:
-              return CustomScrollView(
-                physics: const BouncingScrollPhysics(),
+              return const CustomScrollView(
+                physics: BouncingScrollPhysics(),
                 slivers: [
-                  SliverToBoxAdapter(
-                    child: ActorDetailsSection(actorModel: state.actorModel),
-                  ),
+                  SliverToBoxAdapter(child: ActorDetailsSection()),
                   SliverToBoxAdapter(child: TvShowSection()),
                 ],
               );

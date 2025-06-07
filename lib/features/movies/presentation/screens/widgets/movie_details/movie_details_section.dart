@@ -5,12 +5,9 @@ import 'package:movie/core/util/app_strings.dart';
 import 'package:movie/core/widgets/custom_divider.dart';
 import 'package:movie/features/movies/cubit/movie_details/movie_details_cubit.dart';
 import 'package:movie/features/movies/cubit/movie_details/movie_details_state.dart';
-import 'package:movie/features/movies/data/movie_details/movie_details_model.dart';
 
 class MovieDetailsSection extends StatelessWidget {
-  const MovieDetailsSection({super.key, required this.movieDetailsModel});
-
-  final MovieDetailsModel movieDetailsModel;
+  const MovieDetailsSection({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -30,12 +27,12 @@ class MovieDetailsSection extends StatelessWidget {
                 children: [
                   const CustomDivider(),
                   Text(
-                    movieDetailsModel.title,
+                    state.movieDetails.title,
                     style: theme.titleLarge!.copyWith(fontSize: 18.0),
                   ),
                   const SizedBox(height: 7.0),
                   Text(
-                    movieDetailsModel.geners.join(", "),
+                    state.movieDetails.geners.join(", "),
                     style: theme.bodySmall!.copyWith(
                       fontSize: 12.0,
                       color: Colors.white.withValues(alpha: 0.8),
@@ -52,7 +49,7 @@ class MovieDetailsSection extends StatelessWidget {
                             style: theme.bodyMedium!.copyWith(fontSize: 14.0),
                           ),
                           Text(
-                            "${movieDetailsModel.year}",
+                            "${state.movieDetails.year}",
                             style: theme.bodyLarge,
                           ),
                         ],
@@ -64,7 +61,7 @@ class MovieDetailsSection extends StatelessWidget {
                             style: theme.bodyMedium!.copyWith(fontSize: 14.0),
                           ),
                           Text(
-                            movieDetailsModel.country,
+                            state.movieDetails.country,
                             style: Theme.of(context).textTheme.bodyLarge,
                           ),
                         ],
@@ -76,7 +73,7 @@ class MovieDetailsSection extends StatelessWidget {
                             style: theme.bodyMedium!.copyWith(fontSize: 14.0),
                           ),
                           Text(
-                            "${movieDetailsModel.length} ${AppStrings.min}",
+                            "${state.movieDetails.length} ${AppStrings.min}",
                             style: theme.bodyLarge,
                           ),
                         ],
@@ -84,7 +81,7 @@ class MovieDetailsSection extends StatelessWidget {
                     ],
                   ),
                   const SizedBox(height: 20.0),
-                  Text(movieDetailsModel.overview, style: theme.bodyMedium),
+                  Text(state.movieDetails.overview, style: theme.bodyMedium),
                   const CustomDivider(),
                 ],
               ),

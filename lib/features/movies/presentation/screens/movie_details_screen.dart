@@ -95,28 +95,13 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
                       SliverToBoxAdapter(
                         child: MovieDetailsPoster(
                           posterHeight: posterHeight.value,
-                          movieDetailsModel: state.movieDetails,
                         ),
                       ),
-                      SliverToBoxAdapter(
-                        child: MovieDetailsSection(
-                          movieDetailsModel: state.movieDetails,
-                        ),
-                      ),
-                      SliverToBoxAdapter(child: CastSection(cast: state.cast)),
-                      SliverToBoxAdapter(
-                        child: RecommendedSection(
-                          recommendedMovies: state.recommendedMovies,
-                        ),
-                      ),
-                      SliverToBoxAdapter(
-                        child: SimilarSection(
-                          similarMovies: state.similarMovies,
-                        ),
-                      ),
-                      SliverToBoxAdapter(
-                        child: MovieReviewsSection(reviews: state.reviews),
-                      ),
+                      const SliverToBoxAdapter(child: MovieDetailsSection()),
+                      const SliverToBoxAdapter(child: CastSection()),
+                      const SliverToBoxAdapter(child: RecommendedSection()),
+                      const SliverToBoxAdapter(child: SimilarSection()),
+                      const SliverToBoxAdapter(child: MovieReviewsSection()),
                       const SliverToBoxAdapter(child: SizedBox(height: 40.0)),
                     ],
                   );

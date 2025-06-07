@@ -53,7 +53,9 @@ class MovieDetailsListItem extends StatelessWidget {
                       ],
                     ),
                     Text(
-                      movieModel.title,
+                      movieModel.title.length > 18
+                          ? '${movieModel.title.substring(0, 18)}...'
+                          : movieModel.title,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: Theme.of(context).textTheme.bodySmall,

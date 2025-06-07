@@ -11,13 +11,10 @@ import 'package:movie/core/widgets/custom_back_button.dart';
 import 'package:movie/core/widgets/custom_section_title.dart';
 import 'package:movie/features/movies/cubit/actor/actor_cubit.dart';
 import 'package:movie/features/movies/cubit/actor/actor_state.dart';
-import 'package:movie/features/shared/data/actor_model.dart';
 import 'package:movie/features/shared/presentation/screens/widgets/actor_details_biography.dart';
 
 class ActorDetailsSection extends StatelessWidget {
-  const ActorDetailsSection({super.key, required this.actorModel});
-
-  final ActorModel actorModel;
+  const ActorDetailsSection({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -39,8 +36,8 @@ class ActorDetailsSection extends StatelessWidget {
                       ),
                       child: CachedNetworkImage(
                         imageUrl:
-                            actorModel.image.isNotEmpty
-                                ? ApiConstants.imageUrl(actorModel.image)
+                            state.actorModel.image.isNotEmpty
+                                ? ApiConstants.imageUrl(state.actorModel.image)
                                 : AssetsManager.errorPoster,
                         width: double.infinity,
                         height: 450.0,
@@ -61,7 +58,7 @@ class ActorDetailsSection extends StatelessWidget {
                       bottom: 10.0,
                       start: 16.0,
                       child: Text(
-                        actorModel.name,
+                        state.actorModel.name,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: Theme.of(
@@ -89,7 +86,7 @@ class ActorDetailsSection extends StatelessWidget {
                             color: ColorsManager.inActiveColor,
                           ),
                           Text(
-                            "   ${actorModel.birthday}",
+                            "   ${state.actorModel.birthday}",
                             style: Theme.of(context).textTheme.bodyLarge,
                           ),
                         ],
@@ -103,7 +100,7 @@ class ActorDetailsSection extends StatelessWidget {
                             color: ColorsManager.inActiveColor,
                           ),
                           Text(
-                            "   ${actorModel.placeOfBirth}",
+                            "   ${state.actorModel.placeOfBirth}",
                             style: Theme.of(context).textTheme.bodyLarge,
                           ),
                         ],
@@ -117,7 +114,7 @@ class ActorDetailsSection extends StatelessWidget {
                   seeAll: false,
                 ),
                 const SizedBox(height: 8.0),
-                ActorDetailsBiography(biography: actorModel.biography),
+                ActorDetailsBiography(biography: state.actorModel.biography),
               ],
             );
           case RequestStatus.error:

@@ -13,9 +13,7 @@ import 'package:movie/features/movies/data/movie/movies_model.dart';
 import 'package:movie/features/shared/presentation/screens/widgets/movie_details_list_item.dart';
 
 class RecommendedSection extends StatelessWidget {
-  const RecommendedSection({super.key, required this.recommendedMovies});
-
-  final List<MoviesModel> recommendedMovies;
+  const RecommendedSection({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +23,8 @@ class RecommendedSection extends StatelessWidget {
         CustomSectionTitle(
           title: AppStrings.recommended,
           onPressed: () {
+            final List<MoviesModel> recommendedMovies =
+                context.read<MovieDetailsCubit>().state.recommendedMovies;
             context.pushRoute(
               SeeAllMoviesRoute(
                 title: AppStrings.recommended,
@@ -52,11 +52,11 @@ class RecommendedSection extends StatelessWidget {
                     physics: const BouncingScrollPhysics(),
                     itemBuilder:
                         (context, index) => MovieDetailsListItem(
-                          movieModel: recommendedMovies[index],
+                          movieModel: state.recommendedMovies[index],
                         ),
                     separatorBuilder:
                         (context, index) => const SizedBox(width: 10.0),
-                    itemCount: recommendedMovies.length,
+                    itemCount: state.recommendedMovies.length,
                   ),
                 );
               case RequestStatus.error:

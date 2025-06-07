@@ -253,6 +253,53 @@ class SearchTvRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [SeeAllCastScreen]
+class SeeAllCastRoute extends PageRouteInfo<SeeAllCastRouteArgs> {
+  SeeAllCastRoute({
+    Key? key,
+    required List<CastModel> cast,
+    List<PageRouteInfo>? children,
+  }) : super(
+         SeeAllCastRoute.name,
+         args: SeeAllCastRouteArgs(key: key, cast: cast),
+         initialChildren: children,
+       );
+
+  static const String name = 'SeeAllCastRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<SeeAllCastRouteArgs>();
+      return SeeAllCastScreen(key: args.key, cast: args.cast);
+    },
+  );
+}
+
+class SeeAllCastRouteArgs {
+  const SeeAllCastRouteArgs({this.key, required this.cast});
+
+  final Key? key;
+
+  final List<CastModel> cast;
+
+  @override
+  String toString() {
+    return 'SeeAllCastRouteArgs{key: $key, cast: $cast}';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! SeeAllCastRouteArgs) return false;
+    return key == other.key && const ListEquality().equals(cast, other.cast);
+  }
+
+  @override
+  int get hashCode => key.hashCode ^ const ListEquality().hash(cast);
+}
+
+/// generated route for
 /// [SeeAllMoviesScreen]
 class SeeAllMoviesRoute extends PageRouteInfo<SeeAllMoviesRouteArgs> {
   SeeAllMoviesRoute({
