@@ -42,7 +42,6 @@ class TvSeasonsScreen extends StatelessWidget {
                     itemCount: state.tvDetailsModel.seasons.length,
                   ),
                 ),
-                const SizedBox(height: 20.0),
               ],
             );
           case RequestStatus.error:

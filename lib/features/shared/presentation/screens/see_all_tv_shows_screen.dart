@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:movie/core/widgets/custom_back_button.dart';
 import 'package:movie/core/widgets/custom_scaffold.dart';
 import 'package:movie/features/tv/data/tv_model.dart';
-import 'package:movie/features/tv/presentation/screens/widgets/tv_show/see_all_tv_shows_list_Item.dart';
+import 'package:movie/features/tv/presentation/screens/widgets/tv_show/see_all_tv_shows_list_item.dart';
 
 @RoutePage()
 class SeeAllTvShowsScreen extends StatelessWidget {

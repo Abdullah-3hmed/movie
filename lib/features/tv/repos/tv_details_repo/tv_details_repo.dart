@@ -17,4 +17,5 @@ abstract class TvDetailsRepo {
   Future<Either<Failure, List<TvModel>>> getTvSimilar({required int tvId});
 
   Future<Either<Failure, List<ReviewModel>>> getTvReviews({required int tvId});
+  Future<Either<Failure, String>> getTvTrailer({required int tvId});
 }

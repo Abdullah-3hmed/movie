@@ -46,6 +46,7 @@ class TvDetailsScreen extends StatelessWidget implements AutoRouteWrapper {
                         SliverToBoxAdapter(
                           child: TvDetailsPoster(
                             posterUrl: state.tvDetailsModel.posterPath,
+                            videoId: state.tvDetailsModel.id,
                           ),
                         ),
                         SliverPersistentHeader(

@@ -141,4 +141,42 @@ class TvDetailsRepoImpl implements TvDetailsRepo {
       return Left(ServerFailure(e.toString()));
     }
   }
+
+  @override
+  @override
+  Future<Either<Failure, String>> getTvTrailer({required int tvId}) async {
+    try {
+      final response = await dioHelper.get(
+        url: ApiConstants.tvVideosEndpoint(tvId),
+      );
+      if (response.statusCode == 200) {
+        final videos = response.data['results'] as List;
+        final trailer = videos.firstWhere(
+          (video) =>
+              video['site'] == 'YouTube' &&
+              video['type'] == 'Trailer' &&
+              video['official'] == true,
+          orElse: () => null,
+        );
+        final fallback = videos.firstWhere(
+          (video) => video['site'] == 'YouTube',
+          orElse: () => null,
+        );
+        final videoKey = trailer?['key'] ?? fallback?['key'];
+        if (videoKey != null) {
+          return Right(videoKey);
+        } else {
+          return const Left(ServerFailure('No YouTube trailer found.'));
+        }
+      } else {
+        throw ServerException(errorModel: ErrorModel.fromJson(response.data));
+      }
+    } on DioException catch (e) {
+      return Left(ServerFailure.fromDioError(e));
+    } on ServerException catch (e) {
+      return Left(ServerFailure(e.errorModel.statusMessages));
+    } catch (e) {
+      return Left(ServerFailure(e.toString()));
+    }
+  }
 }
