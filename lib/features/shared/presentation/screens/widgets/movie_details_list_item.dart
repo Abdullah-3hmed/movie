@@ -20,7 +20,12 @@ class MovieDetailsListItem extends StatelessWidget {
         borderRadius: const BorderRadius.all(Radius.circular(24.0)),
         child: InkWell(
           onTap: () {
-            context.pushRoute(MovieDetailsRoute(movieId: movieModel.id));
+            context.pushRoute(
+              MovieDetailsRoute(
+                movieId: movieModel.id,
+                key: ValueKey(movieModel.id),
+              ),
+            );
           },
           child: Stack(
             children: [

@@ -7,6 +7,7 @@ import 'package:movie/core/services/service_locator.dart';
 import 'package:movie/core/widgets/custom_scaffold.dart';
 import 'package:movie/core/widgets/no_internet_widget.dart';
 import 'package:movie/features/movies/cubit/movie_details/movie_details_cubit.dart';
+import 'package:movie/features/movies/cubit/movie_details/movie_details_cubit_manager.dart';
 import 'package:movie/features/movies/cubit/movie_details/movie_details_state.dart';
 import 'package:movie/features/movies/presentation/screens/widgets/movie_details/cast_section.dart';
 import 'package:movie/features/movies/presentation/screens/widgets/movie_details/movie_details_poster.dart';
@@ -26,10 +27,13 @@ class MovieDetailsScreen extends StatefulWidget implements AutoRouteWrapper {
   State<MovieDetailsScreen> createState() => _MovieDetailsScreenState();
 
   @override
-  Widget wrappedRoute(BuildContext context) => BlocProvider(
-    create: (context) => getIt<MovieDetailsCubit>(),
-    child: this,
-  );
+  Widget wrappedRoute(BuildContext context) {
+    final result = getIt<MovieDetailsCubitManager>().getOrCreate(movieId);
+    if (result.isNew) {
+      result.cubit.getAllMoviesDetails(movieId: movieId);
+    }
+    return BlocProvider.value(value: result.cubit, child: this);
+  }
 }
 
 class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
@@ -44,7 +48,6 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
     super.initState();
     scrollController = ScrollController();
     scrollController.addListener(_onScroll);
-    _getAllMovieDetails();
   }
 
   void _onScroll() {
@@ -109,8 +112,10 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
                   if (!state.isConnected) {
                     return NoInternetWidget(
                       errorMessage: state.movieDetailsErrorMessage,
-                      onPressed: () async {
-                        await _getAllMovieDetails();
+                      onPressed: () {
+                        getIt<MovieDetailsCubitManager>().getOrCreate(
+                          widget.movieId,
+                        );
                       },
                     );
                   } else {
@@ -123,12 +128,6 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
           );
         },
       ),
-    );
-  }
-
-  Future<void> _getAllMovieDetails() async {
-    await context.read<MovieDetailsCubit>().getAllMoviesDetails(
-      movieId: widget.movieId,
     );
   }
 }

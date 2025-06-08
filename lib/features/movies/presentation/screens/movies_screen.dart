@@ -16,11 +16,13 @@ import 'package:movie/features/shared/presentation/screens/widgets/custom_loadin
 @RoutePage()
 class MoviesScreen extends StatelessWidget implements AutoRouteWrapper {
   const MoviesScreen({super.key});
+
   @override
   Widget wrappedRoute(BuildContext context) => BlocProvider(
     create: (context) => getIt<MovieCubit>()..getAllHomeMovies(),
     child: this,
   );
+
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(

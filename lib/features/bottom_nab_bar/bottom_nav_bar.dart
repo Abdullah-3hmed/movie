@@ -2,10 +2,26 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:movie/config/router/app_router.dart';
 import 'package:movie/core/icons/solar_system_icons.dart';
+import 'package:movie/core/services/service_locator.dart';
+
+import '../movies/cubit/movie_details/movie_details_cubit_manager.dart';
 
 @RoutePage()
-class BottomNavBarScreen extends StatelessWidget {
+class BottomNavBarScreen extends StatefulWidget {
   const BottomNavBarScreen({super.key});
+
+  @override
+  State<BottomNavBarScreen> createState() => _BottomNavBarScreenState();
+}
+
+class _BottomNavBarScreenState extends State<BottomNavBarScreen>
+    with AutoRouteAwareStateMixin<BottomNavBarScreen> {
+  @override
+  void didPopNext() {
+    getIt<MovieDetailsCubitManager>().clearAll();
+    print('didPopNext');
+    super.didPopNext();
+  }
 
   @override
   Widget build(BuildContext context) {

@@ -8,6 +8,7 @@ import 'package:movie/features/auth/repo/auth_repo_impl.dart';
 import 'package:movie/features/movies/cubit/actor/actor_cubit.dart';
 import 'package:movie/features/movies/cubit/movie/movie_cubit.dart';
 import 'package:movie/features/movies/cubit/movie_details/movie_details_cubit.dart';
+import 'package:movie/features/movies/cubit/movie_details/movie_details_cubit_manager.dart';
 import 'package:movie/features/movies/repos/actor/actor_repo.dart';
 import 'package:movie/features/movies/repos/actor/actor_repo_impl.dart';
 import 'package:movie/features/movies/repos/movie/movie_repo.dart';
@@ -57,5 +58,9 @@ class ServiceLocator {
       () => TvRepoImpl(dioHelper: getIt<DioHelper>()),
     );
     getIt.registerFactory<TvCubit>(() => TvCubit(tvRepo: getIt<TvRepo>()));
+    getIt.registerLazySingleton<MovieDetailsCubitManager>(
+      () =>
+          MovieDetailsCubitManager(movieDetailsRepo: getIt<MovieDetailsRepo>()),
+    );
   }
 }

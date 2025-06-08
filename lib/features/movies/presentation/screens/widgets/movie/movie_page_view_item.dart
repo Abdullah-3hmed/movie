@@ -17,7 +17,12 @@ class MoviePageViewItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        context.pushRoute(MovieDetailsRoute(movieId: upComingMoviesModel.id));
+        context.pushRoute(
+          MovieDetailsRoute(
+            movieId: upComingMoviesModel.id,
+            key: ValueKey(upComingMoviesModel.id),
+          ),
+        );
       },
       child: Stack(
         children: [
