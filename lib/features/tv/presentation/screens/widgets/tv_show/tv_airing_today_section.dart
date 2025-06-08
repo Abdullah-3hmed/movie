@@ -15,26 +15,31 @@ class TvAiringTodaySection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const SizedBox(height: 15.0),
-        CustomSectionTitle(
-          title: AppStrings.airingToDay,
-          onPressed: () {
-            context.pushRoute(const TvDetailsRoute());
-          },
-        ),
-        const SizedBox(height: 15.0),
-        BlocBuilder<TvCubit, TvState>(
-          buildWhen:
-              (previous, current) =>
-                  previous.tvAiringTodayState != current.tvAiringTodayState,
-          builder: (context, state) {
-            switch (state.tvAiringTodayState) {
-              case RequestStatus.loading:
-                return const SizedBox.shrink();
-              case RequestStatus.success:
-                return SizedBox(
+    return BlocBuilder<TvCubit, TvState>(
+      buildWhen:
+          (previous, current) =>
+              previous.tvAiringTodayState != current.tvAiringTodayState,
+      builder: (context, state) {
+        switch (state.tvAiringTodayState) {
+          case RequestStatus.loading:
+            return const SizedBox.shrink();
+          case RequestStatus.success:
+            return Column(
+              children: [
+                const SizedBox(height: 15.0),
+                CustomSectionTitle(
+                  title: AppStrings.airingToDay,
+                  onPressed: () {
+                    context.pushRoute(
+                      SeeAllTvShowsRoute(
+                        title: AppStrings.airingToDay,
+                        tvShows: state.tvAiringTodayShows,
+                      ),
+                    );
+                  },
+                ),
+                const SizedBox(height: 15.0),
+                SizedBox(
                   height: 245.0,
                   child: ListView.separated(
                     scrollDirection: Axis.horizontal,
@@ -53,23 +58,23 @@ class TvAiringTodaySection extends StatelessWidget {
                         (context, index) => const SizedBox(width: 8.0),
                     itemCount: state.tvAiringTodayShows.length,
                   ),
-                );
-              case RequestStatus.error:
-                return SizedBox(
-                  height: 245.0,
-                  child: Center(
-                    child: Text(
-                      state.tvAiringTodayErrorMessage,
-                      style: Theme.of(context).textTheme.bodyMedium,
-                    ),
-                  ),
-                );
-              default:
-                return const SizedBox.shrink();
-            }
-          },
-        ),
-      ],
+                ),
+              ],
+            );
+          case RequestStatus.error:
+            return SizedBox(
+              height: 245.0,
+              child: Center(
+                child: Text(
+                  state.tvAiringTodayErrorMessage,
+                  style: Theme.of(context).textTheme.bodyMedium,
+                ),
+              ),
+            );
+          default:
+            return const SizedBox.shrink();
+        }
+      },
     );
   }
 }

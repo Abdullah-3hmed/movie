@@ -1,32 +1,11 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie/config/router/app_router.dart';
 import 'package:movie/core/icons/solar_system_icons.dart';
-import 'package:movie/core/services/service_locator.dart';
-import 'package:movie/features/movies/cubit/movie/movie_cubit.dart';
-import 'package:movie/features/tv/cubit/tv_cubit.dart';
 
 @RoutePage()
-class BottomNavBarScreen extends StatelessWidget implements AutoRouteWrapper {
+class BottomNavBarScreen extends StatelessWidget {
   const BottomNavBarScreen({super.key});
-
-  @override
-  Widget wrappedRoute(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(
-          create: (context) => getIt<MovieCubit>()..getAllHomeMovies(),
-          child: this,
-        ),
-        BlocProvider(
-          create: (context) => getIt<TvCubit>()..getAllTvShows(),
-          child: this,
-        ),
-      ],
-      child: this,
-    );
-  }
 
   @override
   Widget build(BuildContext context) {

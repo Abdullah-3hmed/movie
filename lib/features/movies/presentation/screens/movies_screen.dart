@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie/core/enums/request_status.dart';
+import 'package:movie/core/services/service_locator.dart';
 import 'package:movie/core/widgets/custom_scaffold.dart';
 import 'package:movie/core/widgets/no_internet_widget.dart';
 import 'package:movie/features/movies/cubit/movie/movie_cubit.dart';
@@ -13,9 +14,13 @@ import 'package:movie/features/movies/presentation/screens/widgets/movie/up_comi
 import 'package:movie/features/shared/presentation/screens/widgets/custom_loading.dart';
 
 @RoutePage()
-class MoviesScreen extends StatelessWidget {
+class MoviesScreen extends StatelessWidget implements AutoRouteWrapper {
   const MoviesScreen({super.key});
-
+  @override
+  Widget wrappedRoute(BuildContext context) => BlocProvider(
+    create: (context) => getIt<MovieCubit>()..getAllHomeMovies(),
+    child: this,
+  );
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(

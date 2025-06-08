@@ -86,7 +86,7 @@ class BottomNavBarRoute extends PageRouteInfo<void> {
   static PageInfo page = PageInfo(
     name,
     builder: (data) {
-      return WrappedRoute(child: const BottomNavBarScreen());
+      return const BottomNavBarScreen();
     },
   );
 }
@@ -167,7 +167,7 @@ class MoviesRoute extends PageRouteInfo<void> {
   static PageInfo page = PageInfo(
     name,
     builder: (data) {
-      return const MoviesScreen();
+      return WrappedRoute(child: const MoviesScreen());
     },
   );
 }
@@ -361,6 +361,67 @@ class SeeAllMoviesRouteArgs {
 }
 
 /// generated route for
+/// [SeeAllTvShowsScreen]
+class SeeAllTvShowsRoute extends PageRouteInfo<SeeAllTvShowsRouteArgs> {
+  SeeAllTvShowsRoute({
+    Key? key,
+    required String title,
+    required List<TvModel> tvShows,
+    List<PageRouteInfo>? children,
+  }) : super(
+         SeeAllTvShowsRoute.name,
+         args: SeeAllTvShowsRouteArgs(key: key, title: title, tvShows: tvShows),
+         initialChildren: children,
+       );
+
+  static const String name = 'SeeAllTvShowsRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<SeeAllTvShowsRouteArgs>();
+      return SeeAllTvShowsScreen(
+        key: args.key,
+        title: args.title,
+        tvShows: args.tvShows,
+      );
+    },
+  );
+}
+
+class SeeAllTvShowsRouteArgs {
+  const SeeAllTvShowsRouteArgs({
+    this.key,
+    required this.title,
+    required this.tvShows,
+  });
+
+  final Key? key;
+
+  final String title;
+
+  final List<TvModel> tvShows;
+
+  @override
+  String toString() {
+    return 'SeeAllTvShowsRouteArgs{key: $key, title: $title, tvShows: $tvShows}';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! SeeAllTvShowsRouteArgs) return false;
+    return key == other.key &&
+        title == other.title &&
+        const ListEquality().equals(tvShows, other.tvShows);
+  }
+
+  @override
+  int get hashCode =>
+      key.hashCode ^ title.hashCode ^ const ListEquality().hash(tvShows);
+}
+
+/// generated route for
 /// [SelectionScreen]
 class SelectionRoute extends PageRouteInfo<void> {
   const SelectionRoute({List<PageRouteInfo>? children})
@@ -498,7 +559,7 @@ class TvRoute extends PageRouteInfo<void> {
   static PageInfo page = PageInfo(
     name,
     builder: (data) {
-      return const TvScreen();
+      return WrappedRoute(child: const TvScreen());
     },
   );
 }

@@ -2,18 +2,18 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:movie/core/widgets/custom_back_button.dart';
 import 'package:movie/core/widgets/custom_scaffold.dart';
-import 'package:movie/features/movies/data/movies_model.dart';
-import 'package:movie/features/shared/presentation/screens/widgets/see_all_and_search_list_view_item.dart';
+import 'package:movie/features/tv/data/tv_model.dart';
+import 'package:movie/features/tv/presentation/screens/widgets/tv_show/see_all_tv_shows_list_Item.dart';
 
 @RoutePage()
-class SeeAllMoviesScreen extends StatelessWidget {
-  const SeeAllMoviesScreen({
+class SeeAllTvShowsScreen extends StatelessWidget {
+  const SeeAllTvShowsScreen({
     super.key,
     required this.title,
-    required this.movies,
+    required this.tvShows,
   });
   final String title;
-  final List<MoviesModel> movies;
+  final List<TvModel> tvShows;
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
@@ -35,12 +35,11 @@ class SeeAllMoviesScreen extends StatelessWidget {
                 child: ListView.separated(
                   physics: const BouncingScrollPhysics(),
                   itemBuilder:
-                      (context, index) => SeeAllAndSearchListViewItem(
-                        movieModel: movies[index],
-                      ),
+                      (context, index) =>
+                          SeeAllTvShowsListItem(tvModel: tvShows[index]),
                   separatorBuilder:
                       (context, index) => const SizedBox(height: 16.0),
-                  itemCount: movies.length,
+                  itemCount: tvShows.length,
                 ),
               ),
             ],

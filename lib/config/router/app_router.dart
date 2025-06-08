@@ -10,6 +10,7 @@ import 'package:movie/features/bottom_nab_bar/bottom_nav_bar.dart';
 import 'package:movie/features/movies/data/movies_model.dart';
 import 'package:movie/features/movies/presentation/screens/movie_details_screen.dart';
 import 'package:movie/features/movies/presentation/screens/movies_screen.dart';
+import 'package:movie/features/movies/presentation/screens/see_all_movies_screen.dart';
 import 'package:movie/features/profile/presentation/screens/profile_screen.dart';
 import 'package:movie/features/profile/presentation/screens/watch_list_screen.dart';
 import 'package:movie/features/search/presentation/screens/search_actors_screen.dart';
@@ -19,9 +20,10 @@ import 'package:movie/features/search/presentation/screens/search_tv_screen.dart
 import 'package:movie/features/shared/data/cast_model.dart';
 import 'package:movie/features/shared/presentation/screens/actor_details_screen.dart';
 import 'package:movie/features/shared/presentation/screens/see_all_cast_screen.dart';
-import 'package:movie/features/shared/presentation/screens/see_all_movies_screen.dart';
+import 'package:movie/features/shared/presentation/screens/see_all_tv_shows_screen.dart';
 import 'package:movie/features/shared/presentation/screens/trailer_screen.dart';
 import 'package:movie/features/splash/presentation/screens/splash_screen.dart';
+import 'package:movie/features/tv/data/tv_model.dart';
 import 'package:movie/features/tv/presentation/screens/tv_details_screen.dart';
 import 'package:movie/features/tv/presentation/screens/tv_overview_screen.dart';
 import 'package:movie/features/tv/presentation/screens/tv_screen.dart';
@@ -78,6 +80,7 @@ class AppRouter extends RootStackRouter {
     _buildCustomRoute(page: WatchListRoute.page),
     _buildCustomRoute(page: SeeAllCastRoute.page),
     _buildCustomRoute(page: TrailerRoute.page),
+    _buildCustomRoute(page: SeeAllTvShowsRoute.page),
   ];
 
   CustomRoute _buildCustomRoute({

@@ -7,24 +7,24 @@ import 'package:movie/core/network/api_constants.dart';
 import 'package:movie/core/util/assets_manager.dart';
 import 'package:movie/core/util/color_manager.dart';
 import 'package:movie/core/util/geners.dart';
-import 'package:movie/features/movies/data/movies_model.dart';
+import 'package:movie/features/tv/data/tv_model.dart';
 
-class SeeAllAndSearchListViewItem extends StatelessWidget {
-  const SeeAllAndSearchListViewItem({
+class SeeAllTvShowsListItem extends StatelessWidget {
+  const SeeAllTvShowsListItem({
     super.key,
     this.isWatchList = false,
-    required this.movieModel,
+    required this.tvModel,
   });
 
   final bool isWatchList;
-  final MoviesModel movieModel;
+  final TvModel tvModel;
 
   @override
   Widget build(BuildContext context) {
-    final genres = getGenreNames(movieModel.genreIds).join(', ');
+    final genres = getGenreNames(tvModel.genreIds).join(', ');
     return InkWell(
       onTap: () {
-        context.pushRoute(MovieDetailsRoute(movieId: movieModel.id));
+        context.pushRoute(MovieDetailsRoute(movieId: tvModel.id));
       },
       child: Transform(
         transform: Matrix4.skewX(-0.05),
@@ -50,9 +50,7 @@ class SeeAllAndSearchListViewItem extends StatelessWidget {
                     ClipRRect(
                       borderRadius: BorderRadius.circular(20.0),
                       child: CachedNetworkImage(
-                        imageUrl: ApiConstants.imageUrl(
-                          movieModel.backdropPath,
-                        ),
+                        imageUrl: ApiConstants.imageUrl(tvModel.backdropPath),
                         errorWidget:
                             (context, url, error) => Image.network(
                               AssetsManager.errorPoster,
@@ -68,9 +66,9 @@ class SeeAllAndSearchListViewItem extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          movieModel.title.length > 12
-                              ? '${movieModel.title.substring(0, 12)}...'
-                              : movieModel.title,
+                          tvModel.name.length > 12
+                              ? '${tvModel.name.substring(0, 12)}...'
+                              : tvModel.name,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           style: Theme.of(context).textTheme.bodyLarge!
@@ -94,12 +92,12 @@ class SeeAllAndSearchListViewItem extends StatelessWidget {
                               color: ColorsManager.ratingIconColor,
                             ),
                             Text(
-                              "  ${movieModel.voteAverage}",
+                              "  ${tvModel.voteAverage}",
                               style: Theme.of(context).textTheme.bodySmall,
                             ),
                             const SizedBox(width: 22.0),
                             Text(
-                              "From ${movieModel.voteCount} users",
+                              "From ${tvModel.voteCount} users",
                               style: Theme.of(context).textTheme.bodySmall,
                             ),
                           ],

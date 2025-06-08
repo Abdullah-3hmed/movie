@@ -1,5 +1,7 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movie/config/router/app_router.dart';
 import 'package:movie/core/enums/request_status.dart';
 import 'package:movie/core/util/app_constants.dart';
 import 'package:movie/core/util/app_strings.dart';
@@ -13,21 +15,31 @@ class PoplarTvShowSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const SizedBox(height: 15.0),
-        CustomSectionTitle(title: AppStrings.popularShows, onPressed: () {}),
-        const SizedBox(height: 15.0),
-        BlocBuilder<TvCubit, TvState>(
-          buildWhen:
-              (previous, current) =>
-                  previous.tvPopularState != current.tvPopularState,
-          builder: (context, state) {
-            switch (state.tvPopularState) {
-              case RequestStatus.loading:
-                return const SizedBox.shrink();
-              case RequestStatus.success:
-                return SizedBox(
+    return BlocBuilder<TvCubit, TvState>(
+      buildWhen:
+          (previous, current) =>
+              previous.tvPopularState != current.tvPopularState,
+      builder: (context, state) {
+        switch (state.tvPopularState) {
+          case RequestStatus.loading:
+            return const SizedBox.shrink();
+          case RequestStatus.success:
+            return Column(
+              children: [
+                const SizedBox(height: 15.0),
+                CustomSectionTitle(
+                  title: AppStrings.popularShows,
+                  onPressed: () {
+                    context.pushRoute(
+                      SeeAllTvShowsRoute(
+                        title: AppStrings.popularShows,
+                        tvShows: state.tvPopularShows,
+                      ),
+                    );
+                  },
+                ),
+                const SizedBox(height: 15.0),
+                SizedBox(
                   height: 245.0,
                   child: ListView.separated(
                     scrollDirection: Axis.horizontal,
@@ -47,18 +59,18 @@ class PoplarTvShowSection extends StatelessWidget {
                         (context, index) => const SizedBox(width: 8.0),
                     itemCount: state.tvPopularShows.length,
                   ),
-                );
-              case RequestStatus.error:
-                return SizedBox(
-                  height: 245.0,
-                  child: Center(child: Text(state.tvPopularErrorMessage)),
-                );
-              default:
-                return const SizedBox.shrink();
-            }
-          },
-        ),
-      ],
+                ),
+              ],
+            );
+          case RequestStatus.error:
+            return SizedBox(
+              height: 245.0,
+              child: Center(child: Text(state.tvPopularErrorMessage)),
+            );
+          default:
+            return const SizedBox.shrink();
+        }
+      },
     );
   }
 }
