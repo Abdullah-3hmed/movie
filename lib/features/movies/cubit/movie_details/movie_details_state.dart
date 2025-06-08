@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:movie/core/enums/request_status.dart';
-import 'package:movie/features/movies/data/movie/movies_model.dart';
-import 'package:movie/features/movies/data/movie_details/movie_details_model.dart';
+import 'package:movie/features/movies/data/movie_details_model.dart';
+import 'package:movie/features/movies/data/movies_model.dart';
 import 'package:movie/features/shared/data/cast_model.dart';
 import 'package:movie/features/shared/data/review_model.dart';
 

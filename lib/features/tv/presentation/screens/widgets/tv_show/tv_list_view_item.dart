@@ -1,11 +1,14 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:movie/core/icons/solar_system_icons.dart';
 import 'package:movie/core/util/color_manager.dart';
+import 'package:movie/core/util/geners.dart';
+import 'package:movie/core/widgets/custom_cached_network_image.dart';
+import 'package:movie/features/tv/data/tv_model.dart';
 
 class TvListViewItem extends StatelessWidget {
-  const TvListViewItem({super.key});
+  const TvListViewItem({super.key, required this.tvModel});
+
+  final TvModel tvModel;
 
   @override
   Widget build(BuildContext context) {
@@ -15,12 +18,10 @@ class TvListViewItem extends StatelessWidget {
         borderRadius: BorderRadius.circular(20.0),
         child: Stack(
           children: [
-            CachedNetworkImage(
-              imageUrl:
-                  "https://i.pinimg.com/736x/bd/8c/99/bd8c998d2e1a2766775fb97151a3c9fd.jpg",
+            CustomCachedNetworkImage(
               height: 245.0,
               width: 180.0,
-              fit: BoxFit.cover,
+              imageUrl: tvModel.backdropPath,
             ),
             PositionedDirectional(
               bottom: 10.0,
@@ -29,11 +30,17 @@ class TvListViewItem extends StatelessWidget {
               child: Column(
                 children: [
                   Text(
-                    "Doctor Strange",
+                    tvModel.name.length > 20
+                        ? "${tvModel.name.substring(0, 20)}..."
+                        : tvModel.name,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                     style: Theme.of(context).textTheme.bodyLarge,
                   ),
                   Text(
-                    "2023 Action, Adventure",
+                    getGenreNames(tvModel.genreIds).join(', '),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                     style: Theme.of(
                       context,
                     ).textTheme.bodySmall!.copyWith(fontSize: 8.0),
@@ -42,20 +49,24 @@ class TvListViewItem extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        "TMDB 8.5 ",
+                        "TMDB ${tvModel.voteAverage} ",
                         style: Theme.of(context).textTheme.bodySmall,
                       ),
                       RatingBar.builder(
-                        itemBuilder:
-                            (context, index) => const Icon(
-                              SolarSystemIcons.star,
-                              color: ColorsManager.ratingIconColor,
-                            ),
-                        initialRating: 5,
+                        initialRating: tvModel.voteAverage,
                         minRating: 1,
                         allowHalfRating: true,
-                        itemSize: 8.0,
-                        onRatingUpdate: (_) {},
+                        itemSize: 12.0,
+                        itemCount: tvModel.voteAverage.toInt(),
+                        itemPadding: const EdgeInsets.symmetric(
+                          horizontal: 1.0,
+                        ),
+                        itemBuilder:
+                            (context, _) => const Icon(
+                              Icons.star,
+                              color: ColorsManager.ratingIconColor,
+                            ),
+                        onRatingUpdate: (rating) {},
                       ),
                     ],
                   ),

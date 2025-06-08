@@ -2,7 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:movie/core/widgets/custom_back_button.dart';
 import 'package:movie/core/widgets/custom_scaffold.dart';
-import 'package:movie/features/movies/data/movie/movies_model.dart';
+import 'package:movie/features/movies/data/movies_model.dart';
 import 'package:movie/features/shared/presentation/screens/widgets/see_all_and_search_list_view_item.dart';
 
 @RoutePage()

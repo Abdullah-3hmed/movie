@@ -38,16 +38,12 @@ class MoviesScreen extends StatelessWidget {
                 ],
               );
             case RequestStatus.error:
-              if (!state.isConnected) {
-                return NoInternetWidget(
-                  errorMessage: state.allMoviesErrorMessage,
-                  onPressed:
-                      () async =>
-                          await context.read<MovieCubit>().getAllHomeMovies(),
-                );
-              } else {
-                return Center(child: Text(state.allMoviesErrorMessage));
-              }
+              return NoInternetWidget(
+                errorMessage: state.allMoviesErrorMessage,
+                onPressed:
+                    () async =>
+                        await context.read<MovieCubit>().getAllHomeMovies(),
+              );
             default:
               return const SizedBox.shrink();
           }

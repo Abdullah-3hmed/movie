@@ -5,27 +5,27 @@ import 'package:movie/core/error/failures.dart';
 import 'package:movie/core/error/server_exception.dart';
 import 'package:movie/core/network/api_constants.dart';
 import 'package:movie/core/network/dio_helper.dart';
-import 'package:movie/features/movies/data/movies_model.dart';
-import 'package:movie/features/movies/data/up_coming_movies_model.dart';
-import 'package:movie/features/movies/repos/movie/movie_repo.dart';
+import 'package:movie/features/tv/data/on_the_air_tv_model.dart';
+import 'package:movie/features/tv/data/tv_model.dart';
+import 'package:movie/features/tv/repos/tv_repo.dart';
 
-class MovieRepoImpl implements MovieRepo {
-  MovieRepoImpl({required this.dioHelper});
+class TvRepoImpl implements TvRepo {
+  TvRepoImpl({required this.dioHelper});
 
   final DioHelper dioHelper;
 
   @override
-  Future<Either<Failure, List<UpComingMoviesModel>>> getUpComingMovies() async {
+  Future<Either<Failure, List<OnTheAirTvModel>>> getOnTheAirShows() async {
     try {
       final response = await dioHelper.get(
-        url: ApiConstants.upComingMoviesEndpoint,
+        url: ApiConstants.tvOnTheAirEndpoint,
       );
       if (response.statusCode == 200) {
-        return Right(
-          response.data['results']
-              .map<UpComingMoviesModel>((e) => UpComingMoviesModel.fromJson(e))
-              .toList(),
-        );
+        final movies =
+            (response.data['results'] as List)
+                .map((e) => OnTheAirTvModel.fromJson(e))
+                .toList();
+        return Right(movies);
       } else {
         throw ServerException(errorModel: ErrorModel.fromJson(response.data));
       }
@@ -39,17 +39,17 @@ class MovieRepoImpl implements MovieRepo {
   }
 
   @override
-  Future<Either<Failure, List<MoviesModel>>> getNowPlayingMovies() async {
+  Future<Either<Failure, List<TvModel>>> getAiringTodayShows() async {
     try {
       final response = await dioHelper.get(
-        url: ApiConstants.nowPlayingMoviesEndpoint,
+        url: ApiConstants.tvAiringTodayEndpoint,
       );
       if (response.statusCode == 200) {
-        return Right(
-          response.data['results']
-              .map<MoviesModel>((e) => MoviesModel.fromJson(e))
-              .toList(),
-        );
+        final movies =
+            (response.data['results'] as List)
+                .map((e) => TvModel.fromJson(e))
+                .toList();
+        return Right(movies);
       } else {
         throw ServerException(errorModel: ErrorModel.fromJson(response.data));
       }
@@ -63,17 +63,15 @@ class MovieRepoImpl implements MovieRepo {
   }
 
   @override
-  Future<Either<Failure, List<MoviesModel>>> getTopRatedMovies() async {
+  Future<Either<Failure, List<TvModel>>> getPopularTvShows() async {
     try {
-      final response = await dioHelper.get(
-        url: ApiConstants.topRatedMoviesEndpoint,
-      );
+      final response = await dioHelper.get(url: ApiConstants.tvPopularEndpoint);
       if (response.statusCode == 200) {
-        return Right(
-          response.data['results']
-              .map<MoviesModel>((e) => MoviesModel.fromJson(e))
-              .toList(),
-        );
+        final movies =
+            (response.data['results'] as List)
+                .map((e) => TvModel.fromJson(e))
+                .toList();
+        return Right(movies);
       } else {
         throw ServerException(errorModel: ErrorModel.fromJson(response.data));
       }
@@ -87,17 +85,17 @@ class MovieRepoImpl implements MovieRepo {
   }
 
   @override
-  Future<Either<Failure, List<MoviesModel>>> getPopularMovies() async {
+  Future<Either<Failure, List<TvModel>>> getTopRatedTvShows() async {
     try {
       final response = await dioHelper.get(
-        url: ApiConstants.popularMoviesEndpoint,
+        url: ApiConstants.tvTopRatedEndpoint,
       );
       if (response.statusCode == 200) {
-        return Right(
-          response.data['results']
-              .map<MoviesModel>((e) => MoviesModel.fromJson(e))
-              .toList(),
-        );
+        final movies =
+            (response.data['results'] as List)
+                .map((e) => TvModel.fromJson(e))
+                .toList();
+        return Right(movies);
       } else {
         throw ServerException(errorModel: ErrorModel.fromJson(response.data));
       }

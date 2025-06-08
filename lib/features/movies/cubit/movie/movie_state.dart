@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:movie/core/enums/request_status.dart';
-import 'package:movie/features/movies/data/movie/movies_model.dart';
-import 'package:movie/features/movies/data/movie/up_coming_movies_model.dart';
+import 'package:movie/features/movies/data/movies_model.dart';
+import 'package:movie/features/movies/data/up_coming_movies_model.dart';
 
 class MovieState extends Equatable {
   final RequestStatus nowPlayingMoviesState;

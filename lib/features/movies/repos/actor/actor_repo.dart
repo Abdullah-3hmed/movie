@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:movie/core/error/failures.dart';
-import 'package:movie/features/movies/data/movie/movies_model.dart';
+import 'package:movie/features/movies/data/movies_model.dart';
 import 'package:movie/features/shared/data/actor_model.dart';
 
 abstract class ActorRepo {

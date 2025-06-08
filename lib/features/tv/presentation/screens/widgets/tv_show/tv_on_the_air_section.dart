@@ -1,20 +1,22 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:movie/core/icons/solar_system_icons.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movie/core/enums/request_status.dart';
 import 'package:movie/core/util/color_manager.dart';
+import 'package:movie/features/tv/cubit/tv_cubit.dart';
+import 'package:movie/features/tv/cubit/tv_state.dart';
+import 'package:movie/features/tv/presentation/screens/widgets/tv_show/tv_page_view_item.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-class TvAiringOnTheAirSection extends StatefulWidget {
-  const TvAiringOnTheAirSection({super.key});
+class TvOnTheAirSection extends StatefulWidget {
+  const TvOnTheAirSection({super.key});
 
   @override
-  State<TvAiringOnTheAirSection> createState() =>
-      _TvAiringOnTheAirSectionState();
+  State<TvOnTheAirSection> createState() => _TvOnTheAirSectionState();
 }
 
-class _TvAiringOnTheAirSectionState extends State<TvAiringOnTheAirSection> {
+class _TvOnTheAirSectionState extends State<TvOnTheAirSection> {
   late final PageController _pageController;
+
   @override
   void initState() {
     _pageController = PageController();
@@ -23,75 +25,56 @@ class _TvAiringOnTheAirSectionState extends State<TvAiringOnTheAirSection> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        SizedBox(
-          height: 385.0,
-          child: PageView.builder(
-            controller: _pageController,
-            itemCount: 5,
-            itemBuilder: (BuildContext context, int index) {
-              return Stack(
-                children: [
-                  CachedNetworkImage(
-                    imageUrl:
-                        "https://i.pinimg.com/736x/bd/8c/99/bd8c998d2e1a2766775fb97151a3c9fd.jpg",
-                    width: double.infinity,
-                    height: 385,
-                    fit: BoxFit.cover,
+    return BlocBuilder<TvCubit, TvState>(
+      buildWhen:
+          (previous, current) =>
+              previous.tvOnTheAirState != current.tvOnTheAirState,
+      builder: (context, state) {
+        switch (state.tvOnTheAirState) {
+          case RequestStatus.loading:
+            return const SizedBox.shrink();
+          case RequestStatus.success:
+            return Column(
+              children: [
+                SizedBox(
+                  height: 385.0,
+                  child: PageView.builder(
+                    controller: _pageController,
+                    itemCount: 7,
+                    itemBuilder:
+                        (BuildContext context, int index) => TvPageViewItem(
+                          tvModel: state.tvOnTheAirShows[index],
+                        ),
                   ),
-                  PositionedDirectional(
-                    start: 20.0,
-                    bottom: 16.0,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Penny Dreadful",
-                          style: Theme.of(
-                            context,
-                          ).textTheme.titleLarge!.copyWith(fontSize: 18.0),
-                        ),
-                        const SizedBox(height: 5.0),
-                        RatingBar.builder(
-                          itemBuilder:
-                              (context, index) => const Icon(
-                                SolarSystemIcons.star,
-                                color: ColorsManager.ratingIconColor,
-                              ),
-                          initialRating: 5,
-                          minRating: 1,
-                          allowHalfRating: true,
-                          itemCount: 10,
-                          itemSize: 12.0,
-                          onRatingUpdate: (_) {},
-                        ),
-                        const SizedBox(height: 5.0),
-                        Text(
-                          "From 3 users",
-                          style: Theme.of(context).textTheme.bodyMedium,
-                        ),
-                      ],
-                    ),
+                ),
+                const SizedBox(height: 12.0),
+                SmoothPageIndicator(
+                  controller: _pageController,
+                  count: 7,
+                  effect: const ExpandingDotsEffect(
+                    activeDotColor: ColorsManager.primaryColor,
+                    dotColor: Colors.white,
+                    dotHeight: 10.0,
+                    dotWidth: 10.0,
+                    spacing: 5.0,
                   ),
-                ],
-              );
-            },
-          ),
-        ),
-        const SizedBox(height: 12.0),
-        SmoothPageIndicator(
-          controller: _pageController,
-          count: 5,
-          effect: const ExpandingDotsEffect(
-            activeDotColor: ColorsManager.primaryColor,
-            dotColor: Colors.white,
-            dotHeight: 10.0,
-            dotWidth: 10.0,
-            spacing: 5.0,
-          ),
-        ),
-      ],
+                ),
+              ],
+            );
+          case RequestStatus.error:
+            return SizedBox(
+              height: 385.0,
+              child: Center(
+                child: Text(
+                  state.tvOnTheAirErrorMessage,
+                  style: Theme.of(context).textTheme.bodyMedium,
+                ),
+              ),
+            );
+          default:
+            return const SizedBox.shrink();
+        }
+      },
     );
   }
 }

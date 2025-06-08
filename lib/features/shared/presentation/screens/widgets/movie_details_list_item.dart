@@ -5,7 +5,7 @@ import 'package:movie/config/router/app_router.dart';
 import 'package:movie/core/network/api_constants.dart';
 import 'package:movie/core/util/assets_manager.dart';
 import 'package:movie/core/util/color_manager.dart';
-import 'package:movie/features/movies/data/movie/movies_model.dart';
+import 'package:movie/features/movies/data/movies_model.dart';
 
 class MovieDetailsListItem extends StatelessWidget {
   const MovieDetailsListItem({super.key, required this.movieModel});
