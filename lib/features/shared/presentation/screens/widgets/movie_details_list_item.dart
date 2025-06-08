@@ -9,7 +9,9 @@ import 'package:movie/features/movies/data/movie/movies_model.dart';
 
 class MovieDetailsListItem extends StatelessWidget {
   const MovieDetailsListItem({super.key, required this.movieModel});
+
   final MoviesModel movieModel;
+
   @override
   Widget build(BuildContext context) {
     return Transform(
@@ -23,7 +25,10 @@ class MovieDetailsListItem extends StatelessWidget {
           child: Stack(
             children: [
               CachedNetworkImage(
-                imageUrl: ApiConstants.imageUrl(movieModel.backdropPath),
+                imageUrl:
+                    movieModel.backdropPath.isNotEmpty
+                        ? ApiConstants.imageUrl(movieModel.backdropPath)
+                        : AssetsManager.errorPoster,
                 errorWidget:
                     (context, url, error) => Image.network(
                       AssetsManager.errorPoster,

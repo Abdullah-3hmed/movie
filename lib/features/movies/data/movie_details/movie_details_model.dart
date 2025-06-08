@@ -28,15 +28,15 @@ class MovieDetailsModel extends Equatable {
   factory MovieDetailsModel.fromJson(Map<String, dynamic> json) =>
       MovieDetailsModel(
         id: json['id'],
-        title: json['original_title'],
-        posterPath: json['poster_path'],
-        voteAverage: json['vote_average'].toDouble(),
-        voteCount: json['vote_count'],
-        overview: json['overview'],
-        geners: List<String>.from(json['genres'].map((e) => e['name'])),
-        country: json['origin_country'][0],
-        length: json['runtime'],
-        year: int.parse(json['release_date'].split('-')[0]),
+        title: json['original_title'] ?? '',
+        posterPath: json['poster_path'] ?? '',
+        voteAverage: json['vote_average'].toDouble() ?? 0.0,
+        voteCount: json['vote_count'] ?? 0,
+        overview: json['overview'] ?? "",
+        geners: List<String>.from(json['genres']?.map((e) => e['name'])),
+        country: json['origin_country'][0] ?? "",
+        length: json['runtime'] ?? 0,
+        year: int.parse(json['release_date']?.split('-')[0]),
       );
   static const empty = MovieDetailsModel(
     id: 0,

@@ -8,7 +8,9 @@ import 'package:movie/features/shared/data/cast_model.dart';
 
 class CastListViewItem extends StatelessWidget {
   const CastListViewItem({super.key, required this.castModel});
+
   final CastModel castModel;
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -22,7 +24,10 @@ class CastListViewItem extends StatelessWidget {
           child: Stack(
             children: [
               CachedNetworkImage(
-                imageUrl: ApiConstants.imageUrl(castModel.image),
+                imageUrl:
+                    castModel.image.isNotEmpty
+                        ? ApiConstants.imageUrl(castModel.image)
+                        : AssetsManager.errorPoster,
                 errorWidget:
                     (context, url, error) => Image.network(
                       AssetsManager.errorPoster,

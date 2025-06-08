@@ -43,9 +43,12 @@ class MovieDetailsPoster extends StatelessWidget {
                       child: ClipPath(
                         clipper: MovieDetailsClipper(),
                         child: CachedNetworkImage(
-                          imageUrl: ApiConstants.imageUrl(
-                            state.movieDetails.posterPath,
-                          ),
+                          imageUrl:
+                              state.movieDetails.posterPath.isNotEmpty
+                                  ? ApiConstants.imageUrl(
+                                    state.movieDetails.posterPath,
+                                  )
+                                  : AssetsManager.errorPoster,
                           errorWidget:
                               (context, url, error) => Image.network(
                                 AssetsManager.errorPoster,
@@ -60,34 +63,40 @@ class MovieDetailsPoster extends StatelessWidget {
                       start: 16.0,
                       child: CustomBackButton(),
                     ),
-                    BlocListener<MovieDetailsCubit, MovieDetailsState>(
-                      listenWhen:
-                          (previous, current) =>
-                              previous.trailerState != current.trailerState,
-                      listener: (context, state) {
-                        if (state.trailerState == RequestStatus.error) {
-                          showToast(
-                            message: state.trailerErrorMessage,
-                            state: ToastStates.error,
-                          );
-                        }
-                      },
-                      child: PositionedDirectional(
-                        start: 0.0,
-                        end: 0.0,
-                        bottom: -25.0,
-                        child: InkWell(
+                    PositionedDirectional(
+                      start: 0.0,
+                      end: 0.0,
+                      bottom: -25.0,
+                      child: BlocListener<MovieDetailsCubit, MovieDetailsState>(
+                        listenWhen:
+                            (previous, current) =>
+                                previous.trailerState != current.trailerState,
+                        listener: (context, state) {
+                          if (state.trailerState == RequestStatus.error) {
+                            showToast(
+                              message: state.trailerErrorMessage,
+                              state: ToastStates.error,
+                            );
+                          }
+                        },
+                        child: GestureDetector(
                           onTap: () async {
                             String videoId = await context
                                 .read<MovieDetailsCubit>()
                                 .getMovieTrailer(
                                   movieId: state.movieDetails.id,
                                 );
-                            if (videoId.isNotEmpty) {
+                            if (videoId.isNotEmpty && context.mounted) {
                               context.pushRoute(TrailerRoute(videoId: videoId));
                             }
                           },
-                          child: SvgPicture.asset(AssetsManager.neonPlayButton),
+                          child: SizedBox(
+                            height: 60.0,
+                            width: 60.0,
+                            child: SvgPicture.asset(
+                              AssetsManager.neonPlayButton,
+                            ),
+                          ),
                         ),
                       ),
                     ),

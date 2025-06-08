@@ -1,5 +1,7 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movie/config/router/app_router.dart';
 import 'package:movie/core/enums/request_status.dart';
 import 'package:movie/core/util/app_constants.dart';
 import 'package:movie/core/util/app_strings.dart';
@@ -7,6 +9,7 @@ import 'package:movie/core/widgets/custom_divider.dart';
 import 'package:movie/core/widgets/custom_section_title.dart';
 import 'package:movie/features/movies/cubit/actor/actor_cubit.dart';
 import 'package:movie/features/movies/cubit/actor/actor_state.dart';
+import 'package:movie/features/movies/data/movie/movies_model.dart';
 import 'package:movie/features/shared/presentation/screens/widgets/movie_details_list_item.dart';
 
 class TvShowSection extends StatelessWidget {
@@ -17,7 +20,16 @@ class TvShowSection extends StatelessWidget {
     return Column(
       children: [
         const CustomDivider(),
-        CustomSectionTitle(title: AppStrings.tvShows, onPressed: () {}),
+        CustomSectionTitle(
+          title: AppStrings.tvShows,
+          onPressed: () {
+            final List<MoviesModel> movies =
+                context.read<ActorCubit>().state.actorMovies;
+            context.pushRoute(
+              SeeAllMoviesRoute(title: AppStrings.tvShows, movies: movies),
+            );
+          },
+        ),
         BlocBuilder<ActorCubit, ActorState>(
           builder: (context, state) {
             switch (state.actorMoviesState) {
