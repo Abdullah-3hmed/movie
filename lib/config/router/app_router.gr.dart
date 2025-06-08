@@ -518,18 +518,46 @@ class TrailerRouteArgs {
 
 /// generated route for
 /// [TvDetailsScreen]
-class TvDetailsRoute extends PageRouteInfo<void> {
-  const TvDetailsRoute({List<PageRouteInfo>? children})
-    : super(TvDetailsRoute.name, initialChildren: children);
+class TvDetailsRoute extends PageRouteInfo<TvDetailsRouteArgs> {
+  TvDetailsRoute({Key? key, required int tvId, List<PageRouteInfo>? children})
+    : super(
+        TvDetailsRoute.name,
+        args: TvDetailsRouteArgs(key: key, tvId: tvId),
+        initialChildren: children,
+      );
 
   static const String name = 'TvDetailsRoute';
 
   static PageInfo page = PageInfo(
     name,
     builder: (data) {
-      return const TvDetailsScreen();
+      final args = data.argsAs<TvDetailsRouteArgs>();
+      return TvDetailsScreen(key: args.key, tvId: args.tvId);
     },
   );
+}
+
+class TvDetailsRouteArgs {
+  const TvDetailsRouteArgs({this.key, required this.tvId});
+
+  final Key? key;
+
+  final int tvId;
+
+  @override
+  String toString() {
+    return 'TvDetailsRouteArgs{key: $key, tvId: $tvId}';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! TvDetailsRouteArgs) return false;
+    return key == other.key && tvId == other.tvId;
+  }
+
+  @override
+  int get hashCode => key.hashCode ^ tvId.hashCode;
 }
 
 /// generated route for

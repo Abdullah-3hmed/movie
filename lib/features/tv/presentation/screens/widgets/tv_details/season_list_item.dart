@@ -1,10 +1,12 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:movie/core/util/app_strings.dart';
 import 'package:movie/core/util/color_manager.dart';
+import 'package:movie/core/widgets/custom_cached_network_image.dart';
+import 'package:movie/features/tv/data/season_model.dart';
 
 class SeasonListItem extends StatelessWidget {
-  const SeasonListItem({super.key});
-
+  const SeasonListItem({super.key, required this.seasonModel});
+  final SeasonModel seasonModel;
   @override
   Widget build(BuildContext context) {
     return Transform(
@@ -21,12 +23,10 @@ class SeasonListItem extends StatelessWidget {
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(20.0),
-              child: CachedNetworkImage(
-                imageUrl:
-                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQr8FcgAq31cIByH4nveSOqH7a0soJ7fLq1Q&s",
+              child: CustomCachedNetworkImage(
                 width: 120.0,
                 height: 144.0,
-                fit: BoxFit.cover,
+                imageUrl: seasonModel.posterPath,
               ),
             ),
             const Spacer(),
@@ -35,9 +35,12 @@ class SeasonListItem extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               spacing: 5.0,
               children: [
-                Text("Season 1", style: Theme.of(context).textTheme.bodyLarge),
                 Text(
-                  "release at : 2015-09-08",
+                  seasonModel.name,
+                  style: Theme.of(context).textTheme.bodyLarge,
+                ),
+                Text(
+                  "${AppStrings.releaseDate} ${seasonModel.releaseDate}",
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
                 Row(
@@ -47,7 +50,10 @@ class SeasonListItem extends StatelessWidget {
                       color: ColorsManager.ratingIconColor,
                       size: 15.0,
                     ),
-                    Text(" 7.6", style: Theme.of(context).textTheme.bodyMedium),
+                    Text(
+                      "${seasonModel.voteAverage}",
+                      style: Theme.of(context).textTheme.bodyMedium,
+                    ),
                   ],
                 ),
               ],

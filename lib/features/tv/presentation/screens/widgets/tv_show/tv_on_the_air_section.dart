@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie/core/enums/request_status.dart';
 import 'package:movie/core/util/color_manager.dart';
-import 'package:movie/features/tv/cubit/tv_cubit.dart';
-import 'package:movie/features/tv/cubit/tv_state.dart';
+import 'package:movie/features/tv/cubit/tv_cubit/tv_cubit.dart';
+import 'package:movie/features/tv/cubit/tv_cubit/tv_state.dart';
 import 'package:movie/features/tv/presentation/screens/widgets/tv_show/tv_page_view_item.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 

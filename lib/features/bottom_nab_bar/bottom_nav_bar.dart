@@ -19,7 +19,6 @@ class _BottomNavBarScreenState extends State<BottomNavBarScreen>
   @override
   void didPopNext() {
     getIt<MovieDetailsCubitManager>().clearAll();
-    print('didPopNext');
     super.didPopNext();
   }
 

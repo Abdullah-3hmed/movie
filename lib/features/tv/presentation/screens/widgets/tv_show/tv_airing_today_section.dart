@@ -6,8 +6,8 @@ import 'package:movie/core/enums/request_status.dart';
 import 'package:movie/core/util/app_constants.dart';
 import 'package:movie/core/util/app_strings.dart';
 import 'package:movie/core/widgets/custom_section_title.dart';
-import 'package:movie/features/tv/cubit/tv_cubit.dart';
-import 'package:movie/features/tv/cubit/tv_state.dart';
+import 'package:movie/features/tv/cubit/tv_cubit/tv_cubit.dart';
+import 'package:movie/features/tv/cubit/tv_cubit/tv_state.dart';
 import 'package:movie/features/tv/presentation/screens/widgets/tv_show/tv_list_view_item.dart';
 
 class TvAiringTodaySection extends StatelessWidget {

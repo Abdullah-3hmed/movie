@@ -109,18 +109,15 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
                     ],
                   );
                 case RequestStatus.error:
-                  if (!state.isConnected) {
-                    return NoInternetWidget(
-                      errorMessage: state.movieDetailsErrorMessage,
-                      onPressed: () {
-                        getIt<MovieDetailsCubitManager>().getOrCreate(
-                          widget.movieId,
-                        );
-                      },
-                    );
-                  } else {
-                    return Center(child: Text(state.movieDetailsErrorMessage));
-                  }
+                  return NoInternetWidget(
+                    errorMessage: state.movieDetailsErrorMessage,
+                    onPressed: () {
+                      getIt<MovieDetailsCubitManager>().getOrCreate(
+                        widget.movieId,
+                      );
+                    },
+                  );
+
                 default:
                   return const SizedBox.shrink();
               }

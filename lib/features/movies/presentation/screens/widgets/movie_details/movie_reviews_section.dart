@@ -6,7 +6,7 @@ import 'package:movie/core/widgets/custom_divider.dart';
 import 'package:movie/core/widgets/custom_section_title.dart';
 import 'package:movie/features/movies/cubit/movie_details/movie_details_cubit.dart';
 import 'package:movie/features/movies/cubit/movie_details/movie_details_state.dart';
-import 'package:movie/features/shared/presentation/screens/widgets/movie_review_item.dart';
+import 'package:movie/features/shared/presentation/screens/widgets/review_list_view_item.dart';
 
 class MovieReviewsSection extends StatelessWidget {
   const MovieReviewsSection({super.key});
@@ -42,7 +42,9 @@ class MovieReviewsSection extends StatelessWidget {
                     itemBuilder:
                         (context, index) => SizedBox(
                           height: 200.0,
-                          child: MovieReviewItem(review: state.reviews[index]),
+                          child: ReviewListViewItem(
+                            review: state.reviews[index],
+                          ),
                         ),
                     separatorBuilder:
                         (context, index) => const SizedBox(width: 10.0),

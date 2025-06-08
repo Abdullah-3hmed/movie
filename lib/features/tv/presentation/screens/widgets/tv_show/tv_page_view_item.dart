@@ -16,7 +16,7 @@ class TvPageViewItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        context.pushRoute(const TvDetailsRoute());
+        context.pushRoute(TvDetailsRoute(tvId: tvModel.id));
       },
       child: Stack(
         children: [

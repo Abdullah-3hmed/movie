@@ -7,7 +7,7 @@ import 'package:movie/core/network/api_constants.dart';
 import 'package:movie/core/network/dio_helper.dart';
 import 'package:movie/features/tv/data/on_the_air_tv_model.dart';
 import 'package:movie/features/tv/data/tv_model.dart';
-import 'package:movie/features/tv/repos/tv_repo.dart';
+import 'package:movie/features/tv/repos/tv_repo/tv_repo.dart';
 
 class TvRepoImpl implements TvRepo {
   TvRepoImpl({required this.dioHelper});

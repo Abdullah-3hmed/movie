@@ -1,13 +1,13 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:movie/core/util/assets_manager.dart';
 import 'package:movie/core/widgets/custom_back_button.dart';
+import 'package:movie/core/widgets/custom_cached_network_image.dart';
 import 'package:movie/features/tv/presentation/screens/widgets/tv_details/tv_details_clipper.dart';
 
 class TvDetailsPoster extends StatelessWidget {
-  const TvDetailsPoster({super.key});
-
+  const TvDetailsPoster({super.key, required this.posterUrl});
+  final String posterUrl;
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -21,10 +21,10 @@ class TvDetailsPoster extends StatelessWidget {
           width: double.infinity,
           child: ClipPath(
             clipper: TvDetailsClipper(),
-            child: CachedNetworkImage(
-              imageUrl:
-                  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQr8FcgAq31cIByH4nveSOqH7a0soJ7fLq1Q&s",
-              fit: BoxFit.cover,
+            child: CustomCachedNetworkImage(
+              imageUrl: posterUrl,
+              height: 330.0,
+              width: double.infinity,
             ),
           ),
         ),

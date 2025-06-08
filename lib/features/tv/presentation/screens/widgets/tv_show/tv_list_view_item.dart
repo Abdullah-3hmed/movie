@@ -16,7 +16,7 @@ class TvListViewItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        context.pushRoute(const TvDetailsRoute());
+        context.pushRoute(TvDetailsRoute(tvId: tvModel.id));
       },
       child: Transform(
         transform: Matrix4.skewX(-0.08),

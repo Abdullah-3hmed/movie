@@ -30,4 +30,6 @@ class AppStrings {
   static const String min = "Min";
   static const String allCast = "All Cast";
   static const String releaseDate = "Release date:";
+  static const String overView = "Overview";
+  static const String seasons = "Seasons";
 }

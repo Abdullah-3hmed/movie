@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie/core/enums/request_status.dart';
-import 'package:movie/features/tv/cubit/tv_state.dart';
-import 'package:movie/features/tv/repos/tv_repo.dart';
+import 'package:movie/features/tv/cubit/tv_cubit/tv_state.dart';
+import 'package:movie/features/tv/repos/tv_repo/tv_repo.dart';
 
 class TvCubit extends Cubit<TvState> {
   TvCubit({required this.tvRepo}) : super(const TvState());

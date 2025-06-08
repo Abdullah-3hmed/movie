@@ -3,8 +3,8 @@ import 'package:movie/core/icons/solar_system_icons.dart';
 import 'package:movie/core/util/color_manager.dart';
 import 'package:movie/features/shared/data/review_model.dart';
 
-class MovieReviewItem extends StatelessWidget {
-  const MovieReviewItem({super.key, required this.review});
+class ReviewListViewItem extends StatelessWidget {
+  const ReviewListViewItem({super.key, required this.review});
   final ReviewModel review;
   @override
   Widget build(BuildContext context) {

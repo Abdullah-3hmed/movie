@@ -14,7 +14,7 @@ class ReviewModel extends Equatable {
     return ReviewModel(
       author: json['author'],
       rating: json["author_details"]['rating'] ?? 0.0,
-      content: json['content'],
+      content: json['content'] ?? "",
     );
   }
   @override
