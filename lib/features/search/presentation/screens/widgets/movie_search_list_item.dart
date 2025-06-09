@@ -67,13 +67,22 @@ class MovieSearchListItem extends StatelessWidget {
                               .copyWith(fontWeight: FontWeight.w500),
                         ),
                         const SizedBox(height: 7.0),
-                        Text(
-                          genres.length > 25
-                              ? '${genres.substring(0, 25)}...'
-                              : genres,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: Theme.of(context).textTheme.bodySmall,
+                        Row(
+                          spacing: 5.0,
+                          children: [
+                            Text(
+                              movieModel.year,
+                              style: Theme.of(context).textTheme.bodySmall,
+                            ),
+                            Text(
+                              genres.length > 25
+                                  ? '${genres.substring(0, 25)}...'
+                                  : genres,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: Theme.of(context).textTheme.bodySmall,
+                            ),
+                          ],
                         ),
                         const SizedBox(height: 7.0),
                         Row(

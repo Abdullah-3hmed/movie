@@ -6,6 +6,7 @@ class TvModel extends Equatable {
   final String backdropPath;
   final List<int> genreIds;
   final double voteAverage;
+  final String year;
   final int voteCount;
 
   const TvModel({
@@ -15,6 +16,7 @@ class TvModel extends Equatable {
     required this.genreIds,
     required this.voteAverage,
     required this.voteCount,
+    required this.year,
   });
 
   factory TvModel.fromJson(Map<String, dynamic> json) {
@@ -24,6 +26,7 @@ class TvModel extends Equatable {
       backdropPath: json['backdrop_path'] ?? "",
       genreIds: List<int>.from(json['genre_ids'] ?? []),
       voteAverage: json['vote_average'].toDouble() ?? 0.0,
+      year: json['first_air_date'].split('-')[0] ?? "",
       voteCount: json['vote_count'] ?? 0,
     );
   }
@@ -35,6 +38,7 @@ class TvModel extends Equatable {
     backdropPath,
     genreIds,
     voteAverage,
+    year,
     voteCount,
   ];
 }

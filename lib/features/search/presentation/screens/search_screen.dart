@@ -27,37 +27,46 @@ class SearchScreen extends StatelessWidget implements AutoRouteWrapper {
           ),
           child: Column(
             children: [
-              TextField(
-                onChanged: (value) {
-                  context.read<SearchBloc>().add(
-                    SearchMovieEvent(movieName: value),
+              Builder(
+                builder: (context) {
+                  final Bloc bloc = context.read<SearchBloc>();
+                  final currentTab = context.select<SearchBloc, int>(
+                    (bloc) => bloc.state.currentTabIndex,
+                  );
+                  return TextField(
+                    onChanged: (value) {
+                      if (currentTab == 0) {
+                        bloc.add(SearchMovieEvent(movieName: value));
+                      } else if (currentTab == 1) {
+                        bloc.add(SearchTvShowsEvent(tvShowName: value));
+                      }
+                    },
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                        borderSide: const BorderSide(
+                          color: ColorsManager.primaryColor,
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                        borderSide: const BorderSide(
+                          color: ColorsManager.primaryColor,
+                        ),
+                      ),
+                      hintText: 'Search',
+                      hintStyle: Theme.of(context).textTheme.bodyMedium!
+                          .copyWith(color: Colors.white.withValues(alpha: 0.6)),
+                      prefixIcon: Icon(
+                        SolarSystemIcons.search,
+                        color: Colors.white.withValues(alpha: 0.6),
+                      ),
+                    ),
                   );
                 },
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                    borderSide: const BorderSide(
-                      color: ColorsManager.primaryColor,
-                    ),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                    borderSide: const BorderSide(
-                      color: ColorsManager.primaryColor,
-                    ),
-                  ),
-                  hintText: 'Search',
-                  hintStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                    color: Colors.white.withValues(alpha: 0.6),
-                  ),
-                  prefixIcon: Icon(
-                    SolarSystemIcons.search,
-                    color: Colors.white.withValues(alpha: 0.6),
-                  ),
-                ),
               ),
               const SizedBox(height: 16.0),
               const SearchTabBarSection(),

@@ -7,6 +7,7 @@ import 'package:movie/core/network/api_constants.dart';
 import 'package:movie/core/network/dio_helper.dart';
 import 'package:movie/features/movies/data/movies_model.dart';
 import 'package:movie/features/search/repos/search_repo.dart';
+import 'package:movie/features/tv/data/tv_model.dart';
 
 class SearchRepoImpl implements SearchRepo {
   SearchRepoImpl({required this.dioHelper});
@@ -26,6 +27,33 @@ class SearchRepoImpl implements SearchRepo {
         return Right(
           response.data['results']
               .map<MoviesModel>((e) => MoviesModel.fromJson(e))
+              .toList(),
+        );
+      } else {
+        throw ServerException(errorModel: ErrorModel.fromJson(response.data));
+      }
+    } on DioException catch (e) {
+      return Left(ServerFailure.fromDioError(e));
+    } on ServerException catch (e) {
+      return Left(ServerFailure(e.errorModel.statusMessages));
+    } catch (e) {
+      return Left(ServerFailure(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<TvModel>>> searchTvShows({
+    required String tvShowName,
+  }) async {
+    try {
+      final response = await dioHelper.get(
+        url: ApiConstants.searchTvEndpoint,
+        queryParameters: {"query": tvShowName},
+      );
+      if (response.statusCode == 200) {
+        return Right(
+          response.data['results']
+              .map<TvModel>((e) => TvModel.fromJson(e))
               .toList(),
         );
       } else {

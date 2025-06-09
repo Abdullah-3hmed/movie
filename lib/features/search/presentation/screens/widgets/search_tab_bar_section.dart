@@ -1,7 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie/config/router/app_router.dart';
 import 'package:movie/core/util/app_strings.dart';
+import 'package:movie/features/search/bloc/search_bloc.dart';
 
 class SearchTabBarSection extends StatelessWidget {
   const SearchTabBarSection({super.key});
@@ -16,7 +18,10 @@ class SearchTabBarSection extends StatelessWidget {
           SearchActorsRoute(),
         ],
         builder: (context, child, controller) {
-          //final tabsRouter = AutoTabsRouter.of(context);
+          // final tabsRouter = AutoTabsRouter.of(context);
+          context.read<SearchBloc>().add(
+            ChangeSearchTabEvent(index: controller.index),
+          );
           return Column(
             children: [
               SizedBox(

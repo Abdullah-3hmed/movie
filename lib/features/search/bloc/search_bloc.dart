@@ -18,6 +18,13 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
       _searchMovieEvent,
       transformer: debounceRestartable(const Duration(milliseconds: 500)),
     );
+    on<SearchTvShowsEvent>(
+      _searchTvShowsEvent,
+      transformer: debounceRestartable(const Duration(milliseconds: 500)),
+    );
+    on<ChangeSearchTabEvent>((event, emit) {
+      emit(state.copyWith(currentTabIndex: event.index));
+    });
   }
 
   FutureOr<void> _searchMovieEvent(
@@ -25,15 +32,18 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
     Emitter<SearchState> emit,
   ) async {
     final trimmedQuery = event.movieName.trim();
-
     if (trimmedQuery.isEmpty) {
       emit(
         state.copyWith(movies: [], moviesRequestState: RequestStatus.initial),
       );
       return;
     }
-    //
-    emit(state.copyWith(moviesRequestState: RequestStatus.loading));
+    emit(
+      state.copyWith(
+        moviesRequestState: RequestStatus.loading,
+        isConnected: true,
+      ),
+    );
 
     final result = await searchRepo.searchMovies(movieName: trimmedQuery);
 
@@ -68,5 +78,45 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
   EventTransformer<T> debounceRestartable<T>(Duration duration) {
     return (events, mapper) =>
         restartable<T>().call(events.debounceTime(duration), mapper);
+  }
+
+  FutureOr<void> _searchTvShowsEvent(
+    SearchTvShowsEvent event,
+    Emitter<SearchState> emit,
+  ) async {
+    final trimmedQuery = event.tvShowName.trim();
+    if (trimmedQuery.isEmpty) {
+      emit(state.copyWith(tvShows: [], tvRequestState: RequestStatus.initial));
+      return;
+    }
+    emit(
+      state.copyWith(tvRequestState: RequestStatus.loading, isConnected: true),
+    );
+
+    final result = await searchRepo.searchTvShows(tvShowName: trimmedQuery);
+
+    result.fold(
+      (failure) {
+        if (!failure.isConnected) {
+          emit(
+            state.copyWith(
+              tvRequestState: RequestStatus.error,
+              tvErrorMessage: failure.errorMessage,
+              isConnected: false,
+            ),
+          );
+        } else {
+          emit(
+            state.copyWith(
+              tvRequestState: RequestStatus.error,
+              tvErrorMessage: failure.errorMessage,
+            ),
+          );
+        }
+      },
+      (tvShows) => emit(
+        state.copyWith(tvRequestState: RequestStatus.success, tvShows: tvShows),
+      ),
+    );
   }
 }
