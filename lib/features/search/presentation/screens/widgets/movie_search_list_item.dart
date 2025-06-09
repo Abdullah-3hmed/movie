@@ -1,30 +1,28 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:movie/config/router/app_router.dart';
 import 'package:movie/core/icons/solar_system_icons.dart';
-import 'package:movie/core/network/api_constants.dart';
-import 'package:movie/core/util/assets_manager.dart';
 import 'package:movie/core/util/color_manager.dart';
 import 'package:movie/core/util/geners.dart';
-import 'package:movie/features/tv/data/tv_model.dart';
+import 'package:movie/core/widgets/custom_cached_network_image.dart';
+import 'package:movie/features/movies/data/movies_model.dart';
 
-class SeeAllTvShowsListItem extends StatelessWidget {
-  const SeeAllTvShowsListItem({
+class MovieSearchListItem extends StatelessWidget {
+  const MovieSearchListItem({
     super.key,
     this.isWatchList = false,
-    required this.tvModel,
+    required this.movieModel,
   });
 
   final bool isWatchList;
-  final TvModel tvModel;
+  final MoviesModel movieModel;
 
   @override
   Widget build(BuildContext context) {
-    final genres = getGenreNames(tvModel.genreIds).join(', ');
+    final genres = getGenreNames(movieModel.genreIds).join(', ');
     return InkWell(
       onTap: () {
-        context.pushRoute(TvDetailsRoute(tvId: tvModel.id));
+        context.pushRoute(MovieDetailsRoute(movieId: movieModel.id));
       },
       child: Transform(
         transform: Matrix4.skewX(-0.05),
@@ -49,16 +47,10 @@ class SeeAllTvShowsListItem extends StatelessWidget {
                   children: [
                     ClipRRect(
                       borderRadius: BorderRadius.circular(20.0),
-                      child: CachedNetworkImage(
-                        imageUrl: ApiConstants.imageUrl(tvModel.backdropPath),
-                        errorWidget:
-                            (context, url, error) => Image.network(
-                              AssetsManager.errorPoster,
-                              fit: BoxFit.cover,
-                            ),
+                      child: CustomCachedNetworkImage(
+                        imageUrl: movieModel.backdropPath,
                         width: 140.0,
                         height: 180.0,
-                        fit: BoxFit.cover,
                       ),
                     ),
                     const SizedBox(width: 10.0),
@@ -66,9 +58,9 @@ class SeeAllTvShowsListItem extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          tvModel.name.length > 12
-                              ? '${tvModel.name.substring(0, 12)}...'
-                              : tvModel.name,
+                          movieModel.title.length > 12
+                              ? '${movieModel.title.substring(0, 12)}...'
+                              : movieModel.title,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           style: Theme.of(context).textTheme.bodyLarge!
@@ -92,12 +84,12 @@ class SeeAllTvShowsListItem extends StatelessWidget {
                               color: ColorsManager.ratingIconColor,
                             ),
                             Text(
-                              "  ${tvModel.voteAverage}",
+                              "  ${movieModel.voteAverage}",
                               style: Theme.of(context).textTheme.bodySmall,
                             ),
                             const SizedBox(width: 22.0),
                             Text(
-                              "From ${tvModel.voteCount} users",
+                              "From ${movieModel.voteCount} users",
                               style: Theme.of(context).textTheme.bodySmall,
                             ),
                           ],

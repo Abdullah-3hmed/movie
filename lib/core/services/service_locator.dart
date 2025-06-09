@@ -14,6 +14,9 @@ import 'package:movie/features/movies/repos/actor/actor_repo_impl.dart';
 import 'package:movie/features/movies/repos/movie/movie_repo.dart';
 import 'package:movie/features/movies/repos/movie_details/movie_details_repo.dart';
 import 'package:movie/features/movies/repos/movie_details/movie_details_repo_impl.dart';
+import 'package:movie/features/search/bloc/search_bloc.dart';
+import 'package:movie/features/search/repos/search_repo.dart';
+import 'package:movie/features/search/repos/search_repo_impl.dart';
 import 'package:movie/features/tv/cubit/tv_cubit/tv_cubit.dart';
 import 'package:movie/features/tv/cubit/tv_details_cubit/tv_details_cubit.dart';
 import 'package:movie/features/tv/repos/tv_details_repo/tv_details_repo.dart';
@@ -70,6 +73,12 @@ class ServiceLocator {
     );
     getIt.registerFactory<TvDetailsCubit>(
       () => TvDetailsCubit(tvDetailsRepo: getIt<TvDetailsRepo>()),
+    );
+    getIt.registerLazySingleton<SearchRepo>(
+      () => SearchRepoImpl(dioHelper: getIt<DioHelper>()),
+    );
+    getIt.registerFactory<SearchBloc>(
+      () => SearchBloc(searchRepo: getIt<SearchRepo>()),
     );
   }
 }

@@ -231,7 +231,7 @@ class SearchRoute extends PageRouteInfo<void> {
   static PageInfo page = PageInfo(
     name,
     builder: (data) {
-      return const SearchScreen();
+      return WrappedRoute(child: const SearchScreen());
     },
   );
 }
@@ -532,7 +532,9 @@ class TvDetailsRoute extends PageRouteInfo<TvDetailsRouteArgs> {
     name,
     builder: (data) {
       final args = data.argsAs<TvDetailsRouteArgs>();
-      return TvDetailsScreen(key: args.key, tvId: args.tvId);
+      return WrappedRoute(
+        child: TvDetailsScreen(key: args.key, tvId: args.tvId),
+      );
     },
   );
 }

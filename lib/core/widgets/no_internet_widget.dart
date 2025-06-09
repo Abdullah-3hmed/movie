@@ -20,19 +20,20 @@ class NoInternetWidget extends StatelessWidget {
         const SizedBox(height: 20),
         Text(errorMessage, style: Theme.of(context).textTheme.titleLarge),
         const SizedBox(height: 20),
-        MaterialButton(
-          height: 50.0,
-          minWidth: 180.0,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10.0),
+        if (onPressed != null)
+          MaterialButton(
+            height: 50.0,
+            minWidth: 180.0,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10.0),
+            ),
+            color: ColorsManager.darkPrimary,
+            onPressed: onPressed,
+            child: Text(
+              "Try Again",
+              style: Theme.of(context).textTheme.titleLarge,
+            ),
           ),
-          color: ColorsManager.darkPrimary,
-          onPressed: onPressed,
-          child: Text(
-            "Try Again",
-            style: Theme.of(context).textTheme.titleLarge,
-          ),
-        ),
       ],
     );
   }

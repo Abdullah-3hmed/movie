@@ -1,12 +1,19 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie/core/icons/solar_system_icons.dart';
+import 'package:movie/core/services/service_locator.dart';
 import 'package:movie/core/util/color_manager.dart';
 import 'package:movie/core/widgets/custom_scaffold.dart';
+import 'package:movie/features/search/bloc/search_bloc.dart';
 import 'package:movie/features/search/presentation/screens/widgets/search_tab_bar_section.dart';
 
 @RoutePage()
-class SearchScreen extends StatelessWidget {
+class SearchScreen extends StatelessWidget implements AutoRouteWrapper {
+  @override
+  Widget wrappedRoute(BuildContext context) =>
+      BlocProvider(create: (context) => getIt<SearchBloc>(), child: this);
+
   const SearchScreen({super.key});
 
   @override
@@ -21,7 +28,11 @@ class SearchScreen extends StatelessWidget {
           child: Column(
             children: [
               TextField(
-                onChanged: (value) {},
+                onChanged: (value) {
+                  context.read<SearchBloc>().add(
+                    SearchMovieEvent(movieName: value),
+                  );
+                },
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10.0),

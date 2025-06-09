@@ -26,7 +26,9 @@ class SearchTabBarSection extends StatelessWidget {
                   indicator: const BoxDecoration(),
                   tabs: [
                     Container(
-                      padding: const EdgeInsets.all(6.0),
+                      padding: const EdgeInsetsDirectional.symmetric(
+                        horizontal: 12.0,
+                      ),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20.0),
                         color:
@@ -38,7 +40,9 @@ class SearchTabBarSection extends StatelessWidget {
                       child: const Tab(text: AppStrings.movies),
                     ),
                     Container(
-                      padding: const EdgeInsets.all(6.0),
+                      padding: const EdgeInsetsDirectional.symmetric(
+                        horizontal: 12.0,
+                      ),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20.0),
                         color:
@@ -49,7 +53,9 @@ class SearchTabBarSection extends StatelessWidget {
                       child: const Tab(text: AppStrings.tvShows),
                     ),
                     Container(
-                      padding: const EdgeInsets.all(6.0),
+                      padding: const EdgeInsetsDirectional.symmetric(
+                        horizontal: 12.0,
+                      ),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20.0),
                         color:

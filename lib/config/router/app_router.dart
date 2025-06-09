@@ -20,10 +20,10 @@ import 'package:movie/features/search/presentation/screens/search_tv_screen.dart
 import 'package:movie/features/shared/data/cast_model.dart';
 import 'package:movie/features/shared/presentation/screens/actor_details_screen.dart';
 import 'package:movie/features/shared/presentation/screens/see_all_cast_screen.dart';
-import 'package:movie/features/shared/presentation/screens/see_all_tv_shows_screen.dart';
 import 'package:movie/features/shared/presentation/screens/trailer_screen.dart';
 import 'package:movie/features/splash/presentation/screens/splash_screen.dart';
 import 'package:movie/features/tv/data/tv_model.dart';
+import 'package:movie/features/tv/presentation/screens/see_all_tv_shows_screen.dart';
 import 'package:movie/features/tv/presentation/screens/tv_details_screen.dart';
 import 'package:movie/features/tv/presentation/screens/tv_overview_screen.dart';
 import 'package:movie/features/tv/presentation/screens/tv_screen.dart';
