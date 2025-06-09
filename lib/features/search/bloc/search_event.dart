@@ -23,6 +23,15 @@ class SearchTvShowsEvent extends SearchEvent {
   List<Object> get props => [tvShowName];
 }
 
+class SearchActorEvent extends SearchEvent {
+  final String actorName;
+
+  SearchActorEvent({required this.actorName});
+
+  @override
+  List<Object> get props => [actorName];
+}
+
 class ChangeSearchTabEvent extends SearchEvent {
   final int index;
   ChangeSearchTabEvent({required this.index});

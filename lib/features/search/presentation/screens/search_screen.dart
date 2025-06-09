@@ -39,6 +39,8 @@ class SearchScreen extends StatelessWidget implements AutoRouteWrapper {
                         bloc.add(SearchMovieEvent(movieName: value));
                       } else if (currentTab == 1) {
                         bloc.add(SearchTvShowsEvent(tvShowName: value));
+                      } else {
+                        bloc.add(SearchActorEvent(actorName: value));
                       }
                     },
                     decoration: InputDecoration(

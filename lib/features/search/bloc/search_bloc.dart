@@ -25,6 +25,10 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
     on<ChangeSearchTabEvent>((event, emit) {
       emit(state.copyWith(currentTabIndex: event.index));
     });
+    on<SearchActorEvent>(
+      _searchActorEvent,
+      transformer: debounceRestartable(const Duration(milliseconds: 500)),
+    );
   }
 
   FutureOr<void> _searchMovieEvent(
@@ -116,6 +120,54 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
       },
       (tvShows) => emit(
         state.copyWith(tvRequestState: RequestStatus.success, tvShows: tvShows),
+      ),
+    );
+  }
+
+  FutureOr<void> _searchActorEvent(
+    SearchActorEvent event,
+    Emitter<SearchState> emit,
+  ) async {
+    final trimmedQuery = event.actorName.trim();
+    if (trimmedQuery.isEmpty) {
+      emit(
+        state.copyWith(actors: [], actorRequestState: RequestStatus.initial),
+      );
+      return;
+    }
+    emit(
+      state.copyWith(
+        actorRequestState: RequestStatus.loading,
+        isConnected: true,
+      ),
+    );
+
+    final result = await searchRepo.searchActors(actorName: trimmedQuery);
+
+    result.fold(
+      (failure) {
+        if (!failure.isConnected) {
+          emit(
+            state.copyWith(
+              actorRequestState: RequestStatus.error,
+              actorErrorMessage: failure.errorMessage,
+              isConnected: false,
+            ),
+          );
+        } else {
+          emit(
+            state.copyWith(
+              actorRequestState: RequestStatus.error,
+              actorErrorMessage: failure.errorMessage,
+            ),
+          );
+        }
+      },
+      (actors) => emit(
+        state.copyWith(
+          actorRequestState: RequestStatus.success,
+          actors: actors,
+        ),
       ),
     );
   }
