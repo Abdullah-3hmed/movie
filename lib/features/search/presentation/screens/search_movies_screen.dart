@@ -6,6 +6,7 @@ import 'package:movie/core/widgets/no_internet_widget.dart';
 import 'package:movie/features/search/bloc/search_bloc.dart';
 import 'package:movie/features/search/bloc/search_state.dart';
 import 'package:movie/features/search/presentation/screens/widgets/movie_search_list_item.dart';
+import 'package:movie/features/search/presentation/screens/widgets/search_screen_initial_widget.dart';
 import 'package:movie/features/shared/presentation/screens/widgets/custom_loading.dart';
 
 @RoutePage()
@@ -20,6 +21,8 @@ class SearchMoviesScreen extends StatelessWidget {
               previous.moviesRequestState != current.moviesRequestState,
       builder: (context, state) {
         switch (state.moviesRequestState) {
+          case RequestStatus.initial:
+            return const SearchScreenInitialWidget();
           case RequestStatus.loading:
             return const CustomLoading();
           case RequestStatus.success:
@@ -48,8 +51,6 @@ class SearchMoviesScreen extends StatelessWidget {
                 ),
               );
             }
-          default:
-            return const SizedBox.shrink();
         }
       },
     );

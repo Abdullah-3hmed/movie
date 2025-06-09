@@ -32,4 +32,5 @@ class AppStrings {
   static const String releaseDate = "Release date :";
   static const String overView = "Overview";
   static const String seasons = "Seasons";
+  static const String searchForWhatYouWant = "Search For What You Want";
 }
