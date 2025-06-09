@@ -86,7 +86,7 @@ class BottomNavBarRoute extends PageRouteInfo<void> {
   static PageInfo page = PageInfo(
     name,
     builder: (data) {
-      return const BottomNavBarScreen();
+      return WrappedRoute(child: const BottomNavBarScreen());
     },
   );
 }
@@ -589,7 +589,7 @@ class TvRoute extends PageRouteInfo<void> {
   static PageInfo page = PageInfo(
     name,
     builder: (data) {
-      return WrappedRoute(child: const TvScreen());
+      return const TvScreen();
     },
   );
 }

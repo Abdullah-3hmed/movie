@@ -15,6 +15,8 @@ Future<void> main() async {
   DioHelper.init();
   AppConstants.sessionId =
       await getIt<CacheHelper>().readData(key: AppConstants.sessionIdKey) ?? "";
+  print("SESSIONID : >>>>>>${AppConstants.sessionId}");
+
   Bloc.observer = MyBlocObserver();
   runApp(const MyApp());
 }

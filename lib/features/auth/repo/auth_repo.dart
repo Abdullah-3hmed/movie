@@ -6,7 +6,7 @@ abstract class AuthRepo {
     required String userName,
     required String password,
   });
+  Future<Either<Failure, int>> getAccountId({required String sessionId});
   Future<void> signUp();
   Future<void> resetPassword();
-  Future<void> logout();
 }

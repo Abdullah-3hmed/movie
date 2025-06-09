@@ -39,7 +39,7 @@ class AppRouter extends RootStackRouter {
   @override
   List<AutoRoute> get routes => [
     AutoRoute(
-      //initial: true,
+      initial: true,
       page: SplashTabRoute.page,
       children: [AutoRoute(initial: true, page: SplashRoute.page)],
     ),
@@ -51,7 +51,6 @@ class AppRouter extends RootStackRouter {
       ],
     ),
     _buildCustomRoute(
-      initial: true,
       page: BottomNavBarRoute.page,
       children: [
         _buildCustomRoute(initial: true, page: MoviesRoute.page),

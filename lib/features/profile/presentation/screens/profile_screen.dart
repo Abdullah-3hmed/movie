@@ -18,7 +18,6 @@ class ProfileScreen extends StatelessWidget {
           physics: BouncingScrollPhysics(),
           child: Column(
             children: [
-              SizedBox(height: 40.0),
               ProfileHeaderSection(),
               ProfileMoviesWatchListSection(),
               CustomDivider(),

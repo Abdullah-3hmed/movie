@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:movie/core/enums/request_status.dart';
 
-class AuthState  extends Equatable {
+class AuthState extends Equatable {
   final RequestStatus loginStatus;
   final String loginErrorMessage;
 

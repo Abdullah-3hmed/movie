@@ -2,7 +2,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie/core/enums/request_status.dart';
-import 'package:movie/core/services/service_locator.dart';
 import 'package:movie/core/widgets/custom_scaffold.dart';
 import 'package:movie/core/widgets/no_internet_widget.dart';
 import 'package:movie/features/shared/presentation/screens/widgets/custom_loading.dart';
@@ -14,13 +13,8 @@ import 'package:movie/features/tv/presentation/screens/widgets/tv_show/tv_airing
 import 'package:movie/features/tv/presentation/screens/widgets/tv_show/tv_on_the_air_section.dart';
 
 @RoutePage()
-class TvScreen extends StatelessWidget implements AutoRouteWrapper {
+class TvScreen extends StatelessWidget {
   const TvScreen({super.key});
-  @override
-  Widget wrappedRoute(BuildContext context) => BlocProvider(
-    create: (context) => getIt<TvCubit>()..getAllTvShows(),
-    child: this,
-  );
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(

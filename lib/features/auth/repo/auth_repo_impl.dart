@@ -3,11 +3,8 @@ import 'package:dio/dio.dart';
 import 'package:movie/core/error/error_model.dart';
 import 'package:movie/core/error/failures.dart';
 import 'package:movie/core/error/server_exception.dart';
-import 'package:movie/core/local/cache_helper.dart';
 import 'package:movie/core/network/api_constants.dart';
 import 'package:movie/core/network/dio_helper.dart';
-import 'package:movie/core/services/service_locator.dart';
-import 'package:movie/core/util/app_constants.dart';
 import 'package:movie/features/auth/repo/auth_repo.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -41,7 +38,7 @@ class AuthRepoImpl implements AuthRepo {
       },
     );
 
-    if (response.data['success'] != true) {
+    if (response.statusCode != 200) {
       throw ServerException(errorModel: ErrorModel.fromJson(response.data));
     }
   }
@@ -103,8 +100,23 @@ class AuthRepoImpl implements AuthRepo {
   }
 
   @override
-  Future<void> logout() async {
-    AppConstants.sessionId = "";
-    await getIt<CacheHelper>().delete(key: AppConstants.sessionIdKey);
+  Future<Either<Failure, int>> getAccountId({required String sessionId}) async {
+    try {
+      final response = await dioHelper.get(
+        url: ApiConstants.accountIdEndpoint,
+        queryParameters: {'session_id': sessionId},
+      );
+      if (response.statusCode == 200) {
+        return Right(response.data['id']);
+      } else {
+        throw ServerException(errorModel: ErrorModel.fromJson(response.data));
+      }
+    } on DioException catch (e) {
+      return Left(ServerFailure.fromDioError(e));
+    } on ServerException catch (e) {
+      return Left(ServerFailure(e.errorModel.statusMessages));
+    } catch (e) {
+      return Left(ServerFailure(e.toString()));
+    }
   }
 }

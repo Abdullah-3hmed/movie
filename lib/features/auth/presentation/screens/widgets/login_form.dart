@@ -101,12 +101,6 @@ class _LoginFormState extends State<LoginForm> {
             ),
             const SizedBox(height: 150.0),
             BlocConsumer<AuthCubit, AuthState>(
-              listenWhen:
-                  (previous, current) =>
-                      previous.loginStatus != current.loginStatus,
-              buildWhen:
-                  (previous, current) =>
-                      previous.loginStatus != current.loginStatus,
               listener: (context, state) {
                 if (state.loginStatus == RequestStatus.success) {
                   context.replaceRoute(const BottomNavBarRoute());
