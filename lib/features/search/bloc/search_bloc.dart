@@ -32,7 +32,7 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
       );
       return;
     }
-
+    //
     emit(state.copyWith(moviesRequestState: RequestStatus.loading));
 
     final result = await searchRepo.searchMovies(movieName: trimmedQuery);
