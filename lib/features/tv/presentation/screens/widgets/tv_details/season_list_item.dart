@@ -20,6 +20,7 @@ class SeasonListItem extends StatelessWidget {
           color: Colors.black26,
         ),
         child: Row(
+          spacing: 10.0,
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(20.0),
@@ -29,36 +30,40 @@ class SeasonListItem extends StatelessWidget {
                 imageUrl: seasonModel.posterPath,
               ),
             ),
-            const Spacer(),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              spacing: 5.0,
-              children: [
-                Text(
-                  seasonModel.name,
-                  style: Theme.of(context).textTheme.bodyLarge,
-                ),
-                Text(
-                  "${AppStrings.releaseDate} ${seasonModel.releaseDate}",
-                  style: Theme.of(context).textTheme.bodyMedium,
-                ),
-                Row(
-                  children: [
-                    const Icon(
-                      Icons.star,
-                      color: ColorsManager.ratingIconColor,
-                      size: 15.0,
-                    ),
-                    Text(
-                      "${seasonModel.voteAverage}",
-                      style: Theme.of(context).textTheme.bodyMedium,
-                    ),
-                  ],
-                ),
-              ],
+            Flexible(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                spacing: 5.0,
+                children: [
+                  Text(
+                    seasonModel.name,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: Theme.of(context).textTheme.bodyLarge,
+                  ),
+                  Text(
+                    "${AppStrings.releaseDate} ${seasonModel.releaseDate}",
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ),
+                  Row(
+                    children: [
+                      const Icon(
+                        Icons.star,
+                        color: ColorsManager.ratingIconColor,
+                        size: 15.0,
+                      ),
+                      Text(
+                        "${seasonModel.voteAverage}",
+                        style: Theme.of(context).textTheme.bodyMedium,
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
-            const Spacer(),
           ],
         ),
       ),

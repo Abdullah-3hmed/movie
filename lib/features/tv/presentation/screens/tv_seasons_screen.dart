@@ -18,8 +18,6 @@ class TvSeasonsScreen extends StatelessWidget {
               previous.tvDetailsState != current.tvDetailsState,
       builder: (context, state) {
         switch (state.tvDetailsState) {
-          case RequestStatus.loading:
-            return const SizedBox.shrink();
           case RequestStatus.success:
             return Column(
               children: [
