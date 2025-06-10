@@ -1,14 +1,14 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie/config/router/app_router.dart';
 import 'package:movie/core/enums/media_type.dart';
 import 'package:movie/core/icons/solar_system_icons.dart';
-import 'package:movie/core/network/api_constants.dart';
-import 'package:movie/core/util/assets_manager.dart';
+import 'package:movie/core/util/app_constants.dart';
+import 'package:movie/core/util/app_strings.dart';
 import 'package:movie/core/util/color_manager.dart';
 import 'package:movie/core/util/geners.dart';
+import 'package:movie/core/widgets/custom_cached_network_image.dart';
 import 'package:movie/features/movies/data/movies_model.dart';
 import 'package:movie/features/profile/cubit/profile_cubit.dart';
 import 'package:movie/features/profile/cubit/profile_state.dart';
@@ -20,56 +20,41 @@ class SeeAllMoviesListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final genres = getGenreNames(movieModel.genreIds).join(', ');
     return InkWell(
       onTap: () {
         context.pushRoute(MovieDetailsRoute(movieId: movieModel.id));
       },
       child: Transform(
-        transform: Matrix4.skewX(-0.05),
+        transform: Matrix4.skewX(AppConstants.skew),
         child: Stack(
           children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(20.0),
-              clipBehavior: Clip.antiAliasWithSaveLayer,
-              child: Container(
-                width: double.infinity,
-                padding: const EdgeInsetsDirectional.symmetric(
-                  horizontal: 12.0,
-                  vertical: 8.0,
-                ),
-                decoration: const BoxDecoration(
-                  borderRadius: BorderRadiusDirectional.only(
-                    bottomEnd: Radius.circular(20.0),
-                  ),
-                  color: Colors.black26,
-                ),
-                child: Row(
-                  children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(20.0),
-                      child: CachedNetworkImage(
-                        imageUrl: ApiConstants.imageUrl(
-                          movieModel.backdropPath,
-                        ),
-                        errorWidget:
-                            (context, url, error) => Image.network(
-                              AssetsManager.errorPoster,
-                              fit: BoxFit.cover,
-                            ),
-                        width: 140.0,
-                        height: 180.0,
-                        fit: BoxFit.cover,
-                      ),
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsetsDirectional.symmetric(
+                horizontal: 12.0,
+                vertical: 8.0,
+              ),
+              decoration: BoxDecoration(
+                color: Colors.black26,
+                borderRadius: BorderRadius.circular(20.0),
+              ),
+              child: Row(
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(20.0),
+                    child: CustomCachedNetworkImage(
+                      imageUrl: movieModel.backdropPath,
+                      width: 140.0,
+                      height: 180.0,
                     ),
-                    const SizedBox(width: 10.0),
-                    Column(
+                  ),
+                  const SizedBox(width: 10.0),
+                  Flexible(
+                    child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          movieModel.title.length > 12
-                              ? '${movieModel.title.substring(0, 12)}...'
-                              : movieModel.title,
+                          movieModel.title,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           style: Theme.of(context).textTheme.bodyLarge!
@@ -77,9 +62,7 @@ class SeeAllMoviesListItem extends StatelessWidget {
                         ),
                         const SizedBox(height: 7.0),
                         Text(
-                          genres.length > 25
-                              ? '${genres.substring(0, 25)}...'
-                              : genres,
+                          getGenreNames(movieModel.genreIds).join(', '),
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           style: Theme.of(context).textTheme.bodySmall,
@@ -98,16 +81,16 @@ class SeeAllMoviesListItem extends StatelessWidget {
                             ),
                             const SizedBox(width: 22.0),
                             Text(
-                              "From ${movieModel.voteCount} users",
+                              AppStrings.fromUser(movieModel.voteCount),
                               style: Theme.of(context).textTheme.bodySmall,
                             ),
                           ],
                         ),
                       ],
                     ),
-                    const SizedBox(width: 5.0),
-                  ],
-                ),
+                  ),
+                  const SizedBox(width: 5.0),
+                ],
               ),
             ),
             PositionedDirectional(
