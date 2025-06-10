@@ -69,7 +69,7 @@ class MovieSearchListItem extends StatelessWidget {
                                 movieModel.year,
                                 style: Theme.of(context).textTheme.bodySmall,
                               ),
-                              Flexible(
+                              Expanded(
                                 child: Text(
                                   getGenreNames(movieModel.genreIds).join(', '),
                                   maxLines: 1,

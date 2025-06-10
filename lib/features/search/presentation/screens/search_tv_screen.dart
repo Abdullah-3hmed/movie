@@ -5,6 +5,7 @@ import 'package:movie/core/enums/request_status.dart';
 import 'package:movie/core/widgets/no_internet_widget.dart';
 import 'package:movie/features/search/bloc/search_bloc.dart';
 import 'package:movie/features/search/bloc/search_state.dart';
+import 'package:movie/features/search/presentation/screens/widgets/search_no_results_found.dart';
 import 'package:movie/features/search/presentation/screens/widgets/search_screen_initial_widget.dart';
 import 'package:movie/features/search/presentation/screens/widgets/tv_search_list_view_item.dart';
 import 'package:movie/features/shared/presentation/screens/widgets/custom_loading.dart';
@@ -20,24 +21,28 @@ class SearchTvScreen extends StatelessWidget {
           (previous, current) =>
               previous.tvRequestState != current.tvRequestState,
       builder: (context, state) {
-        switch (state.moviesRequestState) {
+        switch (state.tvRequestState) {
           case RequestStatus.initial:
             return const SearchScreenInitialWidget();
           case RequestStatus.loading:
             return const CustomLoading();
           case RequestStatus.success:
-            return ListView.separated(
-              physics: const BouncingScrollPhysics(),
-              cacheExtent: 200.0,
-              itemBuilder:
-                  (context, index) => SizedBox(
-                    height: 180.0,
-                    child: TvSearchListViewItem(tvModel: state.tvShows[index]),
-                  ),
-              separatorBuilder:
-                  (context, index) => const SizedBox(height: 16.0),
-              itemCount: state.tvShows.length,
-            );
+            return state.tvShows.isEmpty
+                ? const SearchNoResultsFound()
+                : ListView.separated(
+                  physics: const BouncingScrollPhysics(),
+                  cacheExtent: 200.0,
+                  itemBuilder:
+                      (context, index) => SizedBox(
+                        height: 180.0,
+                        child: TvSearchListViewItem(
+                          tvModel: state.tvShows[index],
+                        ),
+                      ),
+                  separatorBuilder:
+                      (context, index) => const SizedBox(height: 16.0),
+                  itemCount: state.tvShows.length,
+                );
           case RequestStatus.error:
             if (!state.isConnected) {
               return NoInternetWidget(errorMessage: state.moviesErrorMessage);
