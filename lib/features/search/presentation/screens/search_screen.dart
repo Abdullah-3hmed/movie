@@ -30,7 +30,7 @@ class SearchScreen extends StatelessWidget implements AutoRouteWrapper {
               Builder(
                 builder: (context) {
                   final Bloc bloc = context.read<SearchBloc>();
-                  final currentTab = context.select<SearchBloc, int>(
+                  final int currentTab = context.select<SearchBloc, int>(
                     (bloc) => bloc.state.currentTabIndex,
                   );
                   return TextField(

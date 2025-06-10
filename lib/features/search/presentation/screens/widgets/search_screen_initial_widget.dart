@@ -13,14 +13,14 @@ class SearchScreenInitialWidget extends StatelessWidget {
       children: [
         Icon(
           SolarSystemIcons.search,
-          color: ColorsManager.primaryColor.withValues(alpha: 0.8),
+          color: ColorsManager.primaryColor.withValues(alpha: 0.7),
           size: 100.0,
         ),
         const SizedBox(height: 16.0),
         Text(
           AppStrings.searchForWhatYouWant,
           style: Theme.of(context).textTheme.titleMedium!.copyWith(
-            color: ColorsManager.primaryColor.withValues(alpha: 0.7),
+            color: ColorsManager.primaryColor.withValues(alpha: 0.6),
           ),
         ),
         const SizedBox(height: 5.0),

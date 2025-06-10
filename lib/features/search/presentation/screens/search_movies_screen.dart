@@ -32,9 +32,7 @@ class SearchMoviesScreen extends StatelessWidget {
               itemBuilder:
                   (context, index) => SizedBox(
                     height: 180.0,
-                    child: MovieSearchListItem(
-                      movieModel: state.movies[index],
-                    ), // SeeAllAndSearchListViewItem(),
+                    child: MovieSearchListItem(movieModel: state.movies[index]),
                   ),
               separatorBuilder:
                   (context, index) => const SizedBox(height: 16.0),

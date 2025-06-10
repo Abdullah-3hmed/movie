@@ -2,24 +2,20 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:movie/config/router/app_router.dart';
 import 'package:movie/core/icons/solar_system_icons.dart';
+import 'package:movie/core/util/app_strings.dart';
 import 'package:movie/core/util/color_manager.dart';
 import 'package:movie/core/util/geners.dart';
 import 'package:movie/core/widgets/custom_cached_network_image.dart';
 import 'package:movie/features/movies/data/movies_model.dart';
+import 'package:movie/features/movies/presentation/screens/widgets/custom_movies_watch_List_Icon.dart';
 
 class MovieSearchListItem extends StatelessWidget {
-  const MovieSearchListItem({
-    super.key,
-    this.isWatchList = false,
-    required this.movieModel,
-  });
+  const MovieSearchListItem({super.key, required this.movieModel});
 
-  final bool isWatchList;
   final MoviesModel movieModel;
 
   @override
   Widget build(BuildContext context) {
-    final genres = getGenreNames(movieModel.genreIds).join(', ');
     return InkWell(
       onTap: () {
         context.pushRoute(MovieDetailsRoute(movieId: movieModel.id));
@@ -54,74 +50,67 @@ class MovieSearchListItem extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(width: 10.0),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          movieModel.title.length > 12
-                              ? '${movieModel.title.substring(0, 12)}...'
-                              : movieModel.title,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: Theme.of(context).textTheme.bodyLarge!
-                              .copyWith(fontWeight: FontWeight.w500),
-                        ),
-                        const SizedBox(height: 7.0),
-                        Row(
-                          spacing: 5.0,
-                          children: [
-                            Text(
-                              movieModel.year,
-                              style: Theme.of(context).textTheme.bodySmall,
-                            ),
-                            Text(
-                              genres.length > 25
-                                  ? '${genres.substring(0, 25)}...'
-                                  : genres,
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: Theme.of(context).textTheme.bodySmall,
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 7.0),
-                        Row(
-                          children: [
-                            const Icon(
-                              SolarSystemIcons.star,
-                              size: 16.0,
-                              color: ColorsManager.ratingIconColor,
-                            ),
-                            Text(
-                              "  ${movieModel.voteAverage}",
-                              style: Theme.of(context).textTheme.bodySmall,
-                            ),
-                            const SizedBox(width: 22.0),
-                            Text(
-                              "From ${movieModel.voteCount} users",
-                              style: Theme.of(context).textTheme.bodySmall,
-                            ),
-                          ],
-                        ),
-                      ],
+                    Flexible(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            movieModel.title,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: Theme.of(context).textTheme.bodyLarge!
+                                .copyWith(fontWeight: FontWeight.w500),
+                          ),
+                          const SizedBox(height: 7.0),
+                          Row(
+                            spacing: 5.0,
+                            children: [
+                              Text(
+                                movieModel.year,
+                                style: Theme.of(context).textTheme.bodySmall,
+                              ),
+                              Flexible(
+                                child: Text(
+                                  getGenreNames(movieModel.genreIds).join(', '),
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: Theme.of(context).textTheme.bodySmall,
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 7.0),
+                          Row(
+                            children: [
+                              const Icon(
+                                SolarSystemIcons.star,
+                                size: 16.0,
+                                color: ColorsManager.ratingIconColor,
+                              ),
+                              Text(
+                                "  ${movieModel.voteAverage}",
+                                style: Theme.of(context).textTheme.bodySmall,
+                              ),
+                              const SizedBox(width: 22.0),
+                              Text(
+                                AppStrings.fromUser(movieModel.voteCount),
+                                style: Theme.of(context).textTheme.bodySmall,
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                     const SizedBox(width: 5.0),
                   ],
                 ),
               ),
             ),
-            if (!isWatchList)
-              PositionedDirectional(
-                top: 10.0,
-                end: 15.0,
-                child: IconButton(
-                  onPressed: () {},
-                  icon: const Icon(
-                    SolarSystemIcons.unsaved,
-                    color: Color(0xFF007373),
-                  ),
-                ),
-              ),
+            PositionedDirectional(
+              top: 10.0,
+              end: 15.0,
+              child: CustomMoviesWatchListIcon(moviesModel: movieModel),
+            ),
           ],
         ),
       ),
