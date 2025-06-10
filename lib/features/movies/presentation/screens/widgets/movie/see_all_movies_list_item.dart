@@ -11,10 +11,14 @@ import 'package:movie/features/movies/data/movies_model.dart';
 import 'package:movie/features/movies/presentation/screens/widgets/custom_movies_watch_list_icon.dart';
 
 class SeeAllMoviesListItem extends StatelessWidget {
-  const SeeAllMoviesListItem({super.key, required this.movieModel});
+  const SeeAllMoviesListItem({
+    super.key,
+    required this.movieModel,
+    this.isWatchList = false,
+  });
 
   final MoviesModel movieModel;
-
+  final bool isWatchList;
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -90,11 +94,12 @@ class SeeAllMoviesListItem extends StatelessWidget {
                 ],
               ),
             ),
-            PositionedDirectional(
-              top: 10.0,
-              end: 15.0,
-              child: CustomMoviesWatchListIcon(moviesModel: movieModel),
-            ),
+            if (!isWatchList)
+              PositionedDirectional(
+                top: 10.0,
+                end: 15.0,
+                child: CustomMoviesWatchListIcon(moviesModel: movieModel),
+              ),
           ],
         ),
       ),

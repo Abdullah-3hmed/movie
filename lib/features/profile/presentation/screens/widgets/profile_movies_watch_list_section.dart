@@ -15,30 +15,34 @@ class ProfileMoviesWatchListSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        CustomSectionTitle(
-          title: AppStrings.moviesWatchList,
-          onPressed: () {
-            context.pushRoute(const WatchListRoute());
-          },
-        ),
-        BlocBuilder<ProfileCubit, ProfileState>(
-          buildWhen:
-              (previous, current) =>
-                  previous.moviesWatchlistState !=
-                      current.moviesWatchlistState ||
-                  previous.moviesWatchlist != current.moviesWatchlist,
-          builder: (context, state) {
-            switch (state.profileState) {
-              case RequestStatus.success:
-                return state.moviesWatchlist.isEmpty
-                    ? const SizedBox(height: 250.0)
-                    : SizedBox(
+    return BlocBuilder<ProfileCubit, ProfileState>(
+      buildWhen:
+          (previous, current) =>
+              previous.moviesWatchlistState != current.moviesWatchlistState ||
+              previous.moviesWatchlist != current.moviesWatchlist,
+      builder: (context, state) {
+        switch (state.profileState) {
+          case RequestStatus.success:
+            return state.moviesWatchlist.isEmpty
+                ? const SizedBox(height: 250.0)
+                : Column(
+                  children: [
+                    CustomSectionTitle(
+                      title: AppStrings.moviesWatchList,
+                      onPressed: () {
+                        context.pushRoute(
+                          MovieWatchListRoute(
+                            title: AppStrings.moviesWatchList,
+                            movies: state.moviesWatchlist,
+                          ),
+                        );
+                      },
+                    ),
+                    SizedBox(
                       height: 250.0,
                       child: ListView.separated(
                         scrollDirection: Axis.horizontal,
-                        padding: EdgeInsetsDirectional.symmetric(
+                        padding: const EdgeInsetsDirectional.symmetric(
                           horizontal: AppConstants.horizontalPadding,
                         ),
                         physics: const BouncingScrollPhysics(),
@@ -53,23 +57,23 @@ class ProfileMoviesWatchListSection extends StatelessWidget {
                             (context, index) => const SizedBox(width: 10.0),
                         itemCount: state.moviesWatchlist.length,
                       ),
-                    );
-              case RequestStatus.error:
-                return SizedBox(
-                  height: 250.0,
-                  child: Center(
-                    child: Text(
-                      state.moviesWatchlistErrorMessage,
-                      style: Theme.of(context).textTheme.bodyMedium,
                     ),
-                  ),
+                  ],
                 );
-              default:
-                return const SizedBox.shrink();
-            }
-          },
-        ),
-      ],
+          case RequestStatus.error:
+            return SizedBox(
+              height: 250.0,
+              child: Center(
+                child: Text(
+                  state.moviesWatchlistErrorMessage,
+                  style: Theme.of(context).textTheme.bodyMedium,
+                ),
+              ),
+            );
+          default:
+            return const SizedBox.shrink();
+        }
+      },
     );
   }
 }

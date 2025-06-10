@@ -11,10 +11,14 @@ import 'package:movie/features/tv/data/tv_model.dart';
 import 'package:movie/features/tv/presentation/screens/widgets/custom_tv_watch_list_icon.dart';
 
 class SeeAllTvShowsListItem extends StatelessWidget {
-  const SeeAllTvShowsListItem({super.key, required this.tvModel});
+  const SeeAllTvShowsListItem({
+    super.key,
+    required this.tvModel,
+    this.isWatchList = false,
+  });
 
   final TvModel tvModel;
-
+  final bool isWatchList;
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -90,11 +94,12 @@ class SeeAllTvShowsListItem extends StatelessWidget {
                 ],
               ),
             ),
-            PositionedDirectional(
-              top: 10.0,
-              end: 15.0,
-              child: CustomTvWatchListIcon(tvModel: tvModel),
-            ),
+            if (isWatchList)
+              PositionedDirectional(
+                top: 10.0,
+                end: 15.0,
+                child: CustomTvWatchListIcon(tvModel: tvModel),
+              ),
           ],
         ),
       ),
