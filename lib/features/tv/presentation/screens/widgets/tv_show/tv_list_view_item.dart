@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:movie/config/router/app_router.dart';
+import 'package:movie/core/util/app_constants.dart';
 import 'package:movie/core/util/color_manager.dart';
 import 'package:movie/core/util/geners.dart';
 import 'package:movie/core/widgets/custom_cached_network_image.dart';
@@ -19,7 +20,7 @@ class TvListViewItem extends StatelessWidget {
         context.pushRoute(TvDetailsRoute(tvId: tvModel.id));
       },
       child: Transform(
-        transform: Matrix4.skewX(-0.08),
+        transform: Matrix4.skewX(AppConstants.skew),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(20.0),
           child: Stack(
@@ -31,14 +32,12 @@ class TvListViewItem extends StatelessWidget {
               ),
               PositionedDirectional(
                 bottom: 10.0,
-                start: 0.0,
-                end: 0.0,
+                start: 5.0,
+                end: 5.0,
                 child: Column(
                   children: [
                     Text(
-                      tvModel.name.length > 20
-                          ? "${tvModel.name.substring(0, 20)}..."
-                          : tvModel.name,
+                      tvModel.name,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: Theme.of(context).textTheme.bodyLarge,
@@ -54,25 +53,26 @@ class TvListViewItem extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(
-                          "TMDB ${tvModel.voteAverage} ",
-                          style: Theme.of(context).textTheme.bodySmall,
-                        ),
-                        RatingBar.builder(
-                          initialRating: tvModel.voteAverage,
-                          minRating: 1,
-                          allowHalfRating: true,
-                          itemSize: 12.0,
-                          itemCount: tvModel.voteAverage.toInt(),
-                          itemPadding: const EdgeInsets.symmetric(
-                            horizontal: 1.0,
+                        Flexible(
+                          child: Text(
+                            "TMDB ${tvModel.voteAverage} ",
+                            style: Theme.of(context).textTheme.bodySmall,
                           ),
-                          itemBuilder:
-                              (context, _) => const Icon(
-                                Icons.star,
-                                color: ColorsManager.ratingIconColor,
-                              ),
-                          onRatingUpdate: (rating) {},
+                        ),
+                        Flexible(
+                          child: RatingBarIndicator(
+                            rating: tvModel.voteAverage,
+                            itemSize: 12.0,
+                            itemCount: tvModel.voteAverage.toInt(),
+                            itemPadding: const EdgeInsets.symmetric(
+                              horizontal: 1.0,
+                            ),
+                            itemBuilder:
+                                (context, _) => const Icon(
+                                  Icons.star,
+                                  color: ColorsManager.ratingIconColor,
+                                ),
+                          ),
                         ),
                       ],
                     ),

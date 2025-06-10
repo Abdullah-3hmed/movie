@@ -47,10 +47,8 @@ class TvPageViewItem extends StatelessWidget {
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
                 const SizedBox(height: 5.0),
-                RatingBar.builder(
-                  initialRating: tvModel.voteAverage,
-                  minRating: 1,
-                  allowHalfRating: true,
+                RatingBarIndicator(
+                  rating: tvModel.voteAverage,
                   itemSize: 20.0,
                   itemCount: tvModel.voteAverage.toInt(),
                   itemPadding: const EdgeInsets.symmetric(horizontal: 1.0),
@@ -59,11 +57,10 @@ class TvPageViewItem extends StatelessWidget {
                         Icons.star,
                         color: ColorsManager.ratingIconColor,
                       ),
-                  onRatingUpdate: (rating) {},
                 ),
                 const SizedBox(height: 5.0),
                 Text(
-                  "From ${tvModel.voteCount} users",
+                  AppStrings.fromUser(tvModel.voteCount),
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
               ],

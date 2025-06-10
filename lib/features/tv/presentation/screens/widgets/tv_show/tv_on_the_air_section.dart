@@ -24,6 +24,12 @@ class _TvOnTheAirSectionState extends State<TvOnTheAirSection> {
   }
 
   @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return BlocBuilder<TvCubit, TvState>(
       buildWhen:
@@ -31,8 +37,6 @@ class _TvOnTheAirSectionState extends State<TvOnTheAirSection> {
               previous.tvOnTheAirState != current.tvOnTheAirState,
       builder: (context, state) {
         switch (state.tvOnTheAirState) {
-          case RequestStatus.loading:
-            return const SizedBox.shrink();
           case RequestStatus.success:
             return Column(
               children: [

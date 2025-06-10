@@ -21,8 +21,6 @@ class TvAiringTodaySection extends StatelessWidget {
               previous.tvAiringTodayState != current.tvAiringTodayState,
       builder: (context, state) {
         switch (state.tvAiringTodayState) {
-          case RequestStatus.loading:
-            return const SizedBox.shrink();
           case RequestStatus.success:
             return Column(
               children: [
@@ -44,7 +42,7 @@ class TvAiringTodaySection extends StatelessWidget {
                   child: ListView.separated(
                     scrollDirection: Axis.horizontal,
                     physics: const BouncingScrollPhysics(),
-                    padding: EdgeInsetsDirectional.symmetric(
+                    padding: const EdgeInsetsDirectional.symmetric(
                       horizontal: AppConstants.horizontalPadding,
                     ),
                     itemBuilder:

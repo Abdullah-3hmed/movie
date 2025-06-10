@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie/config/router/app_router.dart';
 import 'package:movie/core/icons/solar_system_icons.dart';
 import 'package:movie/core/services/service_locator.dart';
+import 'package:movie/features/movies/cubit/movie/movie_cubit.dart';
 import 'package:movie/features/tv/cubit/tv_cubit/tv_cubit.dart';
 
 import '../movies/cubit/movie_details/movie_details_cubit_manager.dart';
@@ -17,9 +18,19 @@ class BottomNavBarScreen extends StatefulWidget implements AutoRouteWrapper {
 
   @override
   Widget wrappedRoute(BuildContext context) {
-    return BlocProvider(
-      lazy: false,
-      create: (context) => getIt<TvCubit>()..getAllTvShows(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          lazy: false,
+          create: (context) => getIt<MovieCubit>()..getAllHomeMovies(),
+          child: this,
+        ),
+        BlocProvider(
+          lazy: false,
+          create: (context) => getIt<TvCubit>()..getAllTvShows(),
+          child: this,
+        ),
+      ],
       child: this,
     );
   }

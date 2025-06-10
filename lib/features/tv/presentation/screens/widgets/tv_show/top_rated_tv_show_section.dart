@@ -21,8 +21,6 @@ class TopRatedTvShowSection extends StatelessWidget {
               previous.tvTopRatedState != current.tvTopRatedState,
       builder: (context, state) {
         switch (state.tvTopRatedState) {
-          case RequestStatus.loading:
-            return const SizedBox.shrink();
           case RequestStatus.success:
             return Column(
               children: [
@@ -45,7 +43,7 @@ class TopRatedTvShowSection extends StatelessWidget {
                     scrollDirection: Axis.horizontal,
                     cacheExtent: 200.0,
                     physics: const BouncingScrollPhysics(),
-                    padding: EdgeInsetsDirectional.symmetric(
+                    padding: const EdgeInsetsDirectional.symmetric(
                       horizontal: AppConstants.horizontalPadding,
                     ),
                     itemBuilder:

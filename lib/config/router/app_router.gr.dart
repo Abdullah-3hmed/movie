@@ -183,7 +183,7 @@ class MoviesRoute extends PageRouteInfo<void> {
   static PageInfo page = PageInfo(
     name,
     builder: (data) {
-      return WrappedRoute(child: const MoviesScreen());
+      return const MoviesScreen();
     },
   );
 }
