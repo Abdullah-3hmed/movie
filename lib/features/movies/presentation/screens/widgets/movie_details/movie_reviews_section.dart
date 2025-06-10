@@ -28,29 +28,29 @@ class MovieReviewsSection extends StatelessWidget {
                   previous.reviewsState != current.reviewsState,
           builder: (context, state) {
             switch (state.reviewsState) {
-              case RequestStatus.loading:
-                return const SizedBox.shrink();
               case RequestStatus.success:
-                return SizedBox(
-                  height: 200.0,
-                  child: ListView.separated(
-                    padding: const EdgeInsetsDirectional.symmetric(
-                      horizontal: 16.0,
-                    ),
-                    scrollDirection: Axis.horizontal,
-                    physics: const BouncingScrollPhysics(),
-                    itemBuilder:
-                        (context, index) => SizedBox(
-                          height: 200.0,
-                          child: ReviewListViewItem(
-                            review: state.reviews[index],
-                          ),
+                return state.reviews.isEmpty
+                    ? const SizedBox.shrink()
+                    : SizedBox(
+                      height: 200.0,
+                      child: ListView.separated(
+                        padding: const EdgeInsetsDirectional.symmetric(
+                          horizontal: 16.0,
                         ),
-                    separatorBuilder:
-                        (context, index) => const SizedBox(width: 10.0),
-                    itemCount: state.reviews.length,
-                  ),
-                );
+                        scrollDirection: Axis.horizontal,
+                        physics: const BouncingScrollPhysics(),
+                        itemBuilder:
+                            (context, index) => SizedBox(
+                              height: 200.0,
+                              child: ReviewListViewItem(
+                                review: state.reviews[index],
+                              ),
+                            ),
+                        separatorBuilder:
+                            (context, index) => const SizedBox(width: 10.0),
+                        itemCount: state.reviews.length,
+                      ),
+                    );
               case RequestStatus.error:
                 return SizedBox(
                   height: 200.0,

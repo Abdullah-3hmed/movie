@@ -17,8 +17,6 @@ class MovieDetailsSection extends StatelessWidget {
               previous.movieDetailsState != current.movieDetailsState,
       builder: (context, state) {
         switch (state.movieDetailsState) {
-          case RequestStatus.loading:
-            return const SizedBox.shrink();
           case RequestStatus.success:
             final theme = Theme.of(context).textTheme;
             return Padding(
@@ -32,7 +30,7 @@ class MovieDetailsSection extends StatelessWidget {
                   ),
                   const SizedBox(height: 7.0),
                   Text(
-                    state.movieDetails.geners.join(", "),
+                    state.movieDetails.geners.join(" , "),
                     style: theme.bodySmall!.copyWith(
                       fontSize: 12.0,
                       color: Colors.white.withValues(alpha: 0.8),
@@ -48,10 +46,7 @@ class MovieDetailsSection extends StatelessWidget {
                             AppStrings.year,
                             style: theme.bodyMedium!.copyWith(fontSize: 14.0),
                           ),
-                          Text(
-                            "${state.movieDetails.year}",
-                            style: theme.bodyLarge,
-                          ),
+                          Text(state.movieDetails.year, style: theme.bodyLarge),
                         ],
                       ),
                       Column(

@@ -1,17 +1,16 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:movie/config/router/app_router.dart';
 import 'package:movie/core/enums/request_status.dart';
-import 'package:movie/core/icons/solar_system_icons.dart';
-import 'package:movie/core/network/api_constants.dart';
 import 'package:movie/core/util/assets_manager.dart';
 import 'package:movie/core/util/show_toast.dart';
 import 'package:movie/core/widgets/custom_back_button.dart';
+import 'package:movie/core/widgets/custom_cached_network_image.dart';
 import 'package:movie/features/movies/cubit/movie_details/movie_details_cubit.dart';
 import 'package:movie/features/movies/cubit/movie_details/movie_details_state.dart';
+import 'package:movie/features/movies/presentation/screens/widgets/custom_movies_watch_List_Icon.dart';
 import 'package:movie/features/movies/presentation/screens/widgets/movie_details/movie_details_clipper.dart';
 
 class MovieDetailsPoster extends StatelessWidget {
@@ -27,8 +26,6 @@ class MovieDetailsPoster extends StatelessWidget {
               previous.movieDetailsState != current.movieDetailsState,
       builder: (context, state) {
         switch (state.movieDetailsState) {
-          case RequestStatus.loading:
-            return const SizedBox.shrink();
           case RequestStatus.success:
             return Column(
               children: [
@@ -42,24 +39,15 @@ class MovieDetailsPoster extends StatelessWidget {
                       width: double.infinity,
                       child: ClipPath(
                         clipper: MovieDetailsClipper(),
-                        child: CachedNetworkImage(
-                          imageUrl:
-                              state.movieDetails.posterPath.isNotEmpty
-                                  ? ApiConstants.imageUrl(
-                                    state.movieDetails.posterPath,
-                                  )
-                                  : AssetsManager.errorPoster,
-                          errorWidget:
-                              (context, url, error) => Image.network(
-                                AssetsManager.errorPoster,
-                                fit: BoxFit.cover,
-                              ),
-                          fit: BoxFit.cover,
+                        child: CustomCachedNetworkImage(
+                          imageUrl: state.movieDetails.posterPath,
+                          height: posterHeight,
+                          width: double.infinity,
                         ),
                       ),
                     ),
                     const PositionedDirectional(
-                      top: 60.0,
+                      top: 40.0,
                       start: 16.0,
                       child: CustomBackButton(),
                     ),
@@ -125,13 +113,8 @@ class MovieDetailsPoster extends StatelessWidget {
                           ),
                         ],
                       ),
-                      IconButton(
-                        onPressed: () {},
-                        icon: const Icon(
-                          SolarSystemIcons.unsaved,
-                          size: 30.0,
-                          color: Color(0xFF007373),
-                        ),
+                      CustomMoviesWatchListIcon(
+                        moviesModel: state.movieDetails.toMoviesModel(),
                       ),
                     ],
                   ),

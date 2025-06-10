@@ -39,7 +39,6 @@ class MovieDetailsScreen extends StatefulWidget implements AutoRouteWrapper {
 class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
   final ValueNotifier<double> posterHeight = ValueNotifier<double>(330.0);
   final double maxHeight = 330.0;
-  final double minHeight = 180.0;
 
   late final ScrollController scrollController;
 
@@ -54,7 +53,7 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
     final direction = scrollController.position.userScrollDirection;
     final offset = scrollController.offset;
     if (direction == ScrollDirection.reverse) {
-      final newHeight = (maxHeight - offset).clamp(minHeight, maxHeight);
+      final newHeight = (maxHeight - offset).clamp(0.0, maxHeight);
       if (posterHeight.value != newHeight) {
         posterHeight.value = newHeight;
       }
@@ -105,12 +104,12 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
                       const SliverToBoxAdapter(child: RecommendedSection()),
                       const SliverToBoxAdapter(child: SimilarSection()),
                       const SliverToBoxAdapter(child: MovieReviewsSection()),
-                      const SliverToBoxAdapter(child: SizedBox(height: 40.0)),
+                      const SliverToBoxAdapter(child: SizedBox(height: 20.0)),
                     ],
                   );
                 case RequestStatus.error:
                   return NoInternetWidget(
-                    errorMessage: state.movieDetailsErrorMessage,
+                    errorMessage: state.allMovieDetailsErrorMessage,
                     onPressed: () {
                       getIt<MovieDetailsCubitManager>().getOrCreate(
                         widget.movieId,
