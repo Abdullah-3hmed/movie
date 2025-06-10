@@ -20,7 +20,7 @@ class TvOverviewScreen extends StatelessWidget {
         SliverToBoxAdapter(child: TvRecommendedSection()),
         SliverToBoxAdapter(child: TvSimilarSection()),
         SliverToBoxAdapter(child: TvReviewsSection()),
-        SliverToBoxAdapter(child: SizedBox(height: 30.0)),
+        SliverToBoxAdapter(child: SizedBox(height: 20.0)),
       ],
     );
   }

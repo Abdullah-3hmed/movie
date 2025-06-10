@@ -22,46 +22,46 @@ class TvRecommendedSection extends StatelessWidget {
               previous.tvRecommendedState != current.tvRecommendedState,
       builder: (context, state) {
         switch (state.tvRecommendedState) {
-          case RequestStatus.loading:
-            return const SizedBox.shrink();
           case RequestStatus.success:
-            return Column(
-              children: [
-                const CustomDivider(),
-                CustomSectionTitle(
-                  title: AppStrings.recommended,
-                  onPressed: () {
-                    context.pushRoute(
-                      SeeAllTvShowsRoute(
-                        title: AppStrings.recommended,
-                        tvShows: state.tvRecommended,
-                      ),
-                    );
-                  },
-                ),
-                SizedBox(
-                  height: 200.0,
-                  child: ListView.separated(
-                    padding: EdgeInsetsDirectional.symmetric(
-                      horizontal: AppConstants.horizontalPadding,
+            return state.tvRecommended.isEmpty
+                ? const SizedBox.shrink()
+                : Column(
+                  children: [
+                    const CustomDivider(),
+                    CustomSectionTitle(
+                      title: AppStrings.recommended,
+                      onPressed: () {
+                        context.pushRoute(
+                          SeeAllTvShowsRoute(
+                            title: AppStrings.recommended,
+                            tvShows: state.tvRecommended,
+                          ),
+                        );
+                      },
                     ),
-                    scrollDirection: Axis.horizontal,
-                    cacheExtent: 200.0,
-                    physics: const BouncingScrollPhysics(),
-                    itemBuilder:
-                        (context, index) => SizedBox(
-                          height: 200.0,
-                          child: TvListViewItem(
-                            tvModel: state.tvRecommended[index],
-                          ), //MovieDetailsListItem(),
+                    SizedBox(
+                      height: 200.0,
+                      child: ListView.separated(
+                        padding: const EdgeInsetsDirectional.symmetric(
+                          horizontal: AppConstants.horizontalPadding,
                         ),
-                    separatorBuilder:
-                        (context, index) => const SizedBox(width: 10.0),
-                    itemCount: state.tvRecommended.length,
-                  ),
-                ),
-              ],
-            );
+                        scrollDirection: Axis.horizontal,
+                        cacheExtent: 200.0,
+                        physics: const BouncingScrollPhysics(),
+                        itemBuilder:
+                            (context, index) => SizedBox(
+                              height: 200.0,
+                              child: TvListViewItem(
+                                tvModel: state.tvRecommended[index],
+                              ), //MovieDetailsListItem(),
+                            ),
+                        separatorBuilder:
+                            (context, index) => const SizedBox(width: 10.0),
+                        itemCount: state.tvRecommended.length,
+                      ),
+                    ),
+                  ],
+                );
           case RequestStatus.error:
             return SizedBox(
               height: 200.0,

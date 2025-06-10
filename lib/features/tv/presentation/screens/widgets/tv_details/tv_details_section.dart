@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie/core/enums/request_status.dart';
-import 'package:movie/core/icons/solar_system_icons.dart';
 import 'package:movie/core/util/app_strings.dart';
 import 'package:movie/core/widgets/custom_divider.dart';
 import 'package:movie/features/tv/cubit/tv_details_cubit/tv_details_cubit.dart';
 import 'package:movie/features/tv/cubit/tv_details_cubit/tv_details_state.dart';
+import 'package:movie/features/tv/presentation/screens/widgets/custom_tv_watch_List_Icon.dart';
 
 class TvDetailsSection extends StatelessWidget {
   const TvDetailsSection({super.key});
@@ -18,8 +18,6 @@ class TvDetailsSection extends StatelessWidget {
               previous.tvDetailsState != current.tvDetailsState,
       builder: (context, state) {
         switch (state.tvDetailsState) {
-          case RequestStatus.loading:
-            return const SizedBox.shrink();
           case RequestStatus.success:
             return Column(
               children: [
@@ -40,13 +38,8 @@ class TvDetailsSection extends StatelessWidget {
                           Text("${state.tvDetailsModel.voteCount}"),
                         ],
                       ),
-                      IconButton(
-                        onPressed: () {},
-                        icon: const Icon(
-                          SolarSystemIcons.unsaved,
-                          size: 30.0,
-                          color: Color(0xFF007373),
-                        ),
+                      CustomTvWatchListIcon(
+                        tvModel: state.tvDetailsModel.toTvModel(),
                       ),
                     ],
                   ),

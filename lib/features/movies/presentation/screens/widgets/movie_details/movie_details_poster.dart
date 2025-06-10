@@ -10,7 +10,7 @@ import 'package:movie/core/widgets/custom_back_button.dart';
 import 'package:movie/core/widgets/custom_cached_network_image.dart';
 import 'package:movie/features/movies/cubit/movie_details/movie_details_cubit.dart';
 import 'package:movie/features/movies/cubit/movie_details/movie_details_state.dart';
-import 'package:movie/features/movies/presentation/screens/widgets/custom_movies_watch_List_Icon.dart';
+import 'package:movie/features/movies/presentation/screens/widgets/custom_movies_watch_list_icon.dart';
 import 'package:movie/features/movies/presentation/screens/widgets/movie_details/movie_details_clipper.dart';
 
 class MovieDetailsPoster extends StatelessWidget {

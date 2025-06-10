@@ -19,41 +19,41 @@ class TvReviewsSection extends StatelessWidget {
               previous.tvReviewsState != current.tvReviewsState,
       builder: (context, state) {
         switch (state.tvReviewsState) {
-          case RequestStatus.loading:
-            return const SizedBox.shrink();
           case RequestStatus.success:
-            return Column(
-              children: [
-                const CustomDivider(),
-                CustomSectionTitle(
-                  title: AppStrings.reviews,
-                  onPressed: () {},
-                  seeAll: false,
-                ),
-                const SizedBox(height: 16.0),
-                SizedBox(
-                  height: 200.0,
-                  child: ListView.separated(
-                    padding: const EdgeInsetsDirectional.symmetric(
-                      horizontal: 16.0,
+            return state.tvReviews.isEmpty
+                ? const SizedBox.shrink()
+                : Column(
+                  children: [
+                    const CustomDivider(),
+                    CustomSectionTitle(
+                      title: AppStrings.reviews,
+                      onPressed: () {},
+                      seeAll: false,
                     ),
-                    scrollDirection: Axis.horizontal,
-                    physics: const BouncingScrollPhysics(),
-                    itemBuilder:
-                        (context, index) => SizedBox(
-                          height: 200.0,
-                          child: ReviewListViewItem(
-                            review: state.tvReviews[index],
-                          ),
+                    const SizedBox(height: 16.0),
+                    SizedBox(
+                      height: 200.0,
+                      child: ListView.separated(
+                        padding: const EdgeInsetsDirectional.symmetric(
+                          horizontal: 16.0,
                         ),
-                    // MovieReviewItem()),
-                    separatorBuilder:
-                        (context, index) => const SizedBox(width: 10.0),
-                    itemCount: state.tvReviews.length,
-                  ),
-                ),
-              ],
-            );
+                        scrollDirection: Axis.horizontal,
+                        physics: const BouncingScrollPhysics(),
+                        itemBuilder:
+                            (context, index) => SizedBox(
+                              height: 200.0,
+                              child: ReviewListViewItem(
+                                review: state.tvReviews[index],
+                              ),
+                            ),
+                        // MovieReviewItem()),
+                        separatorBuilder:
+                            (context, index) => const SizedBox(width: 10.0),
+                        itemCount: state.tvReviews.length,
+                      ),
+                    ),
+                  ],
+                );
           case RequestStatus.error:
             return SizedBox(
               height: 200.0,

@@ -125,7 +125,7 @@ class TvDetailsCubit extends Cubit<TvDetailsState> {
       emit(
         state.copyWith(
           allTvDetailsState: RequestStatus.error,
-          allTvDetailsErrorMessage: state.allTvDetailsErrorMessage,
+          allTvDetailsErrorMessage: state.tvDetailsErrorMessage,
         ),
       );
     } else {
@@ -134,7 +134,6 @@ class TvDetailsCubit extends Cubit<TvDetailsState> {
   }
 
   Future<String> getTrailer({required int videoId}) async {
-    String trailerKey = '';
     final result = await tvDetailsRepo.getTvTrailer(tvId: videoId);
     result.fold(
       (failure) => emit(
@@ -144,12 +143,11 @@ class TvDetailsCubit extends Cubit<TvDetailsState> {
         ),
       ),
       (trailer) {
-        trailerKey = trailer;
         emit(
           state.copyWith(trailerState: RequestStatus.success, videoId: trailer),
         );
       },
     );
-    return trailerKey;
+    return state.videoId;
   }
 }

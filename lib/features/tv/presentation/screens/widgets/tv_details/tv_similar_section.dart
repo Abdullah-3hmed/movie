@@ -20,36 +20,39 @@ class TvSimilarSection extends StatelessWidget {
               previous.tvSimilarState != current.tvSimilarState,
       builder: (context, state) {
         switch (state.tvSimilarState) {
-          case RequestStatus.loading:
-            return const SizedBox.shrink();
           case RequestStatus.success:
-            return Column(
-              children: [
-                const CustomDivider(),
-                CustomSectionTitle(title: AppStrings.similar, onPressed: () {}),
-                SizedBox(
-                  height: 200.0,
-                  child: ListView.separated(
-                    padding: EdgeInsetsDirectional.symmetric(
-                      horizontal: AppConstants.horizontalPadding,
+            return state.tvSimilar.isEmpty
+                ? const SizedBox.shrink()
+                : Column(
+                  children: [
+                    const CustomDivider(),
+                    CustomSectionTitle(
+                      title: AppStrings.similar,
+                      onPressed: () {},
                     ),
-                    scrollDirection: Axis.horizontal,
-                    cacheExtent: 200.0,
-                    physics: const BouncingScrollPhysics(),
-                    itemBuilder:
-                        (context, index) => SizedBox(
-                          height: 200.0,
-                          child: TvListViewItem(
-                            tvModel: state.tvSimilar[index],
-                          ), //MovieDetailsListItem(),
+                    SizedBox(
+                      height: 200.0,
+                      child: ListView.separated(
+                        padding: const EdgeInsetsDirectional.symmetric(
+                          horizontal: AppConstants.horizontalPadding,
                         ),
-                    separatorBuilder:
-                        (context, index) => const SizedBox(width: 10.0),
-                    itemCount: state.tvSimilar.length,
-                  ),
-                ),
-              ],
-            );
+                        scrollDirection: Axis.horizontal,
+                        cacheExtent: 200.0,
+                        physics: const BouncingScrollPhysics(),
+                        itemBuilder:
+                            (context, index) => SizedBox(
+                              height: 200.0,
+                              child: TvListViewItem(
+                                tvModel: state.tvSimilar[index],
+                              ), //MovieDetailsListItem(),
+                            ),
+                        separatorBuilder:
+                            (context, index) => const SizedBox(width: 10.0),
+                        itemCount: state.tvSimilar.length,
+                      ),
+                    ),
+                  ],
+                );
           case RequestStatus.error:
             return SizedBox(
               height: 200.0,

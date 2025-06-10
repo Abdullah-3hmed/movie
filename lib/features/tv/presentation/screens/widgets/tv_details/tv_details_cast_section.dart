@@ -20,42 +20,41 @@ class TvDetailsCastSection extends StatelessWidget {
           (previous, current) => previous.tvCastState != current.tvCastState,
       builder: (context, state) {
         switch (state.tvCastState) {
-          case RequestStatus.loading:
-            return const SizedBox.shrink();
           case RequestStatus.success:
-            return Column(
-              children: [
-                CustomSectionTitle(
-                  title: AppStrings.cast,
-                  onPressed: () {
-                    context.pushRoute(SeeAllCastRoute(cast: state.tvCast));
-                  },
-                ),
-                const SizedBox(height: 16.0),
-                SizedBox(
-                  height: 200.0,
-                  child: ListView.separated(
-                    scrollDirection: Axis.horizontal,
-                    cacheExtent: 200.0,
-                    physics: const BouncingScrollPhysics(),
-                    padding: EdgeInsetsDirectional.symmetric(
-                      horizontal: AppConstants.horizontalPadding,
+            return state.tvCast.isEmpty
+                ? const SizedBox.shrink()
+                : Column(
+                  children: [
+                    CustomSectionTitle(
+                      title: AppStrings.cast,
+                      onPressed: () {
+                        context.pushRoute(SeeAllCastRoute(cast: state.tvCast));
+                      },
                     ),
-                    itemBuilder:
-                        (context, index) => SizedBox(
-                          height: 200.0,
-                          child: CastListViewItem(
-                            castModel: state.tvCast[index],
-                          ),
+                    const SizedBox(height: 16.0),
+                    SizedBox(
+                      height: 200.0,
+                      child: ListView.separated(
+                        scrollDirection: Axis.horizontal,
+                        cacheExtent: 200.0,
+                        physics: const BouncingScrollPhysics(),
+                        padding: const EdgeInsetsDirectional.symmetric(
+                          horizontal: AppConstants.horizontalPadding,
                         ),
-                    //CastListViewItem()),
-                    separatorBuilder:
-                        (context, index) => const SizedBox(width: 8.0),
-                    itemCount: state.tvCast.length,
-                  ),
-                ),
-              ],
-            );
+                        itemBuilder:
+                            (context, index) => SizedBox(
+                              height: 200.0,
+                              child: CastListViewItem(
+                                castModel: state.tvCast[index],
+                              ),
+                            ),
+                        separatorBuilder:
+                            (context, index) => const SizedBox(width: 8.0),
+                        itemCount: state.tvCast.length,
+                      ),
+                    ),
+                  ],
+                );
           case RequestStatus.error:
             return SizedBox(
               height: 200.0,

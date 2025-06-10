@@ -8,7 +8,7 @@ import 'package:movie/core/util/color_manager.dart';
 import 'package:movie/core/util/geners.dart';
 import 'package:movie/core/widgets/custom_cached_network_image.dart';
 import 'package:movie/features/movies/data/movies_model.dart';
-import 'package:movie/features/movies/presentation/screens/widgets/custom_movies_watch_List_Icon.dart';
+import 'package:movie/features/movies/presentation/screens/widgets/custom_movies_watch_list_icon.dart';
 
 class SeeAllMoviesListItem extends StatelessWidget {
   const SeeAllMoviesListItem({super.key, required this.movieModel});

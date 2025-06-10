@@ -65,7 +65,11 @@ class MovieDetailsModel extends Equatable {
       voteAverage: voteAverage,
       voteCount: voteCount,
       year: year,
-      genreIds: geners.map((name) => genreNameToIdMap[name]!).toList(),
+      genreIds:
+          geners
+              .map((name) => genreNameToIdMap[name])
+              .whereType<int>()
+              .toList(),
     );
   }
 
