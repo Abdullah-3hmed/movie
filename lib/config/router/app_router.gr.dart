@@ -76,6 +76,22 @@ class AuthRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [Authenticated]
+class AuthenticatedRoute extends PageRouteInfo<void> {
+  const AuthenticatedRoute({List<PageRouteInfo>? children})
+    : super(AuthenticatedRoute.name, initialChildren: children);
+
+  static const String name = 'AuthenticatedRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return WrappedRoute(child: const Authenticated());
+    },
+  );
+}
+
+/// generated route for
 /// [BottomNavBarScreen]
 class BottomNavBarRoute extends PageRouteInfo<void> {
   const BottomNavBarRoute({List<PageRouteInfo>? children})

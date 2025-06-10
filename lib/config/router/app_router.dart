@@ -11,6 +11,7 @@ import 'package:movie/features/movies/data/movies_model.dart';
 import 'package:movie/features/movies/presentation/screens/movie_details_screen.dart';
 import 'package:movie/features/movies/presentation/screens/movies_screen.dart';
 import 'package:movie/features/movies/presentation/screens/see_all_movies_screen.dart';
+import 'package:movie/features/profile/cubit/profile_cubit.dart';
 import 'package:movie/features/profile/presentation/screens/profile_screen.dart';
 import 'package:movie/features/profile/presentation/screens/watch_list_screen.dart';
 import 'package:movie/features/search/presentation/screens/search_actors_screen.dart';
@@ -51,35 +52,41 @@ class AppRouter extends RootStackRouter {
       ],
     ),
     _buildCustomRoute(
-      page: BottomNavBarRoute.page,
+      page: AuthenticatedRoute.page,
       children: [
-        _buildCustomRoute(initial: true, page: MoviesRoute.page),
-        _buildCustomRoute(page: TvRoute.page),
         _buildCustomRoute(
-          page: SearchRoute.page,
+          initial: true,
+          page: BottomNavBarRoute.page,
           children: [
-            _buildCustomRoute(initial: true, page: SearchMoviesRoute.page),
-            _buildCustomRoute(page: SearchTvRoute.page),
-            _buildCustomRoute(page: SearchActorsRoute.page),
+            _buildCustomRoute(initial: true, page: MoviesRoute.page),
+            _buildCustomRoute(page: TvRoute.page),
+            _buildCustomRoute(
+              page: SearchRoute.page,
+              children: [
+                _buildCustomRoute(initial: true, page: SearchMoviesRoute.page),
+                _buildCustomRoute(page: SearchTvRoute.page),
+                _buildCustomRoute(page: SearchActorsRoute.page),
+              ],
+            ),
+            _buildCustomRoute(page: ProfileRoute.page),
           ],
         ),
-        _buildCustomRoute(page: ProfileRoute.page),
+        _buildCustomRoute(page: MovieDetailsRoute.page),
+        _buildCustomRoute(page: SeeAllMoviesRoute.page),
+        _buildCustomRoute(
+          page: TvDetailsRoute.page,
+          children: [
+            _buildCustomRoute(initial: true, page: TvOverviewRoute.page),
+            _buildCustomRoute(page: TvSeasonsRoute.page),
+          ],
+        ),
+        _buildCustomRoute(page: ActorDetailsRoute.page),
+        _buildCustomRoute(page: WatchListRoute.page),
+        _buildCustomRoute(page: SeeAllCastRoute.page),
+        _buildCustomRoute(page: TrailerRoute.page),
+        _buildCustomRoute(page: SeeAllTvShowsRoute.page),
       ],
     ),
-    _buildCustomRoute(page: MovieDetailsRoute.page),
-    _buildCustomRoute(page: SeeAllMoviesRoute.page),
-    _buildCustomRoute(
-      page: TvDetailsRoute.page,
-      children: [
-        _buildCustomRoute(initial: true, page: TvOverviewRoute.page),
-        _buildCustomRoute(page: TvSeasonsRoute.page),
-      ],
-    ),
-    _buildCustomRoute(page: ActorDetailsRoute.page),
-    _buildCustomRoute(page: WatchListRoute.page),
-    _buildCustomRoute(page: SeeAllCastRoute.page),
-    _buildCustomRoute(page: TrailerRoute.page),
-    _buildCustomRoute(page: SeeAllTvShowsRoute.page),
   ];
 
   CustomRoute _buildCustomRoute({
@@ -109,4 +116,16 @@ class Auth extends AutoRouter implements AutoRouteWrapper {
   @override
   Widget wrappedRoute(BuildContext context) =>
       BlocProvider(create: (context) => getIt<AuthCubit>(), child: this);
+}
+
+@RoutePage(name: 'AuthenticatedRoute')
+class Authenticated extends AutoRouter implements AutoRouteWrapper {
+  const Authenticated({super.key});
+
+  @override
+  Widget wrappedRoute(BuildContext context) => BlocProvider(
+    lazy: false,
+    create: (context) => getIt<ProfileCubit>()..getProfileAndWatchLists(),
+    child: this,
+  );
 }

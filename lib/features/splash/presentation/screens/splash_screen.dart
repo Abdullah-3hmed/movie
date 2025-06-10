@@ -29,7 +29,7 @@ class _SplashScreenState extends State<SplashScreen> {
     if (AppConstants.sessionId.isEmpty) {
       context.replaceRoute(const AuthRoute());
     } else {
-      context.replaceRoute(const BottomNavBarRoute());
+      context.replaceRoute(const AuthenticatedRoute());
     }
   }
 }
