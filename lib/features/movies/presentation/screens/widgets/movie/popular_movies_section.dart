@@ -15,34 +15,32 @@ class PopularMoviesSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const SizedBox(height: 14.0),
-        CustomSectionTitle(
-          title: AppStrings.popularMovies,
-          onPressed: () {
-            context.pushRoute(
-              SeeAllMoviesRoute(
-                title: AppStrings.popularMovies,
-                movies: context.read<MovieCubit>().state.popularMovies,
-              ),
-            );
-          },
-        ),
-        BlocBuilder<MovieCubit, MovieState>(
-          buildWhen:
-              (previous, current) =>
-                  previous.popularMoviesState != current.popularMoviesState,
-          builder: (context, state) {
-            switch (state.popularMoviesState) {
-              case RequestStatus.loading:
-                return const SizedBox.shrink();
-              case RequestStatus.success:
-                return SizedBox(
+    return BlocBuilder<MovieCubit, MovieState>(
+      buildWhen:
+          (previous, current) =>
+              previous.popularMoviesState != current.popularMoviesState,
+      builder: (context, state) {
+        switch (state.popularMoviesState) {
+          case RequestStatus.success:
+            return Column(
+              children: [
+                const SizedBox(height: 14.0),
+                CustomSectionTitle(
+                  title: AppStrings.popularMovies,
+                  onPressed: () {
+                    context.pushRoute(
+                      SeeAllMoviesRoute(
+                        title: AppStrings.popularMovies,
+                        movies: state.popularMovies,
+                      ),
+                    );
+                  },
+                ),
+                SizedBox(
                   height: 270.0,
                   child: ListView.separated(
                     scrollDirection: Axis.horizontal,
-                    padding: EdgeInsetsDirectional.symmetric(
+                    padding: const EdgeInsetsDirectional.symmetric(
                       horizontal: AppConstants.horizontalPadding,
                     ),
                     physics: const BouncingScrollPhysics(),
@@ -54,23 +52,23 @@ class PopularMoviesSection extends StatelessWidget {
                         (context, index) => const SizedBox(width: 10.0),
                     itemCount: state.popularMovies.length,
                   ),
-                );
-              case RequestStatus.error:
-                return SizedBox(
-                  height: 270.0,
-                  child: Center(
-                    child: Text(
-                      state.popularErrorMessage,
-                      style: Theme.of(context).textTheme.titleMedium,
-                    ),
-                  ),
-                );
-              default:
-                return const SizedBox.shrink();
-            }
-          },
-        ),
-      ],
+                ),
+              ],
+            );
+          case RequestStatus.error:
+            return SizedBox(
+              height: 270.0,
+              child: Center(
+                child: Text(
+                  state.popularErrorMessage,
+                  style: Theme.of(context).textTheme.titleMedium,
+                ),
+              ),
+            );
+          default:
+            return const SizedBox.shrink();
+        }
+      },
     );
   }
 }

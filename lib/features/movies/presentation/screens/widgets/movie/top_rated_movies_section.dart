@@ -15,34 +15,32 @@ class TopRatedMoviesSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const SizedBox(height: 14.0),
-        CustomSectionTitle(
-          title: AppStrings.topRated,
-          onPressed: () {
-            context.pushRoute(
-              SeeAllMoviesRoute(
-                title: AppStrings.topRated,
-                movies: context.read<MovieCubit>().state.topRatedMovies,
-              ),
-            );
-          },
-        ),
-        BlocBuilder<MovieCubit, MovieState>(
-          buildWhen:
-              (previous, current) =>
-                  previous.topRatedMoviesState != current.topRatedMoviesState,
-          builder: (context, state) {
-            switch (state.topRatedMoviesState) {
-              case RequestStatus.loading:
-                return const SizedBox.shrink();
-              case RequestStatus.success:
-                return SizedBox(
+    return BlocBuilder<MovieCubit, MovieState>(
+      buildWhen:
+          (previous, current) =>
+              previous.topRatedMoviesState != current.topRatedMoviesState,
+      builder: (context, state) {
+        switch (state.topRatedMoviesState) {
+          case RequestStatus.success:
+            return Column(
+              children: [
+                const SizedBox(height: 14.0),
+                CustomSectionTitle(
+                  title: AppStrings.topRated,
+                  onPressed: () {
+                    context.pushRoute(
+                      SeeAllMoviesRoute(
+                        title: AppStrings.topRated,
+                        movies: state.topRatedMovies,
+                      ),
+                    );
+                  },
+                ),
+                SizedBox(
                   height: 270.0,
                   child: ListView.separated(
                     scrollDirection: Axis.horizontal,
-                    padding: EdgeInsetsDirectional.symmetric(
+                    padding: const EdgeInsetsDirectional.symmetric(
                       horizontal: AppConstants.horizontalPadding,
                     ),
                     physics: const BouncingScrollPhysics(),
@@ -54,23 +52,23 @@ class TopRatedMoviesSection extends StatelessWidget {
                         (context, index) => const SizedBox(width: 16.0),
                     itemCount: state.topRatedMovies.length,
                   ),
-                );
-              case RequestStatus.error:
-                return SizedBox(
-                  height: 270.0,
-                  child: Center(
-                    child: Text(
-                      state.popularErrorMessage,
-                      style: Theme.of(context).textTheme.titleMedium,
-                    ),
-                  ),
-                );
-              default:
-                return const SizedBox.shrink();
-            }
-          },
-        ),
-      ],
+                ),
+              ],
+            );
+          case RequestStatus.error:
+            return SizedBox(
+              height: 270.0,
+              child: Center(
+                child: Text(
+                  state.topRatedErrorMessage,
+                  style: Theme.of(context).textTheme.titleMedium,
+                ),
+              ),
+            );
+          default:
+            return const SizedBox.shrink();
+        }
+      },
     );
   }
 }

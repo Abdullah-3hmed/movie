@@ -1,11 +1,10 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:movie/config/router/app_router.dart';
-import 'package:movie/core/network/api_constants.dart';
 import 'package:movie/core/util/app_strings.dart';
 import 'package:movie/core/util/color_manager.dart';
+import 'package:movie/core/widgets/custom_cached_network_image.dart';
 import 'package:movie/features/movies/data/up_coming_movies_model.dart';
 
 class MoviePageViewItem extends StatelessWidget {
@@ -17,21 +16,14 @@ class MoviePageViewItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        context.pushRoute(
-          MovieDetailsRoute(
-            movieId: upComingMoviesModel.id,
-            key: ValueKey(upComingMoviesModel.id),
-          ),
-        );
+        context.pushRoute(MovieDetailsRoute(movieId: upComingMoviesModel.id));
       },
       child: Stack(
         children: [
-          CachedNetworkImage(
-            imageUrl: ApiConstants.imageUrl(upComingMoviesModel.backdropPath),
-            errorWidget: (context, url, error) => const Icon(Icons.error),
+          CustomCachedNetworkImage(
+            imageUrl: upComingMoviesModel.backdropPath,
             height: 360.0,
             width: double.infinity,
-            fit: BoxFit.cover,
           ),
           PositionedDirectional(
             start: 16.0,
@@ -70,7 +62,7 @@ class MoviePageViewItem extends StatelessWidget {
                 ),
                 const SizedBox(height: 4.0),
                 Text(
-                  "From ${upComingMoviesModel.voteCount} users",
+                  AppStrings.fromUser(upComingMoviesModel.voteCount),
                   style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                     color: const Color(0xFFD8D8D8),
                     fontWeight: FontWeight.w400,

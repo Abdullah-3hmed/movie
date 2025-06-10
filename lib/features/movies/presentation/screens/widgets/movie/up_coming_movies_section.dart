@@ -37,8 +37,6 @@ class _UpComingMoviesSectionState extends State<UpComingMoviesSection> {
               previous.upComingMoviesState != current.upComingMoviesState,
       builder: (context, state) {
         switch (state.upComingMoviesState) {
-          case RequestStatus.loading:
-            return const SizedBox.shrink();
           case RequestStatus.success:
             return Column(
               children: [
@@ -73,7 +71,7 @@ class _UpComingMoviesSectionState extends State<UpComingMoviesSection> {
               height: 360.0,
               child: Center(
                 child: Text(
-                  state.popularErrorMessage,
+                  state.upComingErrorMessage,
                   style: Theme.of(context).textTheme.titleMedium,
                 ),
               ),

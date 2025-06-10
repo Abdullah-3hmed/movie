@@ -1,7 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie/config/router/app_router.dart';
 import 'package:movie/core/enums/media_type.dart';
@@ -120,13 +119,14 @@ class SeeAllMoviesListItem extends StatelessWidget {
                 },
                 builder: (context, inMoviesWatchlist) {
                   return IconButton(
-                    onPressed: () {
-                      HapticFeedback.lightImpact();
-                      context.read<ProfileCubit>().addAndRemoveFromWatchList(
-                        mediaType: MediaType.movie,
-                        mediaId: movieModel.id,
-                        moviesModel: movieModel,
-                      );
+                    onPressed: () async {
+                      await context
+                          .read<ProfileCubit>()
+                          .addAndRemoveFromWatchList(
+                            mediaType: MediaType.movie,
+                            mediaId: movieModel.id,
+                            moviesModel: movieModel,
+                          );
                     },
                     icon:
                         inMoviesWatchlist.contains(movieModel.id)

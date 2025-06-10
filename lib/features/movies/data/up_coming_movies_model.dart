@@ -20,11 +20,11 @@ class UpComingMoviesModel extends Equatable {
   factory UpComingMoviesModel.fromJson(Map<String, dynamic> json) {
     return UpComingMoviesModel(
       id: json['id'],
-      title: json['original_title'],
-      backdropPath: json['backdrop_path'],
-      voteCount: json['vote_count'],
-      releaseDate: json['release_date'],
-      voteAverage: json['vote_average'].toDouble(),
+      title: json['original_title'] ?? "",
+      backdropPath: json['backdrop_path'] ?? "",
+      voteCount: json['vote_count'] ?? "",
+      releaseDate: json['release_date'] ?? "",
+      voteAverage: json['vote_average'].toDouble() ?? 0.0,
     );
   }
 
