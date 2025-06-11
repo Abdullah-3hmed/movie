@@ -16,41 +16,39 @@ class LoginScreen extends StatelessWidget {
         padding: const EdgeInsetsDirectional.symmetric(horizontal: 30.0),
         child: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
-          child: SafeArea(
-            child: Column(
-              children: [
-                const SizedBox(height: 70.0),
-                Text(
-                  AppStrings.welcomeToOurCommunity,
-                  textAlign: TextAlign.center,
-                  style: textTheme.titleLarge,
-                ),
-                const SizedBox(height: 70.0),
-                const LoginForm(),
-                const SizedBox(height: 120.0),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      AppStrings.dontHaveAccount,
-                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                        color: Colors.white.withAlpha(153),
+          child: Column(
+            children: [
+              const SizedBox(height: 100.0),
+              Text(
+                AppStrings.welcomeToOurCommunity,
+                textAlign: TextAlign.center,
+                style: textTheme.titleLarge,
+              ),
+              const SizedBox(height: 70.0),
+              const LoginForm(),
+              const SizedBox(height: 100.0),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    AppStrings.dontHaveAccount,
+                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                      color: Colors.white.withAlpha(153),
+                    ),
+                  ),
+                  TextButton(
+                    onPressed: () {},
+                    child: Text(
+                      AppStrings.register,
+                      style: textTheme.bodyMedium!.copyWith(
+                        color: const Color(0xFF00CCCC),
                       ),
                     ),
-                    TextButton(
-                      onPressed: () {},
-                      child: Text(
-                        AppStrings.register,
-                        style: textTheme.bodyMedium!.copyWith(
-                          color: const Color(0xFF00CCCC),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 60.0),
-              ],
-            ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 60.0),
+            ],
           ),
         ),
       ),

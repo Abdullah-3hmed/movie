@@ -99,11 +99,11 @@ class _LoginFormState extends State<LoginForm> {
                 ),
               ),
             ),
-            const SizedBox(height: 150.0),
+            const SizedBox(height: 120.0),
             BlocConsumer<AuthCubit, AuthState>(
               listener: (context, state) {
                 if (state.loginStatus == RequestStatus.success) {
-                  context.replaceRoute(const BottomNavBarRoute());
+                  context.replaceRoute(const AuthenticatedRoute());
                 }
                 if (state.loginStatus == RequestStatus.error) {
                   showToast(
