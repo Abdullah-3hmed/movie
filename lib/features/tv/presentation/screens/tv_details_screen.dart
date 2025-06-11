@@ -73,9 +73,12 @@ class TvDetailsScreen extends StatelessWidget implements AutoRouteWrapper {
             case RequestStatus.error:
               return NoInternetWidget(
                 errorMessage: state.allTvDetailsErrorMessage,
-                onPressed:
-                    () async =>
-                        getIt<TvDetailsCubitManager>().getOrCreate(tvId),
+                onPressed: () async {
+                  final result = getIt<TvDetailsCubitManager>().getOrCreate(
+                    tvId,
+                  );
+                  await result.cubit.getAllTvDetails(tvId: tvId);
+                },
               );
             default:
               return const SizedBox.shrink();

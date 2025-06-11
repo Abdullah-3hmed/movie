@@ -38,9 +38,7 @@ class TvDetailsSection extends StatelessWidget {
                           Text("${state.tvDetailsModel.voteCount}"),
                         ],
                       ),
-                      CustomTvWatchListIcon(
-                        tvModel: state.tvDetailsModel.toTvModel(),
-                      ),
+                      CustomTvWatchListIcon(tvModel: state.tvModel),
                     ],
                   ),
                 ),

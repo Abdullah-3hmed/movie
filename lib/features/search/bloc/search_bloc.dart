@@ -79,11 +79,6 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
     );
   }
 
-  EventTransformer<T> debounceRestartable<T>(Duration duration) {
-    return (events, mapper) =>
-        restartable<T>().call(events.debounceTime(duration), mapper);
-  }
-
   FutureOr<void> _searchTvShowsEvent(
     SearchTvShowsEvent event,
     Emitter<SearchState> emit,
@@ -170,5 +165,10 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
         ),
       ),
     );
+  }
+
+  EventTransformer<T> debounceRestartable<T>(Duration duration) {
+    return (events, mapper) =>
+        restartable<T>().call(events.debounceTime(duration), mapper);
   }
 }

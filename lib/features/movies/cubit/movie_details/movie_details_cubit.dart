@@ -33,6 +33,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsState> {
       (movieDetails) => emit(
         state.copyWith(
           movieDetailsState: RequestStatus.success,
+          moviesModel: movieDetails.toMoviesModel(),
           movieDetails: movieDetails,
         ),
       ),

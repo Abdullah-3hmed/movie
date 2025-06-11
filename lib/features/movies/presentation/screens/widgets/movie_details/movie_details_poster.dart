@@ -113,9 +113,7 @@ class MovieDetailsPoster extends StatelessWidget {
                           ),
                         ],
                       ),
-                      CustomMoviesWatchListIcon(
-                        moviesModel: state.movieDetails.toMoviesModel(),
-                      ),
+                      CustomMoviesWatchListIcon(moviesModel: state.moviesModel),
                     ],
                   ),
                 ),

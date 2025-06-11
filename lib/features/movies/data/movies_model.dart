@@ -30,6 +30,15 @@ class MoviesModel extends Equatable {
       genreIds: List<int>.from(json['genre_ids'] ?? []),
     );
   }
+  static const empty = MoviesModel(
+    id: 0,
+    title: '',
+    backdropPath: '',
+    voteAverage: 0.0,
+    genreIds: [],
+    voteCount: 0,
+    year: '',
+  );
 
   @override
   List<Object> get props => [

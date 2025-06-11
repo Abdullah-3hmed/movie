@@ -1,4 +1,5 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class CacheHelper {
   final FlutterSecureStorage _flutterSecureStorage;
@@ -25,5 +26,14 @@ class CacheHelper {
 
   Future<void> deleteAll() async {
     await _flutterSecureStorage.deleteAll();
+  }
+
+  Future<void> isFirstInstall() async {
+    final prefs = await SharedPreferences.getInstance();
+    final isFirst = prefs.getBool("first_install") ?? true;
+    if (isFirst) {
+      await prefs.setBool("first_install", false);
+      await _flutterSecureStorage.deleteAll();
+    }
   }
 }

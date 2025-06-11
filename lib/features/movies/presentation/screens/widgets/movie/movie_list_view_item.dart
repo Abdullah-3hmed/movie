@@ -26,11 +26,11 @@ class MovieListViewItem extends StatelessWidget {
               child: CustomCachedNetworkImage(
                 imageUrl: moviesModel.backdropPath,
                 width: 200.0,
-                height: 250.0,
+                height: 270.0,
               ),
             ),
             PositionedDirectional(
-              bottom: 30.0,
+              bottom: 10.0,
               start: 5.0,
               end: 5.0,
               child: Column(

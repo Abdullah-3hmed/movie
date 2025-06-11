@@ -87,7 +87,7 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
                     previous.allMovieDetailsState !=
                     current.allMovieDetailsState,
             builder: (context, state) {
-              switch (state.movieDetailsState) {
+              switch (state.allMovieDetailsState) {
                 case RequestStatus.loading:
                   return const CustomLoading();
                 case RequestStatus.success:
@@ -110,9 +110,11 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
                 case RequestStatus.error:
                   return NoInternetWidget(
                     errorMessage: state.allMovieDetailsErrorMessage,
-                    onPressed: () {
-                      getIt<MovieDetailsCubitManager>().getOrCreate(
-                        widget.movieId,
+                    onPressed: () async {
+                      final result = getIt<MovieDetailsCubitManager>()
+                          .getOrCreate(widget.movieId);
+                      await result.cubit.getAllMoviesDetails(
+                        movieId: widget.movieId,
                       );
                     },
                   );

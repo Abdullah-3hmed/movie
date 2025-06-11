@@ -26,6 +26,7 @@ class TvDetailsState extends Equatable {
   final RequestStatus trailerState;
   final String videoId;
   final String trailerErrorMessage;
+  final TvModel tvModel;
   final bool isConnected;
 
   const TvDetailsState({
@@ -49,7 +50,7 @@ class TvDetailsState extends Equatable {
     this.trailerState = RequestStatus.initial,
     this.videoId = "",
     this.trailerErrorMessage = "",
-
+    this.tvModel = TvModel.empty,
     this.isConnected = true,
   });
 
@@ -75,6 +76,7 @@ class TvDetailsState extends Equatable {
     RequestStatus? trailerState,
     String? videoId,
     String? trailerErrorMessage,
+    TvModel? tvModel,
     bool? isConnected,
   }) {
     return TvDetailsState(
@@ -103,6 +105,7 @@ class TvDetailsState extends Equatable {
       trailerState: trailerState ?? this.trailerState,
       videoId: videoId ?? this.videoId,
       trailerErrorMessage: trailerErrorMessage ?? this.trailerErrorMessage,
+      tvModel: tvModel ?? this.tvModel,
       isConnected: isConnected ?? this.isConnected,
     );
   }
@@ -129,6 +132,7 @@ class TvDetailsState extends Equatable {
     trailerState,
     videoId,
     trailerErrorMessage,
+    tvModel,
     isConnected,
   ];
 }

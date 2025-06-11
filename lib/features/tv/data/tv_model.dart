@@ -30,7 +30,15 @@ class TvModel extends Equatable {
       voteCount: json['vote_count'] ?? 0,
     );
   }
-
+  static const empty = TvModel(
+    id: 0,
+    name: '',
+    backdropPath: '',
+    genreIds: [],
+    voteAverage: 0.0,
+    year: '',
+    voteCount: 0,
+  );
   @override
   List<Object> get props => [
     id,

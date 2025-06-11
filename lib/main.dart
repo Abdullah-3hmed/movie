@@ -11,6 +11,7 @@ import 'package:movie/my_app.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   ServiceLocator.init();
+  await getIt<CacheHelper>().isFirstInstall();
   await dotenv.load(fileName: "lib/.env");
   DioHelper.init();
   AppConstants.sessionId =

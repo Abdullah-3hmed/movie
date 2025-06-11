@@ -33,6 +33,7 @@ class TvDetailsCubit extends Cubit<TvDetailsState> {
         state.copyWith(
           tvDetailsState: RequestStatus.success,
           tvDetailsModel: tvDetailsModel,
+          tvModel: tvDetailsModel.toTvModel(),
         ),
       ),
     );

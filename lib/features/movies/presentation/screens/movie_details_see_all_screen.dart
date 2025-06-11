@@ -1,10 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie/core/widgets/custom_back_button.dart';
 import 'package:movie/core/widgets/custom_scaffold.dart';
-import 'package:movie/features/movies/cubit/movie/movie_cubit.dart';
-import 'package:movie/features/movies/cubit/movie/movie_state.dart';
 import 'package:movie/features/movies/data/movies_model.dart';
 import 'package:movie/features/movies/presentation/screens/widgets/movie/see_all_movies_list_item.dart';
 
@@ -37,18 +34,14 @@ class MovieDetailsSeeAllScreen extends StatelessWidget {
               ),
               const SizedBox(height: 24.0),
               Expanded(
-                child: BlocBuilder<MovieCubit, MovieState>(
-                  builder: (context, state) {
-                    return ListView.separated(
-                      physics: const BouncingScrollPhysics(),
-                      itemBuilder:
-                          (context, index) =>
-                              SeeAllMoviesListItem(movieModel: movies[index]),
-                      separatorBuilder:
-                          (context, index) => const SizedBox(height: 16.0),
-                      itemCount: movies.length,
-                    );
-                  },
+                child: ListView.separated(
+                  physics: const BouncingScrollPhysics(),
+                  itemBuilder:
+                      (context, index) =>
+                          SeeAllMoviesListItem(movieModel: movies[index]),
+                  separatorBuilder:
+                      (context, index) => const SizedBox(height: 16.0),
+                  itemCount: movies.length,
                 ),
               ),
             ],
