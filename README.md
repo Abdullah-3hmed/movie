@@ -56,7 +56,7 @@
 To run the app locally:
 
 ```bash
-git clone https://github.com/Bit-Camp-IO/movie.git
+git clone https://github.com/Abdullah-3hmed/movie
 cd movie
 flutter pub get
 ```
@@ -121,7 +121,6 @@ Thanks to [TMDB](https://www.themoviedb.org/) for providing the rich and powerfu
 And big thanks to the open-source community 💙
 
 ---
-
 
 ## 📬 Contact
 
