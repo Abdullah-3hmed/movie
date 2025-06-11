@@ -1,13 +1,11 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie/core/enums/request_status.dart';
 import 'package:movie/core/icons/solar_system_icons.dart';
-import 'package:movie/core/network/api_constants.dart';
 import 'package:movie/core/util/app_strings.dart';
-import 'package:movie/core/util/assets_manager.dart';
 import 'package:movie/core/util/color_manager.dart';
 import 'package:movie/core/widgets/custom_back_button.dart';
+import 'package:movie/core/widgets/custom_cached_network_image.dart';
 import 'package:movie/core/widgets/custom_section_title.dart';
 import 'package:movie/features/movies/cubit/actor/actor_cubit.dart';
 import 'package:movie/features/movies/cubit/actor/actor_state.dart';
@@ -23,8 +21,6 @@ class ActorDetailsSection extends StatelessWidget {
           (previous, current) => previous.actorState != current.actorState,
       builder: (context, state) {
         switch (state.actorDetailsState) {
-          case RequestStatus.loading:
-            return const SizedBox.shrink();
           case RequestStatus.success:
             return Column(
               children: [
@@ -34,19 +30,10 @@ class ActorDetailsSection extends StatelessWidget {
                       borderRadius: const BorderRadiusDirectional.only(
                         bottomEnd: Radius.circular(60.0),
                       ),
-                      child: CachedNetworkImage(
-                        imageUrl:
-                            state.actorModel.image.isNotEmpty
-                                ? ApiConstants.imageUrl(state.actorModel.image)
-                                : AssetsManager.errorPoster,
+                      child: CustomCachedNetworkImage(
+                        imageUrl: state.actorModel.image,
                         width: double.infinity,
                         height: 450.0,
-                        errorWidget:
-                            (context, url, error) => Image.network(
-                              AssetsManager.errorPoster,
-                              fit: BoxFit.cover,
-                            ),
-                        fit: BoxFit.cover,
                       ),
                     ),
                     const PositionedDirectional(

@@ -1,9 +1,8 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:movie/config/router/app_router.dart';
-import 'package:movie/core/network/api_constants.dart';
-import 'package:movie/core/util/assets_manager.dart';
+import 'package:movie/core/util/app_constants.dart';
+import 'package:movie/core/widgets/custom_cached_network_image.dart';
 import 'package:movie/features/shared/data/cast_model.dart';
 
 class SeeAllCastListItem extends StatelessWidget {
@@ -20,7 +19,7 @@ class SeeAllCastListItem extends StatelessWidget {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(20.0),
         child: Transform(
-          transform: Matrix4.skewX(-0.05),
+          transform: Matrix4.skewX(AppConstants.skew),
           child: Container(
             height: 160.0,
             width: double.infinity,
@@ -38,21 +37,10 @@ class SeeAllCastListItem extends StatelessWidget {
               children: [
                 ClipRRect(
                   borderRadius: BorderRadius.circular(20.0),
-                  child: CachedNetworkImage(
-                    imageUrl:
-                        castModel.image.isNotEmpty
-                            ? ApiConstants.imageUrl(castModel.image)
-                            : AssetsManager.errorPoster,
-                    errorWidget:
-                        (context, url, error) => Image.network(
-                          AssetsManager.errorPoster,
-                          width: 120.0,
-                          height: 144.0,
-                          fit: BoxFit.cover,
-                        ),
+                  child: CustomCachedNetworkImage(
+                    imageUrl: castModel.image,
                     width: 120.0,
                     height: 144.0,
-                    fit: BoxFit.cover,
                   ),
                 ),
                 const SizedBox(width: 16.0),

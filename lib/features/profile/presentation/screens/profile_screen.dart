@@ -32,9 +32,7 @@ class ProfileScreen extends StatelessWidget {
                   physics: BouncingScrollPhysics(),
                   slivers: [
                     SliverToBoxAdapter(child: ProfileHeaderSection()),
-
                     SliverToBoxAdapter(child: ProfileMoviesWatchListSection()),
-
                     SliverToBoxAdapter(child: ProfileTvShowsWatchList()),
                   ],
                 );

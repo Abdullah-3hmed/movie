@@ -94,7 +94,7 @@ class SeeAllTvShowsListItem extends StatelessWidget {
                 ],
               ),
             ),
-            if (isWatchList)
+            if (!isWatchList)
               PositionedDirectional(
                 top: 10.0,
                 end: 15.0,

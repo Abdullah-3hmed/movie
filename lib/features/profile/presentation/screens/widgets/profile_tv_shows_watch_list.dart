@@ -20,7 +20,7 @@ class ProfileTvShowsWatchList extends StatelessWidget {
       buildWhen:
           (previous, current) =>
               previous.tvWatchlistState != current.tvWatchlistState ||
-              previous.tvWatchlist != current.tvWatchlist,
+              previous.inTvWatchlist != current.inTvWatchlist,
       builder: (context, state) {
         switch (state.profileState) {
           case RequestStatus.success:
@@ -33,9 +33,9 @@ class ProfileTvShowsWatchList extends StatelessWidget {
                       title: AppStrings.tvShowsWatchList,
                       onPressed: () {
                         context.pushRoute(
-                          TvWatchListRoute(
+                          SeeAllTvWatchlistRoute(
                             title: AppStrings.tvShowsWatchList,
-                            tvShows: state.tvWatchlist,
+                            isWatchList: true,
                           ),
                         );
                       },

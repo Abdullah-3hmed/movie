@@ -45,19 +45,11 @@ class ActorDetailsScreen extends StatelessWidget implements AutoRouteWrapper {
                 ],
               );
             case RequestStatus.error:
-              if (!state.isConnected) {
-                return NoInternetWidget(
-                  errorMessage: state.actorDetailsErrorMessage,
-                  onPressed:
-                      () async => await getIt<ActorCubit>()
-                          .getActorDetailsAndMovies(actorId: actorId),
-                );
-              }
-              return Center(
-                child: Text(
-                  state.actorDetailsErrorMessage,
-                  style: Theme.of(context).textTheme.bodyMedium,
-                ),
+              return NoInternetWidget(
+                errorMessage: state.actorDetailsErrorMessage,
+                onPressed:
+                    () async => await getIt<ActorCubit>()
+                        .getActorDetailsAndMovies(actorId: actorId),
               );
             default:
               return const SizedBox.shrink();

@@ -15,7 +15,7 @@ class SeeAllCastScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomScaffold(
       child: Padding(
-        padding: EdgeInsetsDirectional.symmetric(
+        padding: const EdgeInsetsDirectional.symmetric(
           horizontal: AppConstants.horizontalPadding,
         ),
         child: SafeArea(

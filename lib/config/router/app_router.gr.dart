@@ -173,67 +173,6 @@ class MovieDetailsRouteArgs {
 }
 
 /// generated route for
-/// [MovieWatchListScreen]
-class MovieWatchListRoute extends PageRouteInfo<MovieWatchListRouteArgs> {
-  MovieWatchListRoute({
-    Key? key,
-    required String title,
-    required List<MoviesModel> movies,
-    List<PageRouteInfo>? children,
-  }) : super(
-         MovieWatchListRoute.name,
-         args: MovieWatchListRouteArgs(key: key, title: title, movies: movies),
-         initialChildren: children,
-       );
-
-  static const String name = 'MovieWatchListRoute';
-
-  static PageInfo page = PageInfo(
-    name,
-    builder: (data) {
-      final args = data.argsAs<MovieWatchListRouteArgs>();
-      return MovieWatchListScreen(
-        key: args.key,
-        title: args.title,
-        movies: args.movies,
-      );
-    },
-  );
-}
-
-class MovieWatchListRouteArgs {
-  const MovieWatchListRouteArgs({
-    this.key,
-    required this.title,
-    required this.movies,
-  });
-
-  final Key? key;
-
-  final String title;
-
-  final List<MoviesModel> movies;
-
-  @override
-  String toString() {
-    return 'MovieWatchListRouteArgs{key: $key, title: $title, movies: $movies}';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) return true;
-    if (other is! MovieWatchListRouteArgs) return false;
-    return key == other.key &&
-        title == other.title &&
-        const ListEquality().equals(movies, other.movies);
-  }
-
-  @override
-  int get hashCode =>
-      key.hashCode ^ title.hashCode ^ const ListEquality().hash(movies);
-}
-
-/// generated route for
 /// [MoviesScreen]
 class MoviesRoute extends PageRouteInfo<void> {
   const MoviesRoute({List<PageRouteInfo>? children})
@@ -438,6 +377,71 @@ class SeeAllMoviesRouteArgs {
 }
 
 /// generated route for
+/// [SeeAllMoviesWatchListScreen]
+class SeeAllMoviesWatchListRoute
+    extends PageRouteInfo<SeeAllMoviesWatchListRouteArgs> {
+  SeeAllMoviesWatchListRoute({
+    Key? key,
+    required String title,
+    bool isWatchList = false,
+    List<PageRouteInfo>? children,
+  }) : super(
+         SeeAllMoviesWatchListRoute.name,
+         args: SeeAllMoviesWatchListRouteArgs(
+           key: key,
+           title: title,
+           isWatchList: isWatchList,
+         ),
+         initialChildren: children,
+       );
+
+  static const String name = 'SeeAllMoviesWatchListRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<SeeAllMoviesWatchListRouteArgs>();
+      return SeeAllMoviesWatchListScreen(
+        key: args.key,
+        title: args.title,
+        isWatchList: args.isWatchList,
+      );
+    },
+  );
+}
+
+class SeeAllMoviesWatchListRouteArgs {
+  const SeeAllMoviesWatchListRouteArgs({
+    this.key,
+    required this.title,
+    this.isWatchList = false,
+  });
+
+  final Key? key;
+
+  final String title;
+
+  final bool isWatchList;
+
+  @override
+  String toString() {
+    return 'SeeAllMoviesWatchListRouteArgs{key: $key, title: $title, isWatchList: $isWatchList}';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! SeeAllMoviesWatchListRouteArgs) return false;
+    return key == other.key &&
+        title == other.title &&
+        isWatchList == other.isWatchList;
+  }
+
+  @override
+  int get hashCode => key.hashCode ^ title.hashCode ^ isWatchList.hashCode;
+}
+
+/// generated route for
 /// [SeeAllTvShowsScreen]
 class SeeAllTvShowsRoute extends PageRouteInfo<SeeAllTvShowsRouteArgs> {
   SeeAllTvShowsRoute({
@@ -496,6 +500,70 @@ class SeeAllTvShowsRouteArgs {
   @override
   int get hashCode =>
       key.hashCode ^ title.hashCode ^ const ListEquality().hash(tvShows);
+}
+
+/// generated route for
+/// [SeeAllTvWatchlistScreen]
+class SeeAllTvWatchlistRoute extends PageRouteInfo<SeeAllTvWatchlistRouteArgs> {
+  SeeAllTvWatchlistRoute({
+    Key? key,
+    required String title,
+    bool isWatchList = false,
+    List<PageRouteInfo>? children,
+  }) : super(
+         SeeAllTvWatchlistRoute.name,
+         args: SeeAllTvWatchlistRouteArgs(
+           key: key,
+           title: title,
+           isWatchList: isWatchList,
+         ),
+         initialChildren: children,
+       );
+
+  static const String name = 'SeeAllTvWatchlistRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<SeeAllTvWatchlistRouteArgs>();
+      return SeeAllTvWatchlistScreen(
+        key: args.key,
+        title: args.title,
+        isWatchList: args.isWatchList,
+      );
+    },
+  );
+}
+
+class SeeAllTvWatchlistRouteArgs {
+  const SeeAllTvWatchlistRouteArgs({
+    this.key,
+    required this.title,
+    this.isWatchList = false,
+  });
+
+  final Key? key;
+
+  final String title;
+
+  final bool isWatchList;
+
+  @override
+  String toString() {
+    return 'SeeAllTvWatchlistRouteArgs{key: $key, title: $title, isWatchList: $isWatchList}';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! SeeAllTvWatchlistRouteArgs) return false;
+    return key == other.key &&
+        title == other.title &&
+        isWatchList == other.isWatchList;
+  }
+
+  @override
+  int get hashCode => key.hashCode ^ title.hashCode ^ isWatchList.hashCode;
 }
 
 /// generated route for
@@ -685,65 +753,4 @@ class TvSeasonsRoute extends PageRouteInfo<void> {
       return const TvSeasonsScreen();
     },
   );
-}
-
-/// generated route for
-/// [TvWatchListScreen]
-class TvWatchListRoute extends PageRouteInfo<TvWatchListRouteArgs> {
-  TvWatchListRoute({
-    Key? key,
-    required String title,
-    required List<TvModel> tvShows,
-    List<PageRouteInfo>? children,
-  }) : super(
-         TvWatchListRoute.name,
-         args: TvWatchListRouteArgs(key: key, title: title, tvShows: tvShows),
-         initialChildren: children,
-       );
-
-  static const String name = 'TvWatchListRoute';
-
-  static PageInfo page = PageInfo(
-    name,
-    builder: (data) {
-      final args = data.argsAs<TvWatchListRouteArgs>();
-      return TvWatchListScreen(
-        key: args.key,
-        title: args.title,
-        tvShows: args.tvShows,
-      );
-    },
-  );
-}
-
-class TvWatchListRouteArgs {
-  const TvWatchListRouteArgs({
-    this.key,
-    required this.title,
-    required this.tvShows,
-  });
-
-  final Key? key;
-
-  final String title;
-
-  final List<TvModel> tvShows;
-
-  @override
-  String toString() {
-    return 'TvWatchListRouteArgs{key: $key, title: $title, tvShows: $tvShows}';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) return true;
-    if (other is! TvWatchListRouteArgs) return false;
-    return key == other.key &&
-        title == other.title &&
-        const ListEquality().equals(tvShows, other.tvShows);
-  }
-
-  @override
-  int get hashCode =>
-      key.hashCode ^ title.hashCode ^ const ListEquality().hash(tvShows);
 }

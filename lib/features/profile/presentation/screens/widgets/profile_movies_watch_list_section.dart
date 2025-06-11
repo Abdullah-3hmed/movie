@@ -19,7 +19,7 @@ class ProfileMoviesWatchListSection extends StatelessWidget {
       buildWhen:
           (previous, current) =>
               previous.moviesWatchlistState != current.moviesWatchlistState ||
-              previous.moviesWatchlist != current.moviesWatchlist,
+              previous.inMoviesWatchlist != current.inMoviesWatchlist,
       builder: (context, state) {
         switch (state.profileState) {
           case RequestStatus.success:
@@ -31,9 +31,9 @@ class ProfileMoviesWatchListSection extends StatelessWidget {
                       title: AppStrings.moviesWatchList,
                       onPressed: () {
                         context.pushRoute(
-                          MovieWatchListRoute(
+                          SeeAllMoviesWatchListRoute(
                             title: AppStrings.moviesWatchList,
-                            movies: state.moviesWatchlist,
+                            isWatchList: true,
                           ),
                         );
                       },
