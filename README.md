@@ -14,8 +14,8 @@
 ## 📸 Screenshots
 
 <p float="left">
-  <img src="https://i.postimg.cc/g0ZZDGRC/home.png" width="250"/>
-  <img src="https://i.postimg.cc/PxbvgKSK/the-dark-night.png" width="250"/>
+  <img src="https://i.postimg.cc/fTnvq6x5/home.jpg" width="250"/>
+  <img src="https://i.postimg.cc/7Zqnw0t2/the-dark-night.jpg" width="250"/>
 </p>
 
 ---
@@ -42,10 +42,6 @@
 ---
 
 ## 🧰 Prerequisites
-
-- Android Studio 2024.3.1 Patch 1+ or VS Code  
-- Xcode 16+ (for iOS)  
-- Flutter 3.29.2 + Dart 3.7.2  
 - A valid **TMDB API key**
 
 ---
