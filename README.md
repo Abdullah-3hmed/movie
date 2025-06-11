@@ -79,7 +79,7 @@ apiKey = 'YOUR_API_KEY';
 
 That’s it!  
 **Feel free to run this code, edit it, and use any part of it in your own projects.**  
-Just plug in your API key and **enjoy ya negm 😎**  
+Just plug in your API key and **enjoy **  
 And don’t forget to **⭐️ star the repo** if you liked it!
 
 ---
