@@ -29,7 +29,8 @@ class SelectionScreen extends StatelessWidget {
             style: textTheme.titleLarge,
           ),
           const Spacer(),
-          CustomLoginButton(
+          PrimaryButton(
+            text: AppStrings.login,
             onPressed: () => context.pushRoute(const LoginRoute()),
           ),
           const SizedBox(height: 16.0),

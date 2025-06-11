@@ -35,4 +35,6 @@ class AppStrings {
   static const String searchForWhatYouWant = "Search For What You Want";
   static String fromUser(int count) => "From $count users";
   static const String noResults = "No Results Found";
+  static const String addMovies = "Add Movies";
+  static const String addTvShows = "Add Tv Shows";
 }

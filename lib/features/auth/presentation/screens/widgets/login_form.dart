@@ -113,8 +113,9 @@ class _LoginFormState extends State<LoginForm> {
                 }
               },
               builder: (BuildContext context, state) {
-                return CustomLoginButton(
+                return PrimaryButton(
                   isLoading: state.loginStatus == RequestStatus.loading,
+                  text: AppStrings.login,
                   onPressed: () async {
                     await _onSubmit();
                   },

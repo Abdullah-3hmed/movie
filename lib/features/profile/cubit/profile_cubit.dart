@@ -49,7 +49,7 @@ class ProfileCubit extends Cubit<ProfileState> {
       (failure) {
         emit(
           state.copyWith(
-            profileState: RequestStatus.error,
+            moviesWatchlistState: RequestStatus.error,
             moviesWatchlistErrorMessage: failure.errorMessage,
           ),
         );
@@ -58,7 +58,7 @@ class ProfileCubit extends Cubit<ProfileState> {
         final Set<int> movieIds = movies.map((e) => e.id).toSet();
         emit(
           state.copyWith(
-            profileState: RequestStatus.success,
+            moviesWatchlistState: RequestStatus.success,
             moviesWatchlist: movies,
             inMoviesWatchlist: movieIds,
           ),
@@ -75,7 +75,7 @@ class ProfileCubit extends Cubit<ProfileState> {
       (failure) {
         emit(
           state.copyWith(
-            profileState: RequestStatus.error,
+            tvWatchlistState: RequestStatus.error,
             tvWatchlistErrorMessage: failure.errorMessage,
           ),
         );
@@ -84,7 +84,7 @@ class ProfileCubit extends Cubit<ProfileState> {
         final Set<int> tvIds = tvs.map((e) => e.id).toSet();
         emit(
           state.copyWith(
-            profileState: RequestStatus.success,
+            tvWatchlistState: RequestStatus.success,
             tvWatchlist: tvs,
             inTvWatchlist: tvIds,
           ),

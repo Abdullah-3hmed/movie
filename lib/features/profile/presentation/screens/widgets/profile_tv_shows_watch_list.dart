@@ -7,6 +7,7 @@ import 'package:movie/core/util/app_constants.dart';
 import 'package:movie/core/util/app_strings.dart';
 import 'package:movie/core/widgets/custom_divider.dart';
 import 'package:movie/core/widgets/custom_section_title.dart';
+import 'package:movie/features/auth/presentation/screens/widgets/custom_login_button.dart';
 import 'package:movie/features/profile/cubit/profile_cubit.dart';
 import 'package:movie/features/profile/cubit/profile_state.dart';
 import 'package:movie/features/tv/presentation/screens/widgets/tv_show/tv_list_view_item.dart';
@@ -22,10 +23,23 @@ class ProfileTvShowsWatchList extends StatelessWidget {
               previous.tvWatchlistState != current.tvWatchlistState ||
               previous.inTvWatchlist != current.inTvWatchlist,
       builder: (context, state) {
-        switch (state.profileState) {
+        switch (state.tvWatchlistState) {
           case RequestStatus.success:
-            return state.moviesWatchlist.isEmpty
-                ? const SizedBox(height: 250.0)
+            return state.tvWatchlist.isEmpty
+                ? SizedBox(
+                  height: 250.0,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      PrimaryButton(
+                        text: AppStrings.addTvShows,
+                        onPressed: () {
+                          context.navigateTo(const TvRoute());
+                        },
+                      ),
+                    ],
+                  ),
+                )
                 : Column(
                   children: [
                     const CustomDivider(),

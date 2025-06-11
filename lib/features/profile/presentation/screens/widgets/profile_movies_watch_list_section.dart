@@ -6,6 +6,7 @@ import 'package:movie/core/enums/request_status.dart';
 import 'package:movie/core/util/app_constants.dart';
 import 'package:movie/core/util/app_strings.dart';
 import 'package:movie/core/widgets/custom_section_title.dart';
+import 'package:movie/features/auth/presentation/screens/widgets/custom_login_button.dart';
 import 'package:movie/features/movies/presentation/screens/widgets/movie/movie_list_view_item.dart';
 import 'package:movie/features/profile/cubit/profile_cubit.dart';
 import 'package:movie/features/profile/cubit/profile_state.dart';
@@ -21,10 +22,23 @@ class ProfileMoviesWatchListSection extends StatelessWidget {
               previous.moviesWatchlistState != current.moviesWatchlistState ||
               previous.inMoviesWatchlist != current.inMoviesWatchlist,
       builder: (context, state) {
-        switch (state.profileState) {
+        switch (state.moviesWatchlistState) {
           case RequestStatus.success:
             return state.moviesWatchlist.isEmpty
-                ? const SizedBox(height: 250.0)
+                ? SizedBox(
+                  height: 250.0,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      PrimaryButton(
+                        text: AppStrings.addMovies,
+                        onPressed: () {
+                          context.navigateTo(const MoviesRoute());
+                        },
+                      ),
+                    ],
+                  ),
+                )
                 : Column(
                   children: [
                     CustomSectionTitle(

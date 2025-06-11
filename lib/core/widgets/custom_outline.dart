@@ -5,7 +5,7 @@ class CustomOutline extends StatelessWidget {
   final Widget _child;
   final VoidCallback _callback;
   final double _radius;
-  final double width;
+  final double? width;
   final double height;
 
   CustomOutline({
@@ -15,7 +15,7 @@ class CustomOutline extends StatelessWidget {
     required Gradient gradient,
     required Widget child,
     required VoidCallback onPressed,
-    required this.width,
+    this.width,
     required this.height,
   }) : _painter = _GradientPainter(
          strokeWidth: strokeWidth,
@@ -29,7 +29,7 @@ class CustomOutline extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: width,
+      width: width ?? 50.0,
       height: height,
       child: CustomPaint(
         painter: _painter,
