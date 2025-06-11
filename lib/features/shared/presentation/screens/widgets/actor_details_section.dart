@@ -50,7 +50,7 @@ class ActorDetailsSection extends StatelessWidget {
                         overflow: TextOverflow.ellipsis,
                         style: Theme.of(
                           context,
-                        ).textTheme.headlineLarge!.copyWith(
+                        ).textTheme.headlineMedium!.copyWith(
                           color: Colors.white,
                           fontWeight: FontWeight.w700,
                         ),
@@ -86,9 +86,13 @@ class ActorDetailsSection extends StatelessWidget {
                             size: 22.0,
                             color: ColorsManager.inActiveColor,
                           ),
-                          Text(
-                            "   ${state.actorModel.placeOfBirth}",
-                            style: Theme.of(context).textTheme.bodyLarge,
+                          Expanded(
+                            child: Text(
+                              "   ${state.actorModel.placeOfBirth}",
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: Theme.of(context).textTheme.bodyLarge,
+                            ),
                           ),
                         ],
                       ),

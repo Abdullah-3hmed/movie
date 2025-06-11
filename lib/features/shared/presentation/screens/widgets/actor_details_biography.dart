@@ -23,12 +23,7 @@ class _ActorDetailsBiographyState extends State<ActorDetailsBiography> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           AnimatedCrossFade(
-            firstChild: Text(
-              widget.biography,
-              style: textTheme,
-              maxLines: 3,
-              overflow: TextOverflow.ellipsis,
-            ),
+            firstChild: Text(widget.biography, style: textTheme, maxLines: 5),
             secondChild: Text(widget.biography, style: textTheme),
             crossFadeState:
                 _isExpanded

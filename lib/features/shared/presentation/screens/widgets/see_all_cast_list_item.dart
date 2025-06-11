@@ -44,31 +44,30 @@ class SeeAllCastListItem extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(width: 16.0),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  spacing: 5.0,
-                  children: [
-                    Text(
-                      castModel.name.length > 20
-                          ? '${castModel.name.substring(0, 20)}...'
-                          : castModel.name,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                        fontWeight: FontWeight.w500,
+                Flexible(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    spacing: 5.0,
+                    children: [
+                      Text(
+                        castModel.name,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                          fontWeight: FontWeight.w500,
+                        ),
                       ),
-                    ),
-                    Text(
-                      castModel.character.length > 25
-                          ? '${castModel.character.substring(0, 25)}...'
-                          : castModel.character,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                        color: Colors.white.withValues(alpha: 0.8),
+                      Text(
+                        castModel.character,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                          color: Colors.white.withValues(alpha: 0.8),
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ],
             ),
