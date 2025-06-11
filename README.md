@@ -7,16 +7,15 @@
 
 > A modern, responsive movie browsing app built with Flutter and the TMDB API.
 
-![header](screenshots/header.png)
+![header](https://i.postimg.cc/g0ZZDGRC/home.png)
 
 ---
 
 ## 📸 Screenshots
 
 <p float="left">
-  <img src="screenshots/home.png" width="250"/>
-  <img src="screenshots/details.png" width="250"/>
-  <img src="screenshots/search.png" width="250"/>
+  <img src="https://i.postimg.cc/g0ZZDGRC/home.png" width="250"/>
+  <img src="https://i.postimg.cc/PxbvgKSK/the-dark-night.png" width="250"/>
 </p>
 
 ---
