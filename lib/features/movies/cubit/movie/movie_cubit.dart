@@ -123,16 +123,19 @@ class MovieCubit extends Cubit<MovieState> {
   }
 
   Future<void> loadMoreNowPlayingMovies() async {
+    if (state.nowPlayingMoviesState == RequestStatus.loading) return;
     emit(state.copyWith(nowPlayingMoviesState: RequestStatus.loading));
     await getNowPlayingMovies(page: state.nowPlayingPage + 1);
   }
 
   Future<void> loadMoreTopRatedMovies() async {
+    if (state.topRatedMoviesState == RequestStatus.loading) return;
     emit(state.copyWith(topRatedMoviesState: RequestStatus.loading));
     await getTopRatedMovies(page: state.topRatedPage + 1);
   }
 
   Future<void> loadMorePopularMovies() async {
+    if (state.popularMoviesState == RequestStatus.loading) return;
     emit(state.copyWith(popularMoviesState: RequestStatus.loading));
     await getPopularMovies(page: state.popularPage + 1);
   }

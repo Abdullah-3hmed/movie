@@ -32,7 +32,7 @@ class RecommendedSection extends StatelessWidget {
                       title: AppStrings.recommended,
                       onPressed: () {
                         context.pushRoute(
-                          SeeAllMoviesRoute(
+                          MovieDetailsSeeAllRoute(
                             title: AppStrings.recommended,
                             movies: state.recommendedMovies,
                           ),

@@ -2,25 +2,28 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie/core/enums/movies_type.dart';
+import 'package:movie/core/enums/request_status.dart';
+import 'package:movie/core/util/show_toast.dart';
 import 'package:movie/core/widgets/custom_back_button.dart';
 import 'package:movie/core/widgets/custom_scaffold.dart';
 import 'package:movie/features/movies/cubit/movie/movie_cubit.dart';
 import 'package:movie/features/movies/cubit/movie/movie_state.dart';
 import 'package:movie/features/movies/data/movies_model.dart';
 import 'package:movie/features/movies/presentation/screens/widgets/movie/see_all_movies_list_item.dart';
+import 'package:movie/features/shared/presentation/screens/widgets/custom_loading.dart';
 
 @RoutePage()
 class SeeAllMoviesScreen extends StatefulWidget {
   const SeeAllMoviesScreen({
     super.key,
     required this.title,
-    required this.movies,
     required this.movieType,
+    required this.movieCubit,
   });
 
   final String title;
-  final List<MoviesModel> movies;
   final MoviesType movieType;
+  final MovieCubit movieCubit;
 
   @override
   State<SeeAllMoviesScreen> createState() => _SeeAllMoviesScreenState();
@@ -28,6 +31,7 @@ class SeeAllMoviesScreen extends StatefulWidget {
 
 class _SeeAllMoviesScreenState extends State<SeeAllMoviesScreen> {
   late final ScrollController _scrollController;
+  bool _isLoadingMore = false;
 
   @override
   void initState() {
@@ -36,20 +40,29 @@ class _SeeAllMoviesScreenState extends State<SeeAllMoviesScreen> {
   }
 
   void _onScroll() {
+    if (_isLoadingMore || !_scrollController.hasClients) return;
     if (_scrollController.position.pixels >=
-        _scrollController.position.maxScrollExtent / 2) {
-      final cubit = context.read<MovieCubit>();
+        _scrollController.position.maxScrollExtent - 200) {
+      _isLoadingMore = true;
+
       switch (widget.movieType) {
         case MoviesType.nowPlaying:
-          cubit.loadMoreNowPlayingMovies();
+          widget.movieCubit.loadMoreNowPlayingMovies();
           break;
         case MoviesType.topRated:
-          cubit.loadMoreTopRatedMovies();
+          widget.movieCubit.loadMoreTopRatedMovies();
           break;
         case MoviesType.popular:
-          cubit.loadMorePopularMovies();
+          widget.movieCubit.loadMorePopularMovies();
           break;
       }
+    }
+  }
+
+  void _resetLoading(RequestStatus status) {
+    if (_isLoadingMore &&
+        (status == RequestStatus.success || status == RequestStatus.error)) {
+      _isLoadingMore = false;
     }
   }
 
@@ -80,19 +93,77 @@ class _SeeAllMoviesScreenState extends State<SeeAllMoviesScreen> {
               ),
               const SizedBox(height: 24.0),
               Expanded(
-                child: BlocBuilder<MovieCubit, MovieState>(
-                  builder: (context, state) {
-                    return ListView.separated(
-                      physics: const BouncingScrollPhysics(),
-                      itemBuilder:
-                          (context, index) => SeeAllMoviesListItem(
-                            movieModel: widget.movies[index],
-                          ),
-                      separatorBuilder:
-                          (context, index) => const SizedBox(height: 16.0),
-                      itemCount: widget.movies.length,
-                    );
-                  },
+                child: BlocProvider.value(
+                  value: widget.movieCubit,
+                  child: BlocBuilder<MovieCubit, MovieState>(
+                    buildWhen: (previous, current) {
+                      switch (widget.movieType) {
+                        case MoviesType.nowPlaying:
+                          return previous.nowPlayingMoviesState !=
+                              current.nowPlayingMoviesState;
+                        case MoviesType.topRated:
+                          return previous.topRatedMoviesState !=
+                              current.topRatedMoviesState;
+                        case MoviesType.popular:
+                          return previous.popularMoviesState !=
+                              current.popularMoviesState;
+                      }
+                    },
+                    builder: (context, state) {
+                      late List<MoviesModel> movies;
+                      late RequestStatus status;
+                      String errorMessage = "";
+                      switch (widget.movieType) {
+                        case MoviesType.nowPlaying:
+                          movies = state.nowPlayingMovies;
+                          status = state.nowPlayingMoviesState;
+                          errorMessage = state.nowPlayingErrorMessage;
+                          break;
+                        case MoviesType.topRated:
+                          movies = state.topRatedMovies;
+                          status = state.topRatedMoviesState;
+                          errorMessage = state.topRatedErrorMessage;
+                          break;
+                        case MoviesType.popular:
+                          movies = state.popularMovies;
+                          status = state.popularMoviesState;
+                          errorMessage = state.popularErrorMessage;
+                          break;
+                      }
+                      _resetLoading(status);
+                      return ListView.separated(
+                        controller: _scrollController,
+                        physics: const BouncingScrollPhysics(),
+                        itemBuilder: (context, index) {
+                          if (index == movies.length) {
+                            switch (status) {
+                              case RequestStatus.loading:
+                                return const Padding(
+                                  padding: EdgeInsets.symmetric(vertical: 20),
+                                  child: Center(child: CustomLoading()),
+                                );
+
+                              case RequestStatus.error:
+                                showToast(
+                                  message: errorMessage,
+                                  state: ToastStates.error,
+                                );
+                                return const SizedBox.shrink();
+                              default:
+                                return const SizedBox.shrink();
+                            }
+                          }
+
+                          return SeeAllMoviesListItem(
+                            movieModel: movies[index],
+                          );
+                        },
+                        separatorBuilder:
+                            (context, index) => const SizedBox(height: 16.0),
+                        itemCount: movies.length + 1,
+                      );
+                    },
+                  ),
                 ),
               ),
             ],

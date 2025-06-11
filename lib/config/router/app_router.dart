@@ -2,13 +2,16 @@ import 'package:auto_route/auto_route.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movie/core/enums/movies_type.dart';
 import 'package:movie/core/services/service_locator.dart';
 import 'package:movie/features/auth/cubit/auth_cubit.dart';
 import 'package:movie/features/auth/presentation/screens/login_screen.dart';
 import 'package:movie/features/auth/presentation/screens/selection_screen.dart';
 import 'package:movie/features/bottom_nab_bar/bottom_nav_bar.dart';
+import 'package:movie/features/movies/cubit/movie/movie_cubit.dart';
 import 'package:movie/features/movies/data/movies_model.dart';
 import 'package:movie/features/movies/presentation/screens/movie_details_screen.dart';
+import 'package:movie/features/movies/presentation/screens/movie_details_see_all_screen.dart';
 import 'package:movie/features/movies/presentation/screens/movies_screen.dart';
 import 'package:movie/features/movies/presentation/screens/see_all_movies_screen.dart';
 import 'package:movie/features/profile/cubit/profile_cubit.dart';
@@ -87,6 +90,7 @@ class AppRouter extends RootStackRouter {
         _buildCustomRoute(page: SeeAllTvShowsRoute.page),
         _buildCustomRoute(page: SeeAllTvWatchlistRoute.page),
         _buildCustomRoute(page: SeeAllMoviesWatchListRoute.page),
+        _buildCustomRoute(page: MovieDetailsSeeAllRoute.page),
       ],
     ),
   ];

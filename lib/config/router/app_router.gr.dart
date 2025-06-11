@@ -173,6 +173,72 @@ class MovieDetailsRouteArgs {
 }
 
 /// generated route for
+/// [MovieDetailsSeeAllScreen]
+class MovieDetailsSeeAllRoute
+    extends PageRouteInfo<MovieDetailsSeeAllRouteArgs> {
+  MovieDetailsSeeAllRoute({
+    Key? key,
+    required String title,
+    required List<MoviesModel> movies,
+    List<PageRouteInfo>? children,
+  }) : super(
+         MovieDetailsSeeAllRoute.name,
+         args: MovieDetailsSeeAllRouteArgs(
+           key: key,
+           title: title,
+           movies: movies,
+         ),
+         initialChildren: children,
+       );
+
+  static const String name = 'MovieDetailsSeeAllRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<MovieDetailsSeeAllRouteArgs>();
+      return MovieDetailsSeeAllScreen(
+        key: args.key,
+        title: args.title,
+        movies: args.movies,
+      );
+    },
+  );
+}
+
+class MovieDetailsSeeAllRouteArgs {
+  const MovieDetailsSeeAllRouteArgs({
+    this.key,
+    required this.title,
+    required this.movies,
+  });
+
+  final Key? key;
+
+  final String title;
+
+  final List<MoviesModel> movies;
+
+  @override
+  String toString() {
+    return 'MovieDetailsSeeAllRouteArgs{key: $key, title: $title, movies: $movies}';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! MovieDetailsSeeAllRouteArgs) return false;
+    return key == other.key &&
+        title == other.title &&
+        const ListEquality().equals(movies, other.movies);
+  }
+
+  @override
+  int get hashCode =>
+      key.hashCode ^ title.hashCode ^ const ListEquality().hash(movies);
+}
+
+/// generated route for
 /// [MoviesScreen]
 class MoviesRoute extends PageRouteInfo<void> {
   const MoviesRoute({List<PageRouteInfo>? children})
@@ -321,11 +387,17 @@ class SeeAllMoviesRoute extends PageRouteInfo<SeeAllMoviesRouteArgs> {
   SeeAllMoviesRoute({
     Key? key,
     required String title,
-    required List<MoviesModel> movies,
+    required MoviesType movieType,
+    required MovieCubit movieCubit,
     List<PageRouteInfo>? children,
   }) : super(
          SeeAllMoviesRoute.name,
-         args: SeeAllMoviesRouteArgs(key: key, title: title, movies: movies),
+         args: SeeAllMoviesRouteArgs(
+           key: key,
+           title: title,
+           movieType: movieType,
+           movieCubit: movieCubit,
+         ),
          initialChildren: children,
        );
 
@@ -338,7 +410,8 @@ class SeeAllMoviesRoute extends PageRouteInfo<SeeAllMoviesRouteArgs> {
       return SeeAllMoviesScreen(
         key: args.key,
         title: args.title,
-        movies: args.movies,
+        movieType: args.movieType,
+        movieCubit: args.movieCubit,
       );
     },
   );
@@ -348,18 +421,21 @@ class SeeAllMoviesRouteArgs {
   const SeeAllMoviesRouteArgs({
     this.key,
     required this.title,
-    required this.movies,
+    required this.movieType,
+    required this.movieCubit,
   });
 
   final Key? key;
 
   final String title;
 
-  final List<MoviesModel> movies;
+  final MoviesType movieType;
+
+  final MovieCubit movieCubit;
 
   @override
   String toString() {
-    return 'SeeAllMoviesRouteArgs{key: $key, title: $title, movies: $movies}';
+    return 'SeeAllMoviesRouteArgs{key: $key, title: $title, movieType: $movieType, movieCubit: $movieCubit}';
   }
 
   @override
@@ -368,12 +444,13 @@ class SeeAllMoviesRouteArgs {
     if (other is! SeeAllMoviesRouteArgs) return false;
     return key == other.key &&
         title == other.title &&
-        const ListEquality().equals(movies, other.movies);
+        movieType == other.movieType &&
+        movieCubit == other.movieCubit;
   }
 
   @override
   int get hashCode =>
-      key.hashCode ^ title.hashCode ^ const ListEquality().hash(movies);
+      key.hashCode ^ title.hashCode ^ movieType.hashCode ^ movieCubit.hashCode;
 }
 
 /// generated route for

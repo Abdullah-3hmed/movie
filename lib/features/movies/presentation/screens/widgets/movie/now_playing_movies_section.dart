@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie/config/router/app_router.dart';
+import 'package:movie/core/enums/movies_type.dart';
 import 'package:movie/core/enums/request_status.dart';
 import 'package:movie/core/util/app_constants.dart';
 import 'package:movie/core/util/app_strings.dart';
@@ -31,7 +32,8 @@ class NowPlayingMoviesSection extends StatelessWidget {
                     context.pushRoute(
                       SeeAllMoviesRoute(
                         title: AppStrings.nowPlayingMovies,
-                        movies: state.nowPlayingMovies,
+                        movieType: MoviesType.nowPlaying,
+                        movieCubit: context.read<MovieCubit>(),
                       ),
                     );
                   },

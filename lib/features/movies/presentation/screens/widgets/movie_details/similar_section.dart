@@ -31,7 +31,7 @@ class SimilarSection extends StatelessWidget {
                       title: AppStrings.similar,
                       onPressed: () {
                         context.pushRoute(
-                          SeeAllMoviesRoute(
+                          MovieDetailsSeeAllRoute(
                             title: AppStrings.similar,
                             movies: state.similarMovies,
                           ),

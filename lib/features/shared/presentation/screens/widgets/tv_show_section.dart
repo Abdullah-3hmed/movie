@@ -27,7 +27,7 @@ class TvShowSection extends StatelessWidget {
                   title: AppStrings.tvShows,
                   onPressed: () {
                     context.pushRoute(
-                      SeeAllMoviesRoute(
+                      MovieDetailsSeeAllRoute(
                         title: AppStrings.tvShows,
                         movies: state.actorMovies,
                       ),

@@ -38,9 +38,9 @@ class MovieState extends Equatable {
     this.popularErrorMessage = '',
     this.allMoviesState = RequestStatus.loading,
     this.allMoviesErrorMessage = '',
-    this.nowPlayingPage = 1,
-    this.topRatedPage = 1,
-    this.popularPage = 1,
+    this.nowPlayingPage = 0,
+    this.topRatedPage = 0,
+    this.popularPage = 0,
     this.isConnected = true,
   });
 

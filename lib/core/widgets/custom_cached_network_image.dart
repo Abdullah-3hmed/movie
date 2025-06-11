@@ -23,8 +23,8 @@ class CustomCachedNetworkImage extends StatelessWidget {
               ? ApiConstants.imageUrl(imageUrl)
               : AssetsManager.errorPoster,
       errorWidget:
-          (context, url, error) => Image.network(
-            AssetsManager.errorPoster,
+          (context, url, error) => Image.asset(
+            AssetsManager.errorImage,
             height: height,
             width: width,
             fit: BoxFit.cover,
