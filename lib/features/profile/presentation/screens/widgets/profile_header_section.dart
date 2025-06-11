@@ -34,9 +34,9 @@ class ProfileHeaderSection extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   CustomOutline(
-                    height: 105.0,
-                    width: 105.0,
-                    strokeWidth: 4.0,
+                    height: 103.0,
+                    width: 103.0,
+                    strokeWidth: 2.0,
                     radius: 50.0,
                     onPressed: () {},
                     gradient: const LinearGradient(

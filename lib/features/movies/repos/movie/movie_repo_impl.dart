@@ -39,10 +39,13 @@ class MovieRepoImpl implements MovieRepo {
   }
 
   @override
-  Future<Either<Failure, List<MoviesModel>>> getNowPlayingMovies() async {
+  Future<Either<Failure, List<MoviesModel>>> getNowPlayingMovies({
+    required int page,
+  }) async {
     try {
       final response = await dioHelper.get(
         url: ApiConstants.nowPlayingMoviesEndpoint,
+        queryParameters: {"page": page},
       );
       if (response.statusCode == 200) {
         return Right(
@@ -63,10 +66,13 @@ class MovieRepoImpl implements MovieRepo {
   }
 
   @override
-  Future<Either<Failure, List<MoviesModel>>> getTopRatedMovies() async {
+  Future<Either<Failure, List<MoviesModel>>> getTopRatedMovies({
+    required int page,
+  }) async {
     try {
       final response = await dioHelper.get(
         url: ApiConstants.topRatedMoviesEndpoint,
+        queryParameters: {"page": page},
       );
       if (response.statusCode == 200) {
         return Right(
@@ -87,10 +93,13 @@ class MovieRepoImpl implements MovieRepo {
   }
 
   @override
-  Future<Either<Failure, List<MoviesModel>>> getPopularMovies() async {
+  Future<Either<Failure, List<MoviesModel>>> getPopularMovies({
+    required int page,
+  }) async {
     try {
       final response = await dioHelper.get(
         url: ApiConstants.popularMoviesEndpoint,
+        queryParameters: {"page": page},
       );
       if (response.statusCode == 200) {
         return Right(

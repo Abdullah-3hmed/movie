@@ -6,6 +6,7 @@ import 'package:movie/core/icons/solar_system_icons.dart';
 import 'package:movie/core/services/service_locator.dart';
 import 'package:movie/features/movies/cubit/movie/movie_cubit.dart';
 import 'package:movie/features/tv/cubit/tv_cubit/tv_cubit.dart';
+import 'package:movie/features/tv/cubit/tv_details_cubit/tv_details_cubit_manager.dart';
 
 import '../movies/cubit/movie_details/movie_details_cubit_manager.dart';
 
@@ -41,6 +42,7 @@ class _BottomNavBarScreenState extends State<BottomNavBarScreen>
   @override
   void didPopNext() {
     getIt<MovieDetailsCubitManager>().clearAll();
+    getIt<TvDetailsCubitManager>().clearAll();
     super.didPopNext();
   }
 

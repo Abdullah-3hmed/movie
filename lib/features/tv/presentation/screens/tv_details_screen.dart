@@ -9,6 +9,7 @@ import 'package:movie/core/widgets/custom_scaffold.dart';
 import 'package:movie/core/widgets/no_internet_widget.dart';
 import 'package:movie/features/shared/presentation/screens/widgets/custom_loading.dart';
 import 'package:movie/features/tv/cubit/tv_details_cubit/tv_details_cubit.dart';
+import 'package:movie/features/tv/cubit/tv_details_cubit/tv_details_cubit_manager.dart';
 import 'package:movie/features/tv/cubit/tv_details_cubit/tv_details_state.dart';
 import 'package:movie/features/tv/presentation/screens/widgets/tv_details/tv_details_poster.dart';
 
@@ -19,10 +20,13 @@ class TvDetailsScreen extends StatelessWidget implements AutoRouteWrapper {
   final int tvId;
 
   @override
-  Widget wrappedRoute(BuildContext context) => BlocProvider(
-    create: (context) => getIt<TvDetailsCubit>()..getAllTvDetails(tvId: tvId),
-    child: this,
-  );
+  Widget wrappedRoute(BuildContext context) {
+    final result = getIt<TvDetailsCubitManager>().getOrCreate(tvId);
+    if (result.isNew) {
+      result.cubit.getAllTvDetails(tvId: tvId);
+    }
+    return BlocProvider.value(value: result.cubit, child: this);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -70,9 +74,8 @@ class TvDetailsScreen extends StatelessWidget implements AutoRouteWrapper {
               return NoInternetWidget(
                 errorMessage: state.allTvDetailsErrorMessage,
                 onPressed:
-                    () async => await context
-                        .read<TvDetailsCubit>()
-                        .getAllTvDetails(tvId: tvId),
+                    () async =>
+                        getIt<TvDetailsCubitManager>().getOrCreate(tvId),
               );
             default:
               return const SizedBox.shrink();

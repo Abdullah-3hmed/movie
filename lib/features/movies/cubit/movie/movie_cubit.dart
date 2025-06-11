@@ -37,8 +37,8 @@ class MovieCubit extends Cubit<MovieState> {
     );
   }
 
-  Future<void> getNowPlayingMovies() async {
-    final result = await movieRepo.getNowPlayingMovies();
+  Future<void> getNowPlayingMovies({required int page}) async {
+    final result = await movieRepo.getNowPlayingMovies(page: page);
     result.fold(
       (failure) => emit(
         state.copyWith(
@@ -46,17 +46,20 @@ class MovieCubit extends Cubit<MovieState> {
           nowPlayingErrorMessage: failure.errorMessage,
         ),
       ),
-      (movies) => emit(
-        state.copyWith(
-          nowPlayingMoviesState: RequestStatus.success,
-          nowPlayingMovies: movies,
-        ),
-      ),
+      (movies) {
+        emit(
+          state.copyWith(
+            nowPlayingMoviesState: RequestStatus.success,
+            nowPlayingMovies: [...state.nowPlayingMovies, ...movies],
+            nowPlayingPage: state.nowPlayingPage + 1,
+          ),
+        );
+      },
     );
   }
 
-  Future<void> getTopRatedMovies() async {
-    final result = await movieRepo.getTopRatedMovies();
+  Future<void> getTopRatedMovies({required int page}) async {
+    final result = await movieRepo.getTopRatedMovies(page: page);
     result.fold(
       (failure) => emit(
         state.copyWith(
@@ -64,17 +67,20 @@ class MovieCubit extends Cubit<MovieState> {
           topRatedErrorMessage: failure.errorMessage,
         ),
       ),
-      (movies) => emit(
-        state.copyWith(
-          topRatedMoviesState: RequestStatus.success,
-          topRatedMovies: movies,
-        ),
-      ),
+      (movies) {
+        emit(
+          state.copyWith(
+            topRatedMoviesState: RequestStatus.success,
+            topRatedMovies: [...state.topRatedMovies, ...movies],
+            topRatedPage: state.topRatedPage + 1,
+          ),
+        );
+      },
     );
   }
 
-  Future<void> getPopularMovies() async {
-    final result = await movieRepo.getPopularMovies();
+  Future<void> getPopularMovies({required int page}) async {
+    final result = await movieRepo.getPopularMovies(page: page);
     result.fold(
       (failure) => emit(
         state.copyWith(
@@ -82,12 +88,15 @@ class MovieCubit extends Cubit<MovieState> {
           popularErrorMessage: failure.errorMessage,
         ),
       ),
-      (movies) => emit(
-        state.copyWith(
-          popularMoviesState: RequestStatus.success,
-          popularMovies: movies,
-        ),
-      ),
+      (movies) {
+        emit(
+          state.copyWith(
+            popularMoviesState: RequestStatus.success,
+            popularMovies: [...state.popularMovies, ...movies],
+            popularPage: state.popularPage + 1,
+          ),
+        );
+      },
     );
   }
 
@@ -97,9 +106,9 @@ class MovieCubit extends Cubit<MovieState> {
     );
     await Future.wait([
       getUpComingMovies(),
-      getNowPlayingMovies(),
-      getTopRatedMovies(),
-      getPopularMovies(),
+      getNowPlayingMovies(page: 1),
+      getTopRatedMovies(page: 1),
+      getPopularMovies(page: 1),
     ]);
     if (!state.isConnected) {
       emit(
@@ -111,5 +120,20 @@ class MovieCubit extends Cubit<MovieState> {
     } else {
       emit(state.copyWith(allMoviesState: RequestStatus.success));
     }
+  }
+
+  Future<void> loadMoreNowPlayingMovies() async {
+    emit(state.copyWith(nowPlayingMoviesState: RequestStatus.loading));
+    await getNowPlayingMovies(page: state.nowPlayingPage + 1);
+  }
+
+  Future<void> loadMoreTopRatedMovies() async {
+    emit(state.copyWith(topRatedMoviesState: RequestStatus.loading));
+    await getTopRatedMovies(page: state.topRatedPage + 1);
+  }
+
+  Future<void> loadMorePopularMovies() async {
+    emit(state.copyWith(popularMoviesState: RequestStatus.loading));
+    await getPopularMovies(page: state.popularPage + 1);
   }
 }
