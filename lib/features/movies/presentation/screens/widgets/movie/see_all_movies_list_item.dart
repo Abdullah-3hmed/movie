@@ -27,7 +27,8 @@ class SeeAllMoviesListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Dismissible(
       key: UniqueKey(),
-      direction: DismissDirection.startToEnd,
+      direction:
+          isWatchList ? DismissDirection.startToEnd : DismissDirection.none,
       onDismissed: (_) {
         context.read<ProfileCubit>().addAndRemoveFromWatchList(
           mediaId: movieModel.id,

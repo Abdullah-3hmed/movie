@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie/core/enums/request_status.dart';
 import 'package:movie/core/widgets/custom_scaffold.dart';
+import 'package:movie/core/widgets/no_internet_widget.dart';
 import 'package:movie/features/profile/cubit/profile_cubit.dart';
 import 'package:movie/features/profile/cubit/profile_state.dart';
 import 'package:movie/features/profile/presentation/screens/widgets/profile_header_section.dart';
@@ -37,11 +38,13 @@ class ProfileScreen extends StatelessWidget {
                   ],
                 );
               case RequestStatus.error:
-                return Center(
-                  child: Text(
-                    state.profileAndWatchlistErrorMessage,
-                    style: Theme.of(context).textTheme.bodyMedium,
-                  ),
+                return NoInternetWidget(
+                  errorMessage: state.profileAndWatchlistErrorMessage,
+                  onPressed: () async {
+                    await context
+                        .read<ProfileCubit>()
+                        .getProfileAndWatchLists();
+                  },
                 );
               default:
                 return const SizedBox.shrink();
@@ -52,5 +55,3 @@ class ProfileScreen extends StatelessWidget {
     );
   }
 }
-
-//TODO :  Make movie watch list and tv watch list listen to changes in cubit
