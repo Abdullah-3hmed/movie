@@ -20,7 +20,7 @@ class TopRatedMoviesSection extends StatelessWidget {
       buildWhen:
           (previous, current) =>
               previous.topRatedMoviesState != current.topRatedMoviesState &&
-              current.topRatedPage == 1,
+              current.topRatedMovies.isEmpty,
       builder: (context, state) {
         switch (state.topRatedMoviesState) {
           case RequestStatus.success:

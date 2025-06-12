@@ -20,7 +20,7 @@ class NowPlayingMoviesSection extends StatelessWidget {
       buildWhen:
           (previous, current) =>
               current.nowPlayingMoviesState != previous.nowPlayingMoviesState &&
-              current.nowPlayingPage == 1,
+              current.nowPlayingMovies.isEmpty,
       builder: (context, state) {
         switch (state.nowPlayingMoviesState) {
           case RequestStatus.success:

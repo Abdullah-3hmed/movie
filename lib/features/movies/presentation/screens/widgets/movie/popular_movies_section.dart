@@ -20,7 +20,7 @@ class PopularMoviesSection extends StatelessWidget {
       buildWhen:
           (previous, current) =>
               previous.popularMoviesState != current.popularMoviesState &&
-              current.popularPage == 1,
+              current.popularMovies.isEmpty,
       builder: (context, state) {
         switch (state.popularMoviesState) {
           case RequestStatus.success:
