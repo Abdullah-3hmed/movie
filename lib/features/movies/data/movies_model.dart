@@ -25,7 +25,7 @@ class MoviesModel extends Equatable {
       title: json['original_title'] ?? "",
       backdropPath: json['backdrop_path'] ?? "",
       voteCount: json['vote_count'].toInt(),
-      voteAverage: json['vote_average'].toDouble() ?? 0.0,
+      voteAverage: (json['vote_average'] ?? 0).toDouble(),
       year: json['release_date'].split('-')[0] ?? "",
       genreIds: List<int>.from(json['genre_ids'] ?? []),
     );

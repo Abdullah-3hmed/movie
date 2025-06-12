@@ -25,7 +25,7 @@ class TvModel extends Equatable {
       name: json['original_name'] ?? "",
       backdropPath: json['backdrop_path'] ?? "",
       genreIds: List<int>.from(json['genre_ids'] ?? []),
-      voteAverage: json['vote_average'].toDouble() ?? 0.0,
+      voteAverage: (json['vote_average'] ?? 0).toDouble(),
       year: json['first_air_date'].split('-')[0] ?? "",
       voteCount: json['vote_count'] ?? 0,
     );
