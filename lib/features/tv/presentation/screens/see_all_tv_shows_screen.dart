@@ -1,12 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movie/core/enums/request_status.dart';
-import 'package:movie/core/util/show_toast.dart';
 import 'package:movie/core/widgets/custom_back_button.dart';
 import 'package:movie/core/widgets/custom_scaffold.dart';
-import 'package:movie/features/profile/cubit/profile_cubit.dart';
-import 'package:movie/features/profile/cubit/profile_state.dart';
 import 'package:movie/features/tv/data/tv_model.dart';
 import 'package:movie/features/tv/presentation/screens/widgets/tv_show/see_all_tv_shows_list_item.dart';
 
@@ -38,29 +33,15 @@ class SeeAllTvShowsScreen extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 24.0),
-              BlocListener<ProfileCubit, ProfileState>(
-                listenWhen:
-                    (previous, current) =>
-                        previous.addAndRemoveWatchlistState !=
-                        current.addAndRemoveWatchlistState,
-                listener: (context, state) {
-                  if (state.addAndRemoveWatchlistState == RequestStatus.error) {
-                    showToast(
-                      message: state.addAndRemoveWatchlistErrorMessage,
-                      state: ToastStates.error,
-                    );
-                  }
-                },
-                child: Expanded(
-                  child: ListView.separated(
-                    physics: const BouncingScrollPhysics(),
-                    itemBuilder:
-                        (context, index) =>
-                            SeeAllTvShowsListItem(tvModel: tvShows[index]),
-                    separatorBuilder:
-                        (context, index) => const SizedBox(height: 16.0),
-                    itemCount: tvShows.length,
-                  ),
+              Expanded(
+                child: ListView.separated(
+                  physics: const BouncingScrollPhysics(),
+                  itemBuilder:
+                      (context, index) =>
+                          SeeAllTvShowsListItem(tvModel: tvShows[index]),
+                  separatorBuilder:
+                      (context, index) => const SizedBox(height: 16.0),
+                  itemCount: tvShows.length,
                 ),
               ),
             ],

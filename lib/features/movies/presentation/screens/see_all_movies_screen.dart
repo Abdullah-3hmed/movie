@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie/core/enums/movies_type.dart';
 import 'package:movie/core/enums/request_status.dart';
-import 'package:movie/core/util/show_toast.dart';
 import 'package:movie/core/widgets/custom_back_button.dart';
 import 'package:movie/core/widgets/custom_scaffold.dart';
 import 'package:movie/features/movies/cubit/movie/movie_cubit.dart';
@@ -112,22 +111,22 @@ class _SeeAllMoviesScreenState extends State<SeeAllMoviesScreen> {
                     builder: (context, state) {
                       late List<MoviesModel> movies;
                       late RequestStatus status;
-                      String errorMessage = "";
+                      // String errorMessage = "";
                       switch (widget.movieType) {
                         case MoviesType.nowPlaying:
                           movies = state.nowPlayingMovies;
                           status = state.nowPlayingMoviesState;
-                          errorMessage = state.nowPlayingErrorMessage;
+                          //errorMessage = state.nowPlayingErrorMessage;
                           break;
                         case MoviesType.topRated:
                           movies = state.topRatedMovies;
                           status = state.topRatedMoviesState;
-                          errorMessage = state.topRatedErrorMessage;
+                          //errorMessage = state.topRatedErrorMessage;
                           break;
                         case MoviesType.popular:
                           movies = state.popularMovies;
                           status = state.popularMoviesState;
-                          errorMessage = state.popularErrorMessage;
+                          //errorMessage = state.popularErrorMessage;
                           break;
                       }
                       _resetLoading(status);
@@ -144,10 +143,6 @@ class _SeeAllMoviesScreenState extends State<SeeAllMoviesScreen> {
                                 );
 
                               case RequestStatus.error:
-                                showToast(
-                                  message: errorMessage,
-                                  state: ToastStates.error,
-                                );
                                 return const SizedBox.shrink();
                               default:
                                 return const SizedBox.shrink();

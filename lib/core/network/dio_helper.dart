@@ -14,8 +14,8 @@ class DioHelper {
         "api_key": dotenv.env["API_KEY"]!,
         "contentType": 'Application/json',
       },
-      connectTimeout: const Duration(seconds: 10),
-      receiveTimeout: const Duration(seconds: 10),
+      connectTimeout: const Duration(seconds: 20),
+      receiveTimeout: const Duration(seconds: 20),
     );
     _dio = Dio(options);
     _dio.interceptors.addAll([
