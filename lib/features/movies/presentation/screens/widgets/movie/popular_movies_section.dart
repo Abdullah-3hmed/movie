@@ -19,7 +19,8 @@ class PopularMoviesSection extends StatelessWidget {
     return BlocBuilder<MovieCubit, MovieState>(
       buildWhen:
           (previous, current) =>
-              previous.popularMoviesState != current.popularMoviesState,
+              previous.popularMoviesState != current.popularMoviesState &&
+              current.popularPage == 1,
       builder: (context, state) {
         switch (state.popularMoviesState) {
           case RequestStatus.success:

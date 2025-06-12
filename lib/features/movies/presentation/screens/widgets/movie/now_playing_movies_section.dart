@@ -19,7 +19,8 @@ class NowPlayingMoviesSection extends StatelessWidget {
     return BlocBuilder<MovieCubit, MovieState>(
       buildWhen:
           (previous, current) =>
-              current.nowPlayingMoviesState != previous.nowPlayingMoviesState,
+              current.nowPlayingMoviesState != previous.nowPlayingMoviesState &&
+              current.nowPlayingPage == 1,
       builder: (context, state) {
         switch (state.nowPlayingMoviesState) {
           case RequestStatus.success:

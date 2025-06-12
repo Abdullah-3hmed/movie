@@ -19,7 +19,8 @@ class TopRatedMoviesSection extends StatelessWidget {
     return BlocBuilder<MovieCubit, MovieState>(
       buildWhen:
           (previous, current) =>
-              previous.topRatedMoviesState != current.topRatedMoviesState,
+              previous.topRatedMoviesState != current.topRatedMoviesState &&
+              current.topRatedPage == 1,
       builder: (context, state) {
         switch (state.topRatedMoviesState) {
           case RequestStatus.success:
