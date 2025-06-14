@@ -29,9 +29,8 @@ class SeeAllTvShowsListItem extends StatelessWidget {
       direction:
           isWatchList ? DismissDirection.startToEnd : DismissDirection.none,
       onDismissed: (_) {
-        context.read<ProfileCubit>().addAndRemoveFromWatchList(
-          mediaId: tvModel.id,
-          mediaType: MediaType.tv,
+        context.read<ProfileCubit>().addAndRemoveFromTvWatchList(
+          tvId: tvModel.id,
         );
       },
       child: InkWell(

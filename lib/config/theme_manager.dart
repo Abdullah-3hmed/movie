@@ -62,7 +62,7 @@ class ThemeManager {
         selectedItemColor: ColorsManager.primaryColor,
         unselectedItemColor: ColorsManager.inActiveColor,
       ),
-      tabBarTheme: const TabBarTheme(
+      tabBarTheme:  const TabBarThemeData(
         labelColor: Colors.white,
         unselectedLabelColor: Colors.white,
         dividerColor: Colors.transparent,

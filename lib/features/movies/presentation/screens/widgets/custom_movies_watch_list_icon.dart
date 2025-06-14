@@ -21,10 +21,9 @@ class CustomMoviesWatchListIcon extends StatelessWidget {
       builder: (context, inMoviesWatchlist) {
         return IconButton(
           onPressed: () async {
-            await context.read<ProfileCubit>().addAndRemoveFromWatchList(
-              mediaType: MediaType.movie,
-              mediaId: moviesModel.id,
-              moviesModel: moviesModel,
+            await context.read<ProfileCubit>().addAndRemoveFromMoviesWatchList(
+              movieId: moviesModel.id,
+              movieModel: moviesModel,
             );
           },
           icon:

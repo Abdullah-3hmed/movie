@@ -93,49 +93,66 @@ class ProfileCubit extends Cubit<ProfileState> {
     );
   }
 
-  bool _updateLocalWatchlist({
-    required MediaType mediaType,
-    required int mediaId,
-    TvModel? tvModel,
-    MoviesModel? moviesModel,
-  }) {
-    if (mediaType == MediaType.movie) {
-      return _updateMoviesWatchListLocally(mediaId, moviesModel);
-    } else {
-      return _updateTvWatchListLocally(mediaId, tvModel);
-    }
-  }
-
-  bool _updateTvWatchListLocally(int mediaId, TvModel? tvModel) {
+  Future<void> addAndRemoveFromTvWatchList({
+    required int tvId,
+     TvModel? tvModel,
+  }) async {
+    final List<TvModel> oldTvWatchlist = List<TvModel>.from(state.tvWatchlist);
+    final Set<int> oldInTvWatchlist = Set<int>.from(state.inTvWatchlist);
     bool watchList = false;
     final List<TvModel> tvWatchlist = List<TvModel>.from(state.tvWatchlist);
     final Set<int> inWatchlist = Set<int>.from(state.inTvWatchlist);
 
-    if (inWatchlist.contains(mediaId)) {
-      tvWatchlist.removeWhere((tv) => tv.id == mediaId);
-      inWatchlist.remove(mediaId);
+    if (inWatchlist.contains(tvId)) {
+      tvWatchlist.removeWhere((tv) => tv.id == tvId);
+      inWatchlist.remove(tvId);
     } else {
       tvWatchlist.add(tvModel!);
-      inWatchlist.add(mediaId);
+      inWatchlist.add(tvId);
       watchList = true;
     }
     emit(state.copyWith(tvWatchlist: tvWatchlist, inTvWatchlist: inWatchlist));
-    return watchList;
+    final result = await profileRepo.addAndRemoveFromWatchList(
+      accountId: state.profileModel.id,
+      mediaType: MediaType.tv,
+      mediaId: tvId,
+      watchList: watchList,
+    );
+
+    result.fold((failure) {
+      emit(
+        state.copyWith(
+          tvWatchlist: oldTvWatchlist,
+          inTvWatchlist: oldInTvWatchlist,
+          addAndRemoveWatchlistState: RequestStatus.error,
+          addAndRemoveWatchlistErrorMessage: failure.errorMessage,
+        ),
+      );
+    }, (_) {});
   }
 
-  bool _updateMoviesWatchListLocally(int mediaId, MoviesModel? moviesModel) {
+  Future<void> addAndRemoveFromMoviesWatchList({
+    required int movieId,
+     MoviesModel? movieModel,
+  }) async {
+    final List<MoviesModel> oldMoviesWatchlist = List<MoviesModel>.from(
+      state.moviesWatchlist,
+    );
+    final Set<int> oldInMoviesWatchlist = Set<int>.from(
+      state.inMoviesWatchlist,
+    );
     bool watchList = false;
     final List<MoviesModel> moviesWatchlist = List<MoviesModel>.from(
       state.moviesWatchlist,
     );
     final Set<int> inWatchlist = Set<int>.from(state.inMoviesWatchlist);
 
-    if (inWatchlist.contains(mediaId)) {
-      moviesWatchlist.removeWhere((movie) => movie.id == mediaId);
-      inWatchlist.remove(mediaId);
+    if (inWatchlist.contains(movieId)) {
+      moviesWatchlist.removeWhere((movie) => movie.id == movieId);
+      inWatchlist.remove(movieId);
     } else {
-      moviesWatchlist.add(moviesModel!);
-      inWatchlist.add(mediaId);
+      moviesWatchlist.add(movieModel!);
+      inWatchlist.add(movieId);
       watchList = true;
     }
 
@@ -145,33 +162,10 @@ class ProfileCubit extends Cubit<ProfileState> {
         inMoviesWatchlist: inWatchlist,
       ),
     );
-    return watchList;
-  }
-
-  Future<void> addAndRemoveFromWatchList({
-    required MediaType mediaType,
-    required int mediaId,
-    TvModel? tvModel,
-    MoviesModel? moviesModel,
-  }) async {
-    final List<MoviesModel> oldMoviesWatchlist = List<MoviesModel>.from(
-      state.moviesWatchlist,
-    );
-    final Set<int> oldInMoviesWatchlist = Set<int>.from(
-      state.inMoviesWatchlist,
-    );
-    final List<TvModel> oldTvWatchlist = List<TvModel>.from(state.tvWatchlist);
-    final Set<int> oldInTvWatchlist = Set<int>.from(state.inTvWatchlist);
-    bool watchList = _updateLocalWatchlist(
-      mediaType: mediaType,
-      mediaId: mediaId,
-      tvModel: tvModel,
-      moviesModel: moviesModel,
-    );
     final result = await profileRepo.addAndRemoveFromWatchList(
       accountId: state.profileModel.id,
-      mediaType: mediaType,
-      mediaId: mediaId,
+      mediaType: MediaType.movie,
+      mediaId: movieId,
       watchList: watchList,
     );
 
@@ -180,8 +174,6 @@ class ProfileCubit extends Cubit<ProfileState> {
         state.copyWith(
           moviesWatchlist: oldMoviesWatchlist,
           inMoviesWatchlist: oldInMoviesWatchlist,
-          tvWatchlist: oldTvWatchlist,
-          inTvWatchlist: oldInTvWatchlist,
           addAndRemoveWatchlistState: RequestStatus.error,
           addAndRemoveWatchlistErrorMessage: failure.errorMessage,
         ),

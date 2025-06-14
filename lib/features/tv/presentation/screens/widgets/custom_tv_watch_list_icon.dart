@@ -21,9 +21,8 @@ class CustomTvWatchListIcon extends StatelessWidget {
       builder: (context, inTvWatchlist) {
         return IconButton(
           onPressed: () async {
-            await context.read<ProfileCubit>().addAndRemoveFromWatchList(
-              mediaType: MediaType.tv,
-              mediaId: tvModel.id,
+            await context.read<ProfileCubit>().addAndRemoveFromTvWatchList(
+              tvId: tvModel.id,
               tvModel: tvModel,
             );
           },

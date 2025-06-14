@@ -30,9 +30,8 @@ class SeeAllMoviesListItem extends StatelessWidget {
       direction:
           isWatchList ? DismissDirection.startToEnd : DismissDirection.none,
       onDismissed: (_) {
-        context.read<ProfileCubit>().addAndRemoveFromWatchList(
-          mediaId: movieModel.id,
-          mediaType: MediaType.movie,
+        context.read<ProfileCubit>().addAndRemoveFromMoviesWatchList(
+          movieId: movieModel.id,
         );
       },
       child: InkWell(
