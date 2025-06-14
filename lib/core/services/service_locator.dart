@@ -22,7 +22,6 @@ import 'package:movie/features/search/repos/search_repo.dart';
 import 'package:movie/features/search/repos/search_repo_impl.dart';
 import 'package:movie/features/tv/cubit/tv_cubit/tv_cubit.dart';
 import 'package:movie/features/tv/cubit/tv_details_cubit/tv_details_cubit.dart';
-import 'package:movie/features/tv/cubit/tv_details_cubit/tv_details_cubit_manager.dart';
 import 'package:movie/features/tv/repos/tv_details_repo/tv_details_repo.dart';
 import 'package:movie/features/tv/repos/tv_details_repo/tv_details_repo_impl.dart';
 import 'package:movie/features/tv/repos/tv_repo/tv_repo.dart';
@@ -68,18 +67,12 @@ class ServiceLocator {
       () => TvRepoImpl(dioHelper: getIt<DioHelper>()),
     );
     getIt.registerFactory<TvCubit>(() => TvCubit(tvRepo: getIt<TvRepo>()));
-    getIt.registerLazySingleton<MovieDetailsCubitManager>(
-      () =>
-          MovieDetailsCubitManager(movieDetailsRepo: getIt<MovieDetailsRepo>()),
-    );
+
     getIt.registerLazySingleton<TvDetailsRepo>(
       () => TvDetailsRepoImpl(dioHelper: getIt<DioHelper>()),
     );
     getIt.registerFactory<TvDetailsCubit>(
       () => TvDetailsCubit(tvDetailsRepo: getIt<TvDetailsRepo>()),
-    );
-    getIt.registerLazySingleton<TvDetailsCubitManager>(
-      () => TvDetailsCubitManager(tvDetailsRepo: getIt<TvDetailsRepo>()),
     );
     getIt.registerLazySingleton<SearchRepo>(
       () => SearchRepoImpl(dioHelper: getIt<DioHelper>()),

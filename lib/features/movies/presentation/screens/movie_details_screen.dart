@@ -28,11 +28,10 @@ class MovieDetailsScreen extends StatefulWidget implements AutoRouteWrapper {
 
   @override
   Widget wrappedRoute(BuildContext context) {
-    final result = getIt<MovieDetailsCubitManager>().getOrCreate(movieId);
-    if (result.isNew) {
-      result.cubit.getAllMoviesDetails(movieId: movieId);
-    }
-    return BlocProvider.value(value: result.cubit, child: this);
+    return BlocProvider(
+      create: (context) => getIt<MovieDetailsCubit>()..getAllMoviesDetails(movieId: movieId),
+      child: this,
+    );
   }
 }
 
@@ -111,9 +110,7 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
                   return NoInternetWidget(
                     errorMessage: state.allMovieDetailsErrorMessage,
                     onPressed: () async {
-                      final result = getIt<MovieDetailsCubitManager>()
-                          .getOrCreate(widget.movieId);
-                      await result.cubit.getAllMoviesDetails(
+                      await getIt<MovieDetailsCubit>().getAllMoviesDetails(
                         movieId: widget.movieId,
                       );
                     },

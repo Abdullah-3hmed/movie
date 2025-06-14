@@ -9,7 +9,6 @@ import 'package:movie/core/widgets/custom_scaffold.dart';
 import 'package:movie/core/widgets/no_internet_widget.dart';
 import 'package:movie/features/shared/presentation/screens/widgets/custom_loading.dart';
 import 'package:movie/features/tv/cubit/tv_details_cubit/tv_details_cubit.dart';
-import 'package:movie/features/tv/cubit/tv_details_cubit/tv_details_cubit_manager.dart';
 import 'package:movie/features/tv/cubit/tv_details_cubit/tv_details_state.dart';
 import 'package:movie/features/tv/presentation/screens/widgets/tv_details/tv_details_poster.dart';
 
@@ -21,11 +20,8 @@ class TvDetailsScreen extends StatelessWidget implements AutoRouteWrapper {
 
   @override
   Widget wrappedRoute(BuildContext context) {
-    final result = getIt<TvDetailsCubitManager>().getOrCreate(tvId);
-    if (result.isNew) {
-      result.cubit.getAllTvDetails(tvId: tvId);
-    }
-    return BlocProvider.value(value: result.cubit, child: this);
+
+    return BlocProvider(create: (context)=>getIt<TvDetailsCubit>()..getAllTvDetails(tvId: tvId), child: this);
   }
 
   @override
@@ -74,10 +70,7 @@ class TvDetailsScreen extends StatelessWidget implements AutoRouteWrapper {
               return NoInternetWidget(
                 errorMessage: state.allTvDetailsErrorMessage,
                 onPressed: () async {
-                  final result = getIt<TvDetailsCubitManager>().getOrCreate(
-                    tvId,
-                  );
-                  await result.cubit.getAllTvDetails(tvId: tvId);
+                  await getIt<TvDetailsCubit>().getAllTvDetails(tvId: tvId);
                 },
               );
             default:
