@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:internet_state_manager/internet_state_manager.dart';
 import 'package:movie/bloc_observer.dart';
 import 'package:movie/core/local/cache_helper.dart';
 import 'package:movie/core/network/dio_helper.dart';
@@ -15,7 +16,7 @@ class AppSetUp {
     AppConstants.sessionId =
         await getIt<CacheHelper>().readData(key: AppConstants.sessionIdKey) ??
         "";
-
+    await InternetStateManagerInitializer.initialize();
     Bloc.observer = MyBlocObserver();
   }
 }

@@ -56,6 +56,7 @@ dependencies:
   rxdart: ^0.28.0
   bloc_concurrency: ^0.3.0
   shared_preferences: ^2.5.3
+  internet_state_manager: ^1.9.0
 
 dev_dependencies:
   flutter_test:
