@@ -102,7 +102,7 @@ class BottomNavBarRoute extends PageRouteInfo<void> {
   static PageInfo page = PageInfo(
     name,
     builder: (data) {
-      return WrappedRoute(child: const BottomNavBarScreen());
+      return const BottomNavBarScreen();
     },
   );
 }
@@ -249,7 +249,7 @@ class MoviesRoute extends PageRouteInfo<void> {
   static PageInfo page = PageInfo(
     name,
     builder: (data) {
-      return const MoviesScreen();
+      return WrappedRoute(child: const MoviesScreen());
     },
   );
 }
@@ -811,7 +811,7 @@ class TvRoute extends PageRouteInfo<void> {
   static PageInfo page = PageInfo(
     name,
     builder: (data) {
-      return const TvScreen();
+      return WrappedRoute(child: const TvScreen());
     },
   );
 }

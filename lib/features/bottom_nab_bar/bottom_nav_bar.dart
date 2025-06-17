@@ -9,7 +9,7 @@ import 'package:movie/features/tv/cubit/tv_cubit/tv_cubit.dart';
 
 
 @RoutePage()
-class BottomNavBarScreen extends StatelessWidget implements AutoRouteWrapper {
+class BottomNavBarScreen extends StatelessWidget{
   const BottomNavBarScreen({super.key});
 
   @override
@@ -43,22 +43,4 @@ class BottomNavBarScreen extends StatelessWidget implements AutoRouteWrapper {
     );
   }
 
-  @override
-  Widget wrappedRoute(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(
-          lazy: false,
-          create: (context) => getIt<MovieCubit>()..getAllHomeMovies(),
-          child: this,
-        ),
-        BlocProvider(
-          lazy: false,
-          create: (context) => getIt<TvCubit>()..getAllTvShows(),
-          child: this,
-        ),
-      ],
-      child: this,
-    );
-  }
 }
